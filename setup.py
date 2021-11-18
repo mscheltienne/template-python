@@ -84,7 +84,7 @@ setup(
     keywords='neuroscience neuroimaging',
     project_urls={
         'Documentation': 'https://github.com/mscheltienne/template-python',
-        'Source': 'https://github.com/mscheltienne/neurotin-analysis',
+        'Source': 'https://github.com/mscheltienne/template-python',
         'Tracker': 'https://github.com/mscheltienne/template-python/issues'
         },
     platforms='any',
