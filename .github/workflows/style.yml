@@ -6,6 +6,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
   cancel-in-progress: true
 on:
+  pull_request:
+    paths:
+      - '**.py'
+  push:
+    branches: [main]
+    paths:
+      - '**.py'
   workflow_dispatch:
 
 jobs:
