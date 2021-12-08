@@ -1,6 +1,3 @@
-"""
-NeuroTin's logger.
-"""
 import sys
 import logging
 from pathlib import Path
