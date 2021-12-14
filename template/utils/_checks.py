@@ -1,6 +1,7 @@
 """Utility functions for checking types and values. Inspired from MNE."""
 
 import os
+import logging
 import operator
 from pathlib import Path
 
@@ -146,3 +147,31 @@ def _check_value(item, allowed_values, *, item_name=None, extra=None):
                                     options=options, item=item))
 
     return item
+
+
+def _check_verbose(verbose):
+    """
+    Check that the value of verbose is valid.
+    """
+    logging_types = dict(
+        DEBUG=logging.DEBUG,
+        INFO=logging.INFO,
+        WARNING=logging.WARNING,
+        ERROR=logging.ERROR,
+        CRITICAL=logging.CRITICAL)
+
+    _check_type(verbose, (bool, str, int, None), item_name='verbose')
+
+    if verbose is None:
+        verbose = 'INFO'
+    elif isinstance(verbose, str):
+        verbose = verbose.upper()
+        _check_value(verbose, logging_types, item_name='verbose')
+        verbose = logging_types[verbose]
+    elif isinstance(verbose, bool):
+        if verbose:
+            verbose = 'INFO'
+        else:
+            verbose = 'WARNING'
+
+    return verbose
