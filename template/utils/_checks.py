@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 
-def _ensure_int(item, *, item_name=None):
+def _ensure_int(item, item_name=None):
     """
     Ensure a variable is an integer.
 
@@ -65,7 +65,7 @@ _types = {
 }
 
 
-def _check_type(item, types, *, item_name=None):
+def _check_type(item, types, item_name=None):
     """
     Check that item is an instance of types.
 
@@ -107,7 +107,7 @@ def _check_type(item, types, *, item_name=None):
     return item
 
 
-def _check_value(item, allowed_values, *, item_name=None, extra=None):
+def _check_value(item, allowed_values, item_name=None, extra=None):
     """
     Check the value of a parameter against a list of valid options.
 
