@@ -91,7 +91,7 @@ def set_log_level(verbose):
 
 class LoggerFormatter(logging.Formatter):
     """
-    Format string Syntax for BSL.
+    Format string Syntax.
     """
     # Format string syntax for the different Log levels
     _formatters = dict()
