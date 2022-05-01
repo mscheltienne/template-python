@@ -7,9 +7,9 @@ extend-exclude = '''
       __pycache__
     | \.github
     | setup.py
-    | doc
-    | examples
-    | tutorials
+    | doc/
+    | examples/
+    | tutorials/
 )
 '''
 
