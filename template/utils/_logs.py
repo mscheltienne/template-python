@@ -1,16 +1,15 @@
-import sys
 import logging
+import sys
 from pathlib import Path
 
 from ._checks import _check_verbose
-
 
 name = Path(__file__).parent.parent.name
 logger = logging.getLogger(name)
 logger.propagate = False  # don't propagate (in case of multiple imports)
 
 
-def init_logger(verbose='INFO'):
+def init_logger(verbose="INFO"):
     """
     Initialize a logger. Assign sys.stdout as a handler of the logger.
 
@@ -23,7 +22,7 @@ def init_logger(verbose='INFO'):
     add_stream_handler(sys.stdout, verbose)
 
 
-def add_stream_handler(stream, verbose='INFO'):
+def add_stream_handler(stream, verbose="INFO"):
     """
     Add a handler to the logger. The handler redirects the logger output to
     the stream.
@@ -41,7 +40,7 @@ def add_stream_handler(stream, verbose='INFO'):
     set_handler_log_level(verbose, -1)
 
 
-def add_file_handler(fname, mode='a', verbose='INFO'):
+def add_file_handler(fname, mode="a", verbose="INFO"):
     """
     Add a file handler to the logger. The handler saves the logs to file.
 
@@ -93,20 +92,25 @@ class LoggerFormatter(logging.Formatter):
     """
     Format string Syntax.
     """
+
     # Format string syntax for the different Log levels
     _formatters = dict()
     _formatters[logging.DEBUG] = logging.Formatter(
         fmt="[%(module)s:%(funcName)s:%(lineno)d] %(levelname)s: %(message)s "
-            "(%(asctime)s)")
+        "(%(asctime)s)"
+    )
     _formatters[logging.INFO] = logging.Formatter(
-        fmt="[%(module)s.%(funcName)s] %(levelname)s: %(message)s")
+        fmt="[%(module)s.%(funcName)s] %(levelname)s: %(message)s"
+    )
     _formatters[logging.WARNING] = logging.Formatter(
-        fmt="[%(module)s.%(funcName)s] %(levelname)s: %(message)s")
+        fmt="[%(module)s.%(funcName)s] %(levelname)s: %(message)s"
+    )
     _formatters[logging.ERROR] = logging.Formatter(
-        fmt="[%(module)s:%(funcName)s:%(lineno)d] %(levelname)s: %(message)s")
+        fmt="[%(module)s:%(funcName)s:%(lineno)d] %(levelname)s: %(message)s"
+    )
 
     def __init__(self):
-        super().__init__(fmt='%(levelname): %(message)s')
+        super().__init__(fmt="%(levelname): %(message)s")
 
     def format(self, record):
         """
@@ -140,10 +144,12 @@ def verbose(f):
     f : callable
         The function.
     """
+
     def wrapper(*args, **kwargs):
-        if 'verbose' in kwargs:
-            set_log_level(kwargs['verbose'])
+        if "verbose" in kwargs:
+            set_log_level(kwargs["verbose"])
         return f(*args, **kwargs)
+
     return wrapper
 
 
