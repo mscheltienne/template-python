@@ -36,21 +36,22 @@ def fill_doc(f):
     try:
         indented = docdict_indented[indent_count]
     except KeyError:
-        indent = ' ' * indent_count
+        indent = " " * indent_count
         docdict_indented[indent_count] = indented = dict()
 
         for name, docstr in docdict.items():
-            lines = [indent + line if k != 0 else line
-                     for k, line in enumerate(docstr.strip().splitlines())]
-            indented[name] = '\n'.join(lines)
+            lines = [
+                indent + line if k != 0 else line
+                for k, line in enumerate(docstr.strip().splitlines())
+            ]
+            indented[name] = "\n".join(lines)
 
     try:
         f.__doc__ = docstring % indented
     except (TypeError, ValueError, KeyError) as exp:
         funcname = f.__name__
-        funcname = docstring.split('\n')[0] if funcname is None else funcname
-        raise RuntimeError('Error documenting %s:\n%s'
-                           % (funcname, str(exp)))
+        funcname = docstring.split("\n")[0] if funcname is None else funcname
+        raise RuntimeError("Error documenting %s:\n%s" % (funcname, str(exp)))
 
     return f
 
@@ -115,12 +116,14 @@ def copy_doc(source):
     >>> print(B.m1.__doc__)
     Docstring for m1 this gets appended
     """
+
     def wrapper(func):
         if source.__doc__ is None or len(source.__doc__) == 0:
-            raise ValueError('Cannot copy docstring: docstring was empty.')
+            raise ValueError("Cannot copy docstring: docstring was empty.")
         doc = source.__doc__
         if func.__doc__ is not None:
             doc += func.__doc__
         func.__doc__ = doc
         return func
+
     return wrapper
