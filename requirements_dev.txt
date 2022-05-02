@@ -1,3 +1,0 @@
-matplotlib
-pyqt5
-spyder-kernels
