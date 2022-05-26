@@ -1,3 +1,54 @@
+[build-systenm]
+requires = ["setuptools >= 61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "template"
+version = "0.1.0"
+description = """Template for python projects."""
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"
+authors = [
+    {name = "Mathieu Scheltienne", email = "mathieu.scheltienne@fcbg.ch"}
+]
+maintainers = [
+    {name = "Mathieu Scheltienne", email = "mathieu.scheltienne@fcbg.ch"}
+]
+keywords = [
+    "python",
+    "template"
+]
+classifiers = [
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Natural Language :: English",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "numpy"
+]
+
+[project.optional-dependencies]
+style = ["black", "isort", "flake8"]
+test = ["pytest", "pytest-cov"]
+all = ["black", "isort", "flake8", "pytest", "pytest-cov"]
+
+[project.urls]
+homepage = "https://github.com/mscheltienne/template-python"
+documentation = "https://github.com/mscheltienne/template-python"
+source = "https://github.com/mscheltienne/template-python"
+tracker = "https://github.com/mscheltienne/template-python/issues"
+
+[tool.setuptools]
+include-package-data = true
+
 [tool.black]
 line-length = 79
 target-version = ['py37']
