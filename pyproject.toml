@@ -35,9 +35,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-style = ["black", "isort", "flake8"]
+style = ["black", "codespell", "isort", "flake8"]
 test = ["pytest", "pytest-cov"]
-all = ["black", "isort", "flake8", "pytest", "pytest-cov"]
+all = ["black", "codespell", "isort", "flake8", "pytest", "pytest-cov"]
 
 [project.urls]
 homepage = "https://github.com/mscheltienne/template-python"

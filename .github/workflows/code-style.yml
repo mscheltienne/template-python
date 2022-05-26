@@ -43,3 +43,8 @@ jobs:
         uses: psf/black@stable
         with:
           options: "--check --verbose"
+      - name: Run codespell
+        uses: codespell-project/actions-codespell@master
+        with:
+          check_filenames: true
+          check_hidden: true
