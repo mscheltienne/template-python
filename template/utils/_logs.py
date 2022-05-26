@@ -55,7 +55,7 @@ def add_file_handler(
     ----------
     fname : str | Path
     mode : str
-        Mode in which the file is openned.
+        Mode in which the file is opened.
     %(verbose)s
     """
     verbose = _check_verbose(verbose)
