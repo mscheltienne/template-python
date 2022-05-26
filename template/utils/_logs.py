@@ -1,28 +1,33 @@
 import logging
 import sys
 from pathlib import Path
+from typing import Callable, Optional, Union
 
 from ._checks import _check_verbose
+from ._docs import fill_doc
 
 name = Path(__file__).parent.parent.name
 logger = logging.getLogger(name)
 logger.propagate = False  # don't propagate (in case of multiple imports)
 
 
-def init_logger(verbose="INFO"):
+@fill_doc
+def init_logger(verbose: Optional[Union[bool, str, int]] = None):
     """
     Initialize a logger. Assign sys.stdout as a handler of the logger.
 
     Parameters
     ----------
-    verbose : int | str
-        Logger verbosity.
+    %(verbose)s
     """
     set_log_level(verbose)
     add_stream_handler(sys.stdout, verbose)
 
 
-def add_stream_handler(stream, verbose="INFO"):
+@fill_doc
+def add_stream_handler(
+    stream, verbose: Optional[Union[bool, str, int]] = None
+):
     """
     Add a handler to the logger. The handler redirects the logger output to
     the stream.
@@ -30,17 +35,19 @@ def add_stream_handler(stream, verbose="INFO"):
     Parameters
     ----------
     stream : The output stream, e.g. sys.stdout
-    verbose : int | str
-        Handler verbosity.
+    %(verbose)s
     """
     verbose = _check_verbose(verbose)
     handler = logging.StreamHandler(stream)
     handler.setFormatter(LoggerFormatter())
     logger.addHandler(handler)
-    set_handler_log_level(verbose, -1)
+    set_handler_log_level(-1, verbose)
 
 
-def add_file_handler(fname, mode="a", verbose="INFO"):
+@fill_doc
+def add_file_handler(
+    fname, mode: str = "a", verbose: Optional[Union[bool, str, int]] = None
+):
     """
     Add a file handler to the logger. The handler saves the logs to file.
 
@@ -49,40 +56,41 @@ def add_file_handler(fname, mode="a", verbose="INFO"):
     fname : str | Path
     mode : str
         Mode in which the file is openned.
-    verbose : int | str
-        Handler verbosity.
+    %(verbose)s
     """
     verbose = _check_verbose(verbose)
     handler = logging.FileHandler(fname, mode)
     handler.setFormatter(LoggerFormatter())
     logger.addHandler(handler)
-    set_handler_log_level(verbose, -1)
+    set_handler_log_level(-1, verbose)
 
 
-def set_handler_log_level(verbose, handler_id=0):
+@fill_doc
+def set_handler_log_level(
+    handler_id: int, verbose: Union[bool, str, int, None]
+):
     """
     Set the log level for a specific handler.
     First handler (ID 0) is always stdout, followed by user-defined handlers.
 
     Parameters
     ----------
-    verbose : int | str
-        Logger verbosity.
     handler_id : int
         ID of the handler among 'logger.handlers'.
+    %(verbose)s
     """
     verbose = _check_verbose(verbose)
     logger.handlers[handler_id].setLevel = verbose
 
 
-def set_log_level(verbose):
+@fill_doc
+def set_log_level(verbose: Union[bool, str, int, None]):
     """
     Set the log level for the logger.
 
     Parameters
     ----------
-    verbose : int | str
-        Logger verbosity.
+    %(verbose)s
     """
     verbose = _check_verbose(verbose)
     logger.setLevel(verbose)
@@ -112,7 +120,7 @@ class LoggerFormatter(logging.Formatter):
     def __init__(self):
         super().__init__(fmt="%(levelname): %(message)s")
 
-    def format(self, record):
+    def format(self, record: logging.LogRecord):
         """
         Format the received log record.
 
@@ -130,7 +138,7 @@ class LoggerFormatter(logging.Formatter):
             return self._formatters[logging.ERROR].format(record)
 
 
-def verbose(f):
+def verbose(f: Callable) -> Callable:
     """
     Set the verbose for the function call from the kwargs.
 

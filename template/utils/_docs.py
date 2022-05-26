@@ -4,22 +4,34 @@ Inspired from mne: https://mne.tools/stable/index.html
 Inspired from mne.utils.docs.py by Eric Larson <larson.eric.d@gmail.com>
 """
 import sys
+from typing import Callable, List
 
 # ------------------------- Documentation dictionary -------------------------
 docdict = dict()
+
+# ---------------------------------- verbose ---------------------------------
+docdict[
+    "verbose"
+] = """
+verbose : int | str | bool | None
+    Sets the verbosity level. The verbosity increases gradually between
+    "CRITICAL", "ERROR", "WARNING", "INFO" and "DEBUG".
+    If None is provided, the verbosity is set to "WARNING".
+    If a bool is provided, the verbosity is set to "WARNING" for False and to
+    "INFO" for True."""
 
 # ------------------------- Documentation functions --------------------------
 docdict_indented = dict()
 
 
-def fill_doc(f):
+def fill_doc(f: Callable) -> Callable:
     """
     Fill a docstring with docdict entries.
 
     Parameters
     ----------
     f : callable
-        The function to fill the docstring of. Will be modified in place.
+        The function to fill the docstring of (modified in place).
 
     Returns
     -------
@@ -56,7 +68,7 @@ def fill_doc(f):
     return f
 
 
-def _indentcount_lines(lines):
+def _indentcount_lines(lines: List[str]) -> int:
     """
     Minimum indent for all lines in line list.
 
@@ -82,7 +94,7 @@ def _indentcount_lines(lines):
     return indent
 
 
-def copy_doc(source):
+def copy_doc(source: Callable) -> Callable:
     """
     Copy the docstring from another function (decorator).
 
@@ -94,12 +106,12 @@ def copy_doc(source):
 
     Parameters
     ----------
-    source : function
-        Function to copy the docstring from.
+    source : callable
+        The function to copy the docstring from.
 
     Returns
     -------
-    wrapper : function
+    wrapper : callable
         The decorated function.
 
     Examples
@@ -119,7 +131,10 @@ def copy_doc(source):
 
     def wrapper(func):
         if source.__doc__ is None or len(source.__doc__) == 0:
-            raise ValueError("Cannot copy docstring: docstring was empty.")
+            raise RuntimeError(
+                f"The docstring from {source.__name__} could not be copied "
+                "because it was empty."
+            )
         doc = source.__doc__
         if func.__doc__ is not None:
             doc += func.__doc__
