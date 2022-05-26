@@ -184,7 +184,7 @@ def _check_verbose(verbose):
         CRITICAL=logging.CRITICAL,
     )
 
-    _check_type(verbose, (bool, str, int, None), item_name="verbose")
+    _check_type(verbose, (bool, str, "int", None), item_name="verbose")
 
     if verbose is None:
         verbose = "INFO"
@@ -197,5 +197,11 @@ def _check_verbose(verbose):
             verbose = "INFO"
         else:
             verbose = "WARNING"
+    elif isinstance(verbose, int):
+        if verbose <= 0:
+            raise ValueError(
+                "Argument 'verbose' can not be a negative integer, "
+                f"{verbose} is invalid."
+            )
 
     return verbose
