@@ -1,13 +1,11 @@
 import logging
 import sys
-from pathlib import Path
 from typing import Callable, Optional, Union
 
 from ._checks import _check_verbose
 from ._docs import fill_doc
 
-name = Path(__file__).parent.parent.name
-logger = logging.getLogger(name)
+logger = logging.getLogger(__package__.split('.')[0])
 logger.propagate = False  # don't propagate (in case of multiple imports)
 
 
