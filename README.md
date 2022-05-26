@@ -7,5 +7,8 @@
 Template python repository.
 
 The folder name `template` should be changed to the package name.
-Entries in `setup.py` should be adapted to the path(s)/URL(s)/name(s)/...
+Entries in `pyproject.toml` should be adapted to the path(s)/URL(s)/name(s)/...
 involved in the package.
+Entries in the CIs workflow should be updated:
+- code-style.yml: path of the flake8 action
+- pytest.yml: path of the pytest action
