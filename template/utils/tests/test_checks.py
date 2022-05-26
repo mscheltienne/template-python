@@ -1,14 +1,10 @@
 """Test _checks.py"""
 
 import logging
+
 import pytest
 
-from .._checks import (
-    _check_type,
-    _check_value,
-    _check_verbose,
-    _ensure_int,
-)
+from .._checks import _check_type, _check_value, _check_verbose, _ensure_int
 
 
 def test_ensure_int():
@@ -73,7 +69,7 @@ def test_check_verbose():
 
     # invalids
     with pytest.raises(TypeError, match="must be an instance of"):
-        _check_verbose(("INFO", ))
+        _check_verbose(("INFO",))
     with pytest.raises(ValueError, match="Invalid value"):
         _check_verbose("101")
     with pytest.raises(ValueError, match="negative integer, -101 is invalid."):

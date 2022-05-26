@@ -19,7 +19,6 @@ jobs:
   style:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
