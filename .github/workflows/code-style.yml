@@ -48,4 +48,4 @@ jobs:
         with:
           check_filenames: true
           check_hidden: true
-          skip: 'build/*,.pytest_cache/*,.git/*,*.bib'
+          skip: './.git,./build'
