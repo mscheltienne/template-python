@@ -1,4 +1,4 @@
-[build-systenm]
+[build-system]
 requires = ["setuptools >= 61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
@@ -37,7 +37,8 @@ dependencies = [
 [project.optional-dependencies]
 style = ["black", "codespell", "isort", "flake8"]
 test = ["pytest", "pytest-cov"]
-all = ["black", "codespell", "isort", "flake8", "pytest", "pytest-cov"]
+build = ["build"]
+all = ["black", "build", "codespell", "isort", "flake8", "pytest", "pytest-cov"]
 
 [project.urls]
 homepage = "https://github.com/mscheltienne/template-python"
