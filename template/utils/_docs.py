@@ -63,7 +63,7 @@ def fill_doc(f: Callable) -> Callable:
     except (TypeError, ValueError, KeyError) as exp:
         funcname = f.__name__
         funcname = docstring.split("\n")[0] if funcname is None else funcname
-        raise RuntimeError("Error documenting %s:\n%s" % (funcname, str(exp)))
+        raise RuntimeError(f"Error documenting {funcname}:\n{str(exp)}")
 
     return f
 
