@@ -37,11 +37,9 @@ jobs:
         uses: py-actions/flake8@v1
         with:
           path: "template"
+      - name: Run isort
+        uses: jamescurtin/isort-action@master
       - name: Run black
         uses: psf/black@stable
         with:
           options: "--check --verbose"
-      - name: Run isort
-        uses: jamescurtin/isort-action@master
-        with:
-            requirementsFiles: "requirements.txt requirements_testing.txt"
