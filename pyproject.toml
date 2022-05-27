@@ -87,6 +87,6 @@ extend_skip_glob = [
 
 [tool.pydocstyle]
 convention = "numpy"
+ignore-decorators = '(copy_doc|property|.*setter|.*getter)'
 match = '^(?!setup|__init__|test_).*\.py'
 match-dir = '^(?!build|dist|\.).*'
-ignore-decorators = 'copy_doc'
