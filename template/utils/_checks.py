@@ -181,8 +181,17 @@ def _check_value(
 
 
 def _check_verbose(verbose: Union[bool, str, int, None]) -> int:
-    """
-    Check that the value of verbose is valid.
+    """Check that the value of verbose is valid.
+
+    Parameters
+    ----------
+    verbose : bool | str | int | None
+        The verbosity level.
+
+    Returns
+    -------
+    verbose : int
+        The verbosity level as an integer.
     """
     logging_types = dict(
         DEBUG=logging.DEBUG,
