@@ -37,8 +37,7 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools wheel
           python -m pip install --progress-bar off build
       - name: Build package
-        run: |
-          python -m build
+        run: python -m build
       - name: Install sdist
         run: pip install ./dist/*.tar.gz
       - name: Test sdist install
