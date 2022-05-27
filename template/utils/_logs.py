@@ -5,7 +5,7 @@ from typing import Callable, Optional, Union
 from ._checks import _check_verbose
 from ._docs import fill_doc
 
-logger = logging.getLogger(__package__.split('.')[0])
+logger = logging.getLogger(__package__.split('.utils')[0])
 logger.propagate = False  # don't propagate (in case of multiple imports)
 
 
