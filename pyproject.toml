@@ -37,7 +37,7 @@ dependencies = [
 [project.optional-dependencies]
 style = ["black", "codespell", "isort", "flake8", "pydocstyle[toml]",]
 test = ["pytest", "pytest-cov"]
-build = ["build"]
+build = ["build", "twine"]
 all = [
     "black",
     "build",
@@ -46,7 +46,8 @@ all = [
     "flake8",
     "pydocstyle[toml]",
     "pytest",
-    "pytest-cov"
+    "pytest-cov",
+    "twine"
 ]
 
 [project.urls]
