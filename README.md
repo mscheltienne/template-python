@@ -10,5 +10,6 @@ The folder name `template` should be changed to the package name.
 Entries in `pyproject.toml` should be adapted to the path(s)/URL(s)/name(s)/...
 involved in the package.
 Entries in the CIs workflow should be updated:
-- `code-style.yml`: path of the `flake8` action
-- `pytest.yml`: path of the `pytest` action
+- `build.yml`: name of the package
+- `code-style.yml`: path to the package for the `flake8` action
+- `pytest.yml`: path to the package for the `pytest` action
