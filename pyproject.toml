@@ -60,7 +60,6 @@ tracker = 'https://github.com/mscheltienne/template-python/issues'
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ['template']
 include = ['template*']
 exclude = ['^.*tests']
 
