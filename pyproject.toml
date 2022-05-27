@@ -35,10 +35,19 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-style = ["black", "codespell", "isort", "flake8"]
+style = ["black", "codespell", "isort", "flake8", "pydocstyle[toml]",]
 test = ["pytest", "pytest-cov"]
 build = ["build"]
-all = ["black", "build", "codespell", "isort", "flake8", "pytest", "pytest-cov"]
+all = [
+    "black",
+    "build",
+    "codespell",
+    "isort",
+    "flake8",
+    "pydocstyle[toml]",
+    "pytest",
+    "pytest-cov"
+]
 
 [project.urls]
 homepage = "https://github.com/mscheltienne/template-python"
@@ -75,3 +84,8 @@ extend_skip_glob = [
     'examples/*',
     'tutorials/*'
     ]
+
+[tool.pydocstyle]
+convention = "numpy"
+match = '^(?!.*(setup|__init__|test_)).*\.py'
+ignore-decorators= 'copy_doc'

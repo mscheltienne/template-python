@@ -1,7 +1,8 @@
-"""
-Optional dependency import.
+"""Handle optional dependency imports.
+
 Inspired from pandas: https://pandas.pydata.org/
 """
+
 import importlib
 
 # A mapping from import name to package name (on PyPI) when the package name
@@ -12,8 +13,8 @@ INSTALL_MAPPING = {"serial": "pyserial"}
 def import_optional_dependency(
     name: str, extra: str = "", raise_error: bool = True
 ):
-    """
-    Import an optional dependency.
+    """Import an optional dependency.
+
     By default, if a dependency is missing an ImportError with a nice message
     will be raised.
 

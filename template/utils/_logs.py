@@ -26,9 +26,7 @@ def init_logger(verbose: Optional[Union[bool, str, int]] = None):
 def add_stream_handler(
     stream, verbose: Optional[Union[bool, str, int]] = None
 ):
-    """
-    Add a handler to the logger. The handler redirects the logger output to
-    the stream.
+    """Add a stream handler to the logger.
 
     Parameters
     ----------
@@ -46,8 +44,7 @@ def add_stream_handler(
 def add_file_handler(
     fname, mode: str = "a", verbose: Optional[Union[bool, str, int]] = None
 ):
-    """
-    Add a file handler to the logger. The handler saves the logs to file.
+    """Add a file handler to the logger.
 
     Parameters
     ----------
@@ -67,8 +64,8 @@ def add_file_handler(
 def set_handler_log_level(
     handler_id: int, verbose: Union[bool, str, int, None]
 ):
-    """
-    Set the log level for a specific handler.
+    """Set the log level for a specific handler.
+
     First handler (ID 0) is always stdout, followed by user-defined handlers.
 
     Parameters
@@ -83,8 +80,7 @@ def set_handler_log_level(
 
 @fill_doc
 def set_log_level(verbose: Union[bool, str, int, None]):
-    """
-    Set the log level for the logger.
+    """Set the log level for the logger.
 
     Parameters
     ----------
@@ -95,9 +91,7 @@ def set_log_level(verbose: Union[bool, str, int, None]):
 
 
 class LoggerFormatter(logging.Formatter):
-    """
-    Format string Syntax.
-    """
+    """Format string Syntax."""
 
     # Format string syntax for the different Log levels
     _formatters = dict()
@@ -137,8 +131,7 @@ class LoggerFormatter(logging.Formatter):
 
 
 def verbose(f: Callable) -> Callable:
-    """
-    Set the verbose for the function call from the kwargs.
+    """Set the verbose for the function call from the kwargs.
 
     Parameters
     ----------
