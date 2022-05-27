@@ -44,10 +44,10 @@ jobs:
       - name: Test sdist install
         run: |
           python -c "import template; print(template.__version__)"
-          python -m pip uninstall template
+          python -m pip uninstall -y template
       - name: Install wheel
         run: pip install ./dist/*.whl
       - name: Test wheel install
         run: |
           python -c "import template; print(template.__version__)"
-          python -m pip uninstall template
+          python -m pip uninstall -y template
