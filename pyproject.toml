@@ -10,14 +10,14 @@ readme = 'README.md'
 license = {file = 'LICENSE'}
 requires-python = '>=3.8'
 authors = [
-    {name = 'Mathieu Scheltienne', email = 'mathieu.scheltienne@fcbg.ch'}
+    {name = 'Mathieu Scheltienne', email = 'mathieu.scheltienne@fcbg.ch'},
 ]
 maintainers = [
-    {name = 'Mathieu Scheltienne', email = 'mathieu.scheltienne@fcbg.ch'}
+    {name = 'Mathieu Scheltienne', email = 'mathieu.scheltienne@fcbg.ch'},
 ]
 keywords = [
     'python',
-    'template'
+    'template',
 ]
 classifiers = [
     'Operating System :: Microsoft :: Windows',
@@ -35,19 +35,31 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-style = ['black', 'codespell', 'isort', 'flake8', 'pydocstyle[toml]']
-test = ['pytest', 'pytest-cov']
-build = ['build', 'twine']
+style = [
+    'black',
+    'codespell',
+    'isort',
+    'flake8',
+    'pydocstyle[toml]',
+]
+test = [
+    'pytest',
+    'pytest-cov',
+]
+build = [
+    'build',
+    'twine',
+]
 all = [
     'black',
-    'build',
     'codespell',
     'isort',
     'flake8',
     'pydocstyle[toml]',
     'pytest',
     'pytest-cov',
-    'twine'
+    'build',
+    'twine',
 ]
 
 [project.urls]
