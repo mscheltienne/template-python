@@ -10,9 +10,7 @@ logger.propagate = False  # don't propagate (in case of multiple imports)
 
 
 @fill_doc
-def init_logger(
-        verbose: Optional[Union[bool, str, int]] = None
-    ) -> None:
+def init_logger(verbose: Optional[Union[bool, str, int]] = None) -> None:
     """Initialize a logger.
 
     Assign sys.stdout as a handler of the logger.
