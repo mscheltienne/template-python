@@ -10,8 +10,7 @@ import numpy as np
 
 
 def _ensure_int(item: Any, item_name: Optional[str] = None) -> int:
-    """
-    Ensure a variable is an integer.
+    """Ensure a variable is an integer.
 
     Parameters
     ----------
@@ -70,8 +69,7 @@ _types = {
 def _check_type(
     item: Any, types: tuple, item_name: Optional[str] = None
 ) -> Any:
-    """
-    Check that item is an instance of types.
+    """Check that item is an instance of types.
 
     Parameters
     ----------
@@ -132,8 +130,7 @@ def _check_value(
     item_name: Optional[str] = None,
     extra: Optional[str] = None,
 ) -> Any:
-    """
-    Check the value of a parameter against a list of valid options.
+    """Check the value of a parameter against a list of valid options.
 
     Parameters
     ----------
