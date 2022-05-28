@@ -10,9 +10,12 @@ logger.propagate = False  # don't propagate (in case of multiple imports)
 
 
 @fill_doc
-def init_logger(verbose: Optional[Union[bool, str, int]] = None):
-    """
-    Initialize a logger. Assign sys.stdout as a handler of the logger.
+def init_logger(
+        verbose: Optional[Union[bool, str, int]] = None
+    ) -> None:
+    """Initialize a logger.
+
+    Assign sys.stdout as a handler of the logger.
 
     Parameters
     ----------
@@ -25,7 +28,7 @@ def init_logger(verbose: Optional[Union[bool, str, int]] = None):
 @fill_doc
 def add_stream_handler(
     stream, verbose: Optional[Union[bool, str, int]] = None
-):
+) -> None:
     """Add a stream handler to the logger.
 
     Parameters
@@ -43,7 +46,7 @@ def add_stream_handler(
 @fill_doc
 def add_file_handler(
     fname, mode: str = "a", verbose: Optional[Union[bool, str, int]] = None
-):
+) -> None:
     """Add a file handler to the logger.
 
     Parameters
@@ -63,7 +66,7 @@ def add_file_handler(
 @fill_doc
 def set_handler_log_level(
     handler_id: int, verbose: Union[bool, str, int, None]
-):
+) -> None:
     """Set the log level for a specific handler.
 
     First handler (ID 0) is always stdout, followed by user-defined handlers.
@@ -79,7 +82,7 @@ def set_handler_log_level(
 
 
 @fill_doc
-def set_log_level(verbose: Union[bool, str, int, None]):
+def set_log_level(verbose: Union[bool, str, int, None]) -> None:
     """Set the log level for the logger.
 
     Parameters

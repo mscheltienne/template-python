@@ -26,8 +26,7 @@ docdict_indented = dict()
 
 
 def fill_doc(f: Callable) -> Callable:
-    """
-    Fill a docstring with docdict entries.
+    """Fill a docstring with docdict entries.
 
     Parameters
     ----------
@@ -70,8 +69,7 @@ def fill_doc(f: Callable) -> Callable:
 
 
 def _indentcount_lines(lines: List[str]) -> int:
-    """
-    Minimum indent for all lines in line list.
+    """Minimum indent for all lines in line list.
 
     >>> lines = [' one', '  two', '   three']
     >>> indentcount_lines(lines)
@@ -96,8 +94,7 @@ def _indentcount_lines(lines: List[str]) -> int:
 
 
 def copy_doc(source: Callable) -> Callable:
-    """
-    Copy the docstring from another function (decorator).
+    """Copy the docstring from another function (decorator).
 
     The docstring of the source function is prepepended to the docstring of the
     function wrapped by this decorator.

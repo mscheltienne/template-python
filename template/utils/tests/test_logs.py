@@ -5,13 +5,15 @@ from typing import Optional, Union
 
 import pytest
 
-from .._logs import logger, set_log_level, verbose
+from .._logs import init_logger, logger, set_log_level, verbose
 
 logger.propagate = True
 
 
 def test_default_log_level(caplog):
     """Test the default log level."""
+    init_logger()
+
     caplog.clear()
     logger.debug("101")
     assert "101" not in caplog.text
