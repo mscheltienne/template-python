@@ -35,7 +35,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --progress-bar off --upgrade pip setuptools wheel
-          python -m pip install --progress-bar off build
+          python -m pip install --progress-bar off .[build]
+      - name: Test package install
+        run: python -c "import template; print(template.__version__)"
+      - name: Remove package install
+        run: python -m pip uninstall -y template
       - name: Build package
         run: python -m build
       - name: Install sdist
