@@ -51,15 +51,9 @@ build = [
     'twine',
 ]
 all = [
-    'black',
-    'codespell',
-    'isort',
-    'flake8',
-    'pydocstyle[toml]',
-    'pytest',
-    'pytest-cov',
-    'build',
-    'twine',
+    "template[style]",
+    "template[test]",
+    "template[build]",
 ]
 
 [project.urls]
@@ -73,7 +67,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 include = ['template*']
-exclude = ['^.*tests']
+exclude = ['template*tests']
 
 [tool.black]
 line-length = 79
