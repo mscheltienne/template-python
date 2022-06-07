@@ -51,9 +51,9 @@ build = [
     'twine',
 ]
 all = [
-    "template[style]",
-    "template[test]",
-    "template[build]",
+    'template[style]',
+    'template[test]',
+    'template[build]',
 ]
 
 [project.urls]
