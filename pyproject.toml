@@ -63,7 +63,7 @@ source = 'https://github.com/mscheltienne/template-python'
 tracker = 'https://github.com/mscheltienne/template-python/issues'
 
 [tool.setuptools]
-include-package-data = true
+include-package-data = false
 
 [tool.setuptools.packages.find]
 include = ['template*']
