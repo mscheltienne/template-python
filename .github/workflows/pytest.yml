@@ -23,7 +23,7 @@ jobs:
       matrix:
         os: [ubuntu, macos, windows]
         python-version: [3.8, 3.9, "3.10"]
-    name: ${{ matrix.os }} - ${{ matrix.python-version }}
+    name: ${{ matrix.os }} - py${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}-latest
     defaults:
       run:
@@ -41,4 +41,4 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools wheel
           python -m pip install --progress-bar off .[test]
       - name: Run pytest
-        run: pytest template --cov=template --cov-report=xml --verbose
+        run: pytest template --cov=template --cov-report=xml --cov-config=pyproject.toml

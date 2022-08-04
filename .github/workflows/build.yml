@@ -13,13 +13,13 @@ on:
 
 jobs:
   build:
-    timeout-minutes: 30
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu, macos, windows]
         python-version: [3.8, 3.9, "3.10"]
-    name: ${{ matrix.os }} - ${{ matrix.python-version }}
+    name: ${{ matrix.os }} - py${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}-latest
     defaults:
       run:
