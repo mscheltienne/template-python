@@ -55,6 +55,9 @@ all = [
     'template[test]',
     'template[build]',
 ]
+full = [
+    'template[all]',
+]
 
 [project.urls]
 homepage = 'https://github.com/mscheltienne/template-python'
