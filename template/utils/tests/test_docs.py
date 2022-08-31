@@ -20,7 +20,7 @@ def test_fill_doc():
 
     assert "verbose : int | str | bool | None" in foo.__doc__
 
-    # test filling docstring without docstring
+    # test filling empty-docstring
     @fill_doc
     def foo():
         pass
