@@ -11,7 +11,7 @@ def run():
     parser.add_argument(
         "--developer",
         help="display information for optional dependencies",
-        action="store_true"
+        action="store_true",
     )
     args = parser.parse_args()
 
