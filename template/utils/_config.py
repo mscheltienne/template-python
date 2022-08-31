@@ -8,12 +8,13 @@ from typing import IO, Callable, List, Optional
 
 import psutil
 
+from ._checks import _check_type
 from ._imports import INSTALL_MAPPING
 
 LIB_MAPPING = {value: key for key, value in INSTALL_MAPPING.items()}
 
 
-def sys_info(fid: Optional[IO] = None):
+def sys_info(fid: Optional[IO] = None, developer: bool = False):
     """Print the system information for debugging.
 
     Parameters
@@ -21,7 +22,11 @@ def sys_info(fid: Optional[IO] = None):
     fid : file-like | None
         The file to write to, passed to :func:`print`.
         Can be None to use :data:`sys.stdout`.
+    developer : bool
+        If True, display information about optional dependencies.
     """
+    _check_type(developer, (bool,), "developer")
+
     ljust = 18
     out = partial(print, end="", file=fid)
     package = __package__.split(".")[0]
@@ -43,23 +48,25 @@ def sys_info(fid: Optional[IO] = None):
 
     # dependencies
     out("\nDependencies info\n")
+    out(f"{package}:".ljust(ljust) + import_module(package).__version__ + "\n")
     dependencies = [elt for elt in requires(package) if "extra" not in elt]
     _list_dependencies_info(out, ljust, dependencies)
 
     # extras
-    keys = (
-        "build",
-        "test",
-        "style",
-    )
-    for key in keys:
-        out(f"\nOptional '{key}' info\n")
-        dependencies = [
-            elt.split(";")[0].rstrip()
-            for elt in requires(package)
-            if "extra" in elt and key in elt
-        ]
-        _list_dependencies_info(out, ljust, dependencies)
+    if developer:
+        keys = (
+            "build",
+            "test",
+            "style",
+        )
+        for key in keys:
+            out(f"\nOptional '{key}' info\n")
+            dependencies = [
+                elt.split(";")[0].rstrip()
+                for elt in requires(package)
+                if "extra" in elt and key in elt
+            ]
+            _list_dependencies_info(out, ljust, dependencies)
 
 
 def _list_dependencies_info(

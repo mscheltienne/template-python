@@ -66,6 +66,9 @@ documentation = 'https://github.com/mscheltienne/template-python'
 source = 'https://github.com/mscheltienne/template-python'
 tracker = 'https://github.com/mscheltienne/template-python/issues'
 
+[project.scripts]
+template-sys_info = 'template.commands.sys_info:run'
+
 [tool.setuptools]
 include-package-data = false
 
