@@ -38,6 +38,6 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools wheel
           python -m pip install --progress-bar off .[test]
       - name: Display system information
-        run: template-sys_info
+        run: template-sys_info --developer
       - name: Run pytest
         run: pytest template --cov=template --cov-report=xml --cov-config=pyproject.toml
