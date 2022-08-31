@@ -123,6 +123,7 @@ source = [
 ]
 omit = [
     '**/__init__.py',
+    'template/_version.py',
     'template/commands/*',
     '**/tests/**',
 ]
