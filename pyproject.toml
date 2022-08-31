@@ -32,9 +32,14 @@ classifiers = [
 ]
 dependencies = [
     'numpy>=1.21',
+    'psutil',
 ]
 
 [project.optional-dependencies]
+build = [
+    'build',
+    'twine',
+]
 style = [
     'black',
     'codespell',
@@ -45,10 +50,6 @@ style = [
 test = [
     'pytest',
     'pytest-cov',
-]
-build = [
-    'build',
-    'twine',
 ]
 all = [
     'template[style]',
