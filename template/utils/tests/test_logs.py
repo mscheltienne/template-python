@@ -6,8 +6,8 @@ from typing import Optional, Union
 import pytest
 
 from .._logs import (
+    _init_logger,
     add_file_handler,
-    init_logger,
     logger,
     set_log_level,
     verbose,
@@ -18,7 +18,7 @@ logger.propagate = True
 
 def test_default_log_level(caplog):
     """Test the default log level."""
-    init_logger()
+    _init_logger()
 
     caplog.clear()
     logger.debug("101")
