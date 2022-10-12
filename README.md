@@ -6,12 +6,18 @@
 
 # template-python
 
-Template python repository.
+Template python repository. To bootstrap a project from this template, the
+following steps are required:
 
-The folder name `template` should be changed to the package name.
-Entries in `pyproject.toml` should be adapted to the path(s)/URL(s)/name(s)/...
-involved in the package.
-Entries in the CIs workflow should be updated:
-- `build.yml`: name of the package
-- `code-style.yml`: path to the package for the `flake8` action
-- `pytest.yml`: path to the package for the `pytest` action
+- [ ] Rename the folder `template` to the package name
+- [ ] Edit `pyproject.toml`
+    - [ ] Under `[project]`, edit `name`, `description` and `keywords`
+    - [ ] Under `[project.urls]`, edit all the URLs
+    - [ ] Under `[project.scripts]`, edit the command for system information
+    - [ ] Under `[tool.setuptools.packages.find]`, edit the file inclusion/exclusion patterns
+    - [ ] Under `[tool.pydocstyle]`, edit the matching pattern `match-dir`
+    - [ ] Under `[tool.coverage.run]`, edit the exclusion patterns `omit`
+- [ ] Edit the GitHub workflows
+    - [ ] In `build.yml`, edit the command for system information and uninstallation
+    - [ ] In `code-style.yml`, replace the path of the flake8 action
+    - [ ] In `pytest.yml`, edit the command for system information and pytest
