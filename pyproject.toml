@@ -40,6 +40,18 @@ build = [
     'build',
     'twine',
 ]
+doc = [
+    'furo',
+    'matplotlib',
+    'memory-profiler',
+    'numpydoc',
+    'sphinx',
+    'sphinxcontrib-bibtex',
+    'sphinx-copybutton',
+    'sphinx-design',
+    'sphinx-gallery',
+    'sphinx-issues',
+]
 style = [
     'black',
     'codespell',
@@ -53,6 +65,7 @@ test = [
 ]
 all = [
     'template[style]',
+    'template[doc]',
     'template[test]',
     'template[build]',
 ]
