@@ -12,6 +12,7 @@ following steps are required:
 - [ ] Rename the folder `template` to the package name
 - [ ] Edit `pyproject.toml`
     - [ ] Under `[project]`, edit `name`, `description` and `keywords`
+    - [ ] Under `[project.optional-dependencies]`, edit the extra-keys `all` and `full`
     - [ ] Under `[project.urls]`, edit all the URLs
     - [ ] Under `[project.scripts]`, edit the command for system information
     - [ ] Under `[tool.setuptools.packages.find]`, edit the file inclusion/exclusion patterns
@@ -20,4 +21,9 @@ following steps are required:
 - [ ] Edit the GitHub workflows
     - [ ] In `build.yml`, edit the command for system information and uninstallation
     - [ ] In `code-style.yml`, replace the path of the flake8 action
+    - [ ] In `publish.yml`, uncomment the trigger on release and edit the command for system information
     - [ ] In `pytest.yml`, edit the command for system information and pytest
+
+The package can then be installed in a given environment with
+`pip install -e .` (assuming the current working directory is the root of the
+repository).
