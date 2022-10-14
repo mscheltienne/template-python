@@ -113,7 +113,7 @@ extend_skip_glob = [
     'setup.py',
     'doc/*',
     'examples/*',
-    'tutorials/*'
+    'tutorials/*',
 ]
 
 [tool.pydocstyle]
