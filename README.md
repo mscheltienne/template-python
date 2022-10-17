@@ -3,6 +3,7 @@
 [![codecov](https://codecov.io/gh/mscheltienne/template-python/branch/main/graph/badge.svg?token=KRYRRUXDYY)](https://codecov.io/gh/mscheltienne/template-python)
 [![tests](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yml)
 [![build](https://github.com/mscheltienne/template-python/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/build.yml)
+[![doc](https://github.com/mscheltienne/template-python/actions/workflows/doc.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/doc.yml)
 
 # template-python
 
