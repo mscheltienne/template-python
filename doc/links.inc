@@ -22,9 +22,28 @@
 .. _MIT license: https://opensource.org/licenses/MIT
 
 
+.. mne
+
+.. _mne stable: https://mne.tools/stable/index.html
+.. _mne bids: https://mne.tools/mne-bids/stable/index.html
+.. _mne connectivity: https://mne.tools/mne-connectivity/stable/index.html
+.. _mne icalabel: https://mne.tools/mne-icalabel/dev/index.html
+.. _autoreject: https://autoreject.github.io/stable/index.html
+
+
+.. numpy
+
+.. _numpy: https://numpy.org/
+
+
 .. psychopy
 
 .. _psychopy: https://www.psychopy.org/
+
+
+.. sklearn
+
+.. _scikit-learn: https://scikit-learn.org/stable/
 
 
 .. scipy
