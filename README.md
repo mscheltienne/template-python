@@ -6,6 +6,8 @@
 
 # template-python
 
+## Package
+
 Template python repository. To bootstrap a project from this template, the
 following steps are required:
 
@@ -21,7 +23,6 @@ following steps are required:
 - [ ] Edit the GitHub workflows
     - [ ] In `build.yml`, edit the command for system information and uninstallation
     - [ ] In `code-style.yml`, replace the path of the flake8 action
-    - [ ] In `doc.yml`, edit the command for system information
     - [ ] In `publish.yml`, uncomment the trigger on release and edit the command for system information
     - [ ] In `pytest.yml`, edit the command for system information and pytest
 - [ ] Edit `README.md`
@@ -29,3 +30,22 @@ following steps are required:
 The package can then be installed in a given environment with
 `pip install -e .` (assuming the current working directory is the root of the
 repository).
+
+## Documentation build
+
+If the documentation build is preserved, the following steps are required:
+
+On the `main` branch:
+- [ ] Edit the GitHub workflows
+    - [ ] In `doc.yml`, edit the command for system information
+- [ ] Edit the project links in `doc\links.inc`
+- [ ] Edit the landing page `index.rst`
+- [ ] Edit the sphinx configuration
+    - [ ] Replace `import template` with the correct package name
+    - [ ] Edit the fields `project`, `author`, `release`, `package` and `gh_url`
+- [ ] Edit the API pages
+    - [ ] In `doc\api\index.rst`, edit the package name
+    - [ ] In `doc\api\logging.rst`, edit the current module
+
+On the `gh-pages` branch:
+- [ ] Edit the links in the landing page `index.html`
