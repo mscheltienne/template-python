@@ -21,6 +21,7 @@ following steps are required:
 - [ ] Edit the GitHub workflows
     - [ ] In `build.yml`, edit the command for system information and uninstallation
     - [ ] In `code-style.yml`, replace the path of the flake8 action
+    - [ ] In `doc.yml`, edit the command for system information
     - [ ] In `publish.yml`, uncomment the trigger on release and edit the command for system information
     - [ ] In `pytest.yml`, edit the command for system information and pytest
 - [ ] Edit `README.md`
