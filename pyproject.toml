@@ -63,6 +63,7 @@ style = [
 test = [
     'pytest',
     'pytest-cov',
+    'pytest-timeout',
 ]
 all = [
     'template[style]',
