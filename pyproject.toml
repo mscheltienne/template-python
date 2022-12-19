@@ -66,10 +66,10 @@ test = [
     'pytest-timeout',
 ]
 all = [
-    'template[style]',
-    'template[doc]',
-    'template[test]',
     'template[build]',
+    'template[doc]',
+    'template[style]',
+    'template[test]',
 ]
 full = [
     'template[all]',
