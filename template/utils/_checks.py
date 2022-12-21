@@ -249,6 +249,6 @@ def _ensure_path(item: Any, must_exist: bool) -> Path:
         )
     if must_exist and not item.exists():
         raise FileNotFoundError(
-            f"The provided path {str(item)} does not exist."
+            f"The provided path '{str(item)}' does not exist."
         )
     return item
