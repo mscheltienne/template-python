@@ -1,0 +1,46 @@
+{% set name = "template" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/template-{{ version }}.tar.gz
+  sha256: a3778ac2d7e8f22e9499e46c590408ae3236f9703b7782840d451832c7e9ccef
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+  entry_points:
+    - template-sys_info = template.commands.sys_info:run
+
+requirements:
+  host:
+    - pip
+    - python >=3.8
+    - setuptools >=61.0.0
+  run:
+    - numpy >=1.21
+    - psutil
+    - python >=3.8
+
+test:
+  imports:
+    - template
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://mscheltienne.github.io/template-python/dev/index.html
+  summary: Template for python projects
+  license: MIT
+  license_file: LICENSE
+  dev_url: https://github.com/mscheltienne/template-python
+
+extra:
+  recipe-maintainers:
+    - mscheltienne
