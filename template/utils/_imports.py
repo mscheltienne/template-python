@@ -4,7 +4,6 @@ Inspired from pandas: https://pandas.pydata.org/
 """
 
 import importlib
-import numpy as np
 
 # A mapping from import name to package name (on PyPI) when the package name
 # is different.
