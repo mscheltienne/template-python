@@ -23,7 +23,6 @@ following steps are required:
     - [ ] Under `[tool.coverage.run]`, edit the exclusion patterns `omit`
 - [ ] Edit the GitHub workflows
     - [ ] In `build.yml`, edit the command for system information and uninstallation
-    - [ ] In `code-style.yml`, replace the path of the flake8 action
     - [ ] In `publish.yml`, uncomment the trigger on release and edit the command for system information
     - [ ] In `pytest.yml`, edit the command for system information and pytest
 - [ ] Edit `README.md`
