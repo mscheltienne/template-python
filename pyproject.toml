@@ -56,7 +56,7 @@ doc = [
 style = [
     'bibclean',
     'black',
-    'codespell',
+    'codespell[toml]',
     'isort',
     'pydocstyle[toml]',
     'ruff',
@@ -107,6 +107,11 @@ extend-exclude = '''
     | tutorials/
 )
 '''
+
+[tool.codespell]
+builtin = 'clear,rare,names,code'
+ignore-words = './.codespellignore'
+skip = './build,./.git,./.mypy_cache,./.pytest_cache,./.ruff_cache'
 
 [tool.isort]
 profile = 'black'
