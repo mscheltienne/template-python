@@ -110,8 +110,9 @@ extend-exclude = '''
 
 [tool.codespell]
 builtin = 'clear,rare,names,code'
-ignore-words = './.codespellignore'
-skip = './build,./.git,./.mypy_cache,./.pytest_cache,./.ruff_cache'
+check-hidden = true
+ignore-words = '.codespellignore'
+skip = './build,./doc/references.bib,./*.egg-info,.codecov.yml,.codespellignore,./.git,./.github,.gitignore,./.mypy_cache,./.pytest_cache,./.ruff_cache'
 
 [tool.isort]
 profile = 'black'
