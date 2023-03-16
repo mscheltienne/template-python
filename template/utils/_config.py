@@ -76,7 +76,8 @@ def _list_dependencies_info(
     out: Callable, ljust: int, package: str, dependencies: List[Requirement]
 ):
     """List dependencies names and versions."""
-    if sys.stdout.encoding.lower().startswith("utf"):
+    unicode = sys.stdout.encoding.lower().startswith("utf")
+    if unicode:
         ljust += 1
 
     not_found: List[Requirement] = list()
@@ -91,7 +92,7 @@ def _list_dependencies_info(
 
         # build the output string step by step
         output = ""
-        if sys.stdout.encoding.lower().startswith("utf"):
+        if unicode:
             output += "✔︎ "
         output += dep.name
         # handle version specifiers
@@ -120,7 +121,7 @@ def _list_dependencies_info(
             else dep.name
             for dep in not_found
         ]
-        if sys.stdout.encoding.lower().startswith("utf"):
+        if unicode:
             out(f"✘ Not installed: {', '.join(not_found)}\n")
         else:
             out(f"Not installed: {', '.join(not_found)}\n")
