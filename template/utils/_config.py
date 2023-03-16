@@ -91,10 +91,7 @@ def _list_dependencies_info(
             continue
 
         # build the output string step by step
-        output = ""
-        if unicode:
-            output += "✔︎ "
-        output += dep.name
+        output = f"✔︎ {dep.name}" if unicode else dep.name
         # handle version specifiers
         if len(dep.specifier) != 0:
             output += f" ({str(dep.specifier)})"
@@ -111,8 +108,7 @@ def _list_dependencies_info(
                 backend = "Not found"
 
             output += f" (backend: {backend})"
-        output += "\n"
-        out(output)
+        out(output + "\n")
 
     if len(not_found) != 0:
         not_found = [
