@@ -78,6 +78,7 @@ def _list_dependencies_info(
     """List dependencies names and versions."""
     if sys.stdout.encoding.lower().startswith("utf"):
         ljust += 1
+
     not_found: List[Requirement] = list()
     for dep in dependencies:
         if dep.name == package:
