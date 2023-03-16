@@ -111,6 +111,12 @@ def _list_dependencies_info(
         out(output)
 
     if len(not_found) != 0:
+        not_found = [
+            f"{dep.name} ({str(dep.specifier)})"
+            if len(dep.specifier) != 0
+            else dep.name
+            for dep in not_found
+        ]
         if sys.stdout.encoding.lower().startswith("utf"):
             out(f"✘ Not installed: {', '.join(not_found)}\n")
         else:
