@@ -33,6 +33,7 @@ classifiers = [
 ]
 dependencies = [
     'numpy>=1.21',
+    'packaging',
     'psutil',
 ]
 

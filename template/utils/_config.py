@@ -1,11 +1,11 @@
 import platform
-import re
 import sys
 from functools import partial
 from importlib.metadata import requires, version
 from typing import IO, Callable, List, Optional
 
 import psutil
+from packaging.requirements import Requirement
 
 from ._checks import _check_type
 
@@ -29,28 +29,28 @@ def sys_info(fid: Optional[IO] = None, developer: bool = False):
 
     # OS information - requires python 3.8 or above
     out("Platform:".ljust(ljust) + platform.platform() + "\n")
-    # Python information
+    # python information
     out("Python:".ljust(ljust) + sys.version.replace("\n", " ") + "\n")
     out("Executable:".ljust(ljust) + sys.executable + "\n")
     # CPU information
     out("CPU:".ljust(ljust) + platform.processor() + "\n")
     out("Physical cores:".ljust(ljust) + str(psutil.cpu_count(False)) + "\n")
     out("Logical cores:".ljust(ljust) + str(psutil.cpu_count(True)) + "\n")
-    # Memory information
+    # memory information
     out("RAM:".ljust(ljust))
     out(f"{psutil.virtual_memory().total / float(2 ** 30):0.1f} GB\n")
     out("SWAP:".ljust(ljust))
     out(f"{psutil.swap_memory().total / float(2 ** 30):0.1f} GB\n")
+    # package information
+    out(f"{package}:".ljust(ljust) + version(package) + "\n")
 
     # dependencies
-    out("\nDependencies info\n")
-    out(f"{package}:".ljust(ljust) + version(package) + "\n")
-    dependencies = [
-        elt.split(";")[0].rstrip()
-        for elt in requires(package)
-        if "extra" not in elt
+    out("\nCore dependencies\n")
+    dependencies = [Requirement(elt) for elt in requires(package)]
+    core_dependencies = [
+        dep for dep in dependencies if "extra" not in str(dep.marker)
     ]
-    _list_dependencies_info(out, ljust, dependencies)
+    _list_dependencies_info(out, ljust, package, core_dependencies)
 
     # extras
     if developer:
@@ -61,39 +61,44 @@ def sys_info(fid: Optional[IO] = None, developer: bool = False):
             "style",
         )
         for key in keys:
-            dependencies = [
-                elt.split(";")[0].rstrip()
-                for elt in requires(package)
-                if f"extra == '{key}'" in elt or f'extra == "{key}"' in elt
+            extra_dependencies = [
+                dep
+                for dep in dependencies
+                if all(elt in str(dep.marker) for elt in ("extra", key))
             ]
-            if len(dependencies) == 0:
+            if len(extra_dependencies) == 0:
                 continue
-            out(f"\nOptional '{key}' info\n")
-            _list_dependencies_info(out, ljust, dependencies)
+            out(f"\nOptional '{key}' dependencies\n")
+            _list_dependencies_info(out, ljust, package, extra_dependencies)
 
 
 def _list_dependencies_info(
-    out: Callable, ljust: int, dependencies: List[str]
+    out: Callable, ljust: int, package: str, dependencies: List[Requirement]
 ):
     """List dependencies names and versions."""
+    not_found: List[Requirement] = list()
     for dep in dependencies:
-        # handle dependencies with version specifiers
-        specifiers_pattern = r"(~=|==|!=|<=|>=|<|>|===)"
-        specifiers = re.findall(specifiers_pattern, dep)
-        if len(specifiers) != 0:
-            dep, _ = dep.split(specifiers[0])
-            while not dep[-1].isalpha():
-                dep = dep[:-1]
-        # handle dependencies provided with a [key], e.g. pydocstyle[toml]
-        if "[" in dep:
-            dep = dep.split("[")[0]
+        if dep.name == package:
+            continue
         try:
-            version_ = version(dep)
+            version_ = version(dep.name)
         except Exception:
-            version_ = "Not found."
+            not_found.append(dep)
+            continue
+
+        # build the output string step by step
+        output = ""
+        if sys.stdout.encoding.lower().startswith("utf"):
+            output += "✔︎ "
+        output += dep.name
+        # handle version specifiers
+        if len(dep.specifier) != 0:
+            output += f" ({str(dep.specifier)})"
+        output += ":"
+        output = output.ljust(ljust) + version_
 
         # handle special dependencies with backends, C dep, ..
-        if dep in ("matplotlib", "seaborn") and version_ != "Not found.":
+        if dep.name in ("matplotlib", "seaborn") and version_ != "Not found.":
             try:
                 from matplotlib import pyplot as plt
 
@@ -101,7 +106,12 @@ def _list_dependencies_info(
             except Exception:
                 backend = "Not found"
 
-            out(f"{dep}:".ljust(ljust) + version_ + f" (backend: {backend})\n")
+            output += f" (backend: {backend})"
+        output += "\n"
+        out(output)
 
+    if len(not_found) != 0:
+        if sys.stdout.encoding.lower().startswith("utf"):
+            out(f"✘ Not installed: {', '.join(not_found)}\n")
         else:
-            out(f"{dep}:".ljust(ljust) + version_ + "\n")
+            out(f"Not installed: {', '.join(not_found)}\n")
