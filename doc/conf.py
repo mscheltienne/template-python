@@ -21,7 +21,7 @@ author = "Mathieu Scheltienne"
 copyright = f"{date.today().year}, {author}"
 release = template.__version__
 package = template.__name__
-gh_url = "http://github.com/mscheltienne/template-python"
+gh_url = "https://github.com/mscheltienne/template-python"
 
 # -- general configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -110,7 +110,7 @@ intersphinx_mapping = {
 intersphinx_timeout = 5
 
 # -- sphinx-issues -----------------------------------------------------------
-issues_github_path = gh_url.split("http://github.com/")[-1]
+issues_github_path = gh_url.split("https://github.com/")[-1]
 
 # -- autosectionlabels -------------------------------------------------------
 autosectionlabel_prefix_document = True
