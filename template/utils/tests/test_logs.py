@@ -5,7 +5,7 @@ from typing import Optional, Union
 
 import pytest
 
-from .._logs import (
+from ..logs import (
     _init_logger,
     add_file_handler,
     logger,

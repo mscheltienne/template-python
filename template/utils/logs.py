@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from typing import Callable, Optional, TextIO, Union
 
-from ._checks import _check_verbose
+from ._checks import check_verbose
 from ._docs import fill_doc
 
 logger = logging.getLogger(__package__.split(".utils", maxsplit=1)[0])
@@ -36,9 +36,9 @@ def add_stream_handler(
         The output stream, e.g. ``sys.stdout``.
     %(verbose)s
     """
-    verbose = _check_verbose(verbose)
+    verbose = check_verbose(verbose)
     handler = logging.StreamHandler(stream)
-    handler.setFormatter(LoggerFormatter())
+    handler.setFormatter(_LoggerFormatter())
     logger.addHandler(handler)
     set_handler_log_level(-1, verbose)
 
@@ -62,9 +62,9 @@ def add_file_handler(
         If not None, encoding used to open the file.
     %(verbose)s
     """
-    verbose = _check_verbose(verbose)
+    verbose = check_verbose(verbose)
     handler = logging.FileHandler(fname, mode, encoding)
-    handler.setFormatter(LoggerFormatter())
+    handler.setFormatter(_LoggerFormatter())
     logger.addHandler(handler)
     set_handler_log_level(-1, verbose)
 
@@ -84,7 +84,7 @@ def set_handler_log_level(
         ID of the handler among ``logger.handlers``.
     %(verbose)s
     """
-    verbose = _check_verbose(verbose)
+    verbose = check_verbose(verbose)
     logger.handlers[handler_id].setLevel = verbose
 
 
@@ -96,11 +96,11 @@ def set_log_level(verbose: Union[bool, str, int, None]) -> None:
     ----------
     %(verbose)s
     """
-    verbose = _check_verbose(verbose)
+    verbose = check_verbose(verbose)
     logger.setLevel(verbose)
 
 
-class LoggerFormatter(logging.Formatter):
+class _LoggerFormatter(logging.Formatter):
     """Format string Syntax."""
 
     # Format string syntax for the different Log levels

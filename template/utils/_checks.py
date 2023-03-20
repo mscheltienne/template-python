@@ -68,7 +68,7 @@ _types = {
 }
 
 
-def _check_type(
+def check_type(
     item: Any, types: tuple, item_name: Optional[str] = None
 ) -> None:
     """Check that item is an instance of types.
@@ -124,7 +124,7 @@ def _check_type(
         )
 
 
-def _check_value(
+def check_value(
     item: Any,
     allowed_values: tuple,
     item_name: Optional[str] = None,
@@ -176,7 +176,7 @@ def _check_value(
 
 
 @fill_doc
-def _check_verbose(verbose: Any) -> int:
+def check_verbose(verbose: Any) -> int:
     """Check that the value of verbose is valid.
 
     Parameters
@@ -196,13 +196,13 @@ def _check_verbose(verbose: Any) -> int:
         CRITICAL=logging.CRITICAL,
     )
 
-    _check_type(verbose, (bool, str, "int", None), item_name="verbose")
+    check_type(verbose, (bool, str, "int", None), item_name="verbose")
 
     if verbose is None:
         verbose = logging.WARNING
     elif isinstance(verbose, str):
         verbose = verbose.upper()
-        _check_value(verbose, logging_types, item_name="verbose")
+        check_value(verbose, logging_types, item_name="verbose")
         verbose = logging_types[verbose]
     elif isinstance(verbose, bool):
         if verbose:
@@ -220,7 +220,7 @@ def _check_verbose(verbose: Any) -> int:
     return verbose
 
 
-def _ensure_path(item: Any, must_exist: bool) -> Path:
+def ensure_path(item: Any, must_exist: bool) -> Path:
     """Ensure a variable is a Path.
 
     Parameters

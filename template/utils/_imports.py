@@ -17,7 +17,7 @@ INSTALL_MAPPING = {
 }
 
 
-def _import_optional_dependency(
+def import_optional_dependency(
     name: str,
     extra: str = "",
     raise_error: bool = True,
