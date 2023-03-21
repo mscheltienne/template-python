@@ -21,7 +21,8 @@ from template import add_file_handler, logger, set_log_level
 # The logger can be used to send logs at different levels:
 # ``DEBUG``, ``INFO``, ``WARNING``, ``ERROR`` and ``CRITICAL``. Each of this
 # level is equal to an integer value. If the logger level is at least equal to
-# the emitted report level, the log is displayed. Else, it is omitted.
+# the emitted report level, the log is displayed. Else, it is omitted. By
+# default, the logger is set to the ``WARNING`` level.
 
 print (f"The level 'INFO' corresponds to the value {logging.INFO}.")
 print (f"The level 'ERROR' corresponds to the value {logging.ERROR}.")
@@ -37,8 +38,8 @@ logger.debug("This is a debug log that will now be displayed.")
 
 #%%
 # By default, the logger has one `~logging.StreamHandler` which outputs in
-# ``sys.stdout``. The level of this handler always matches the level of the
-# logger when using  `~template.set_log_level`.
+# ``sys.stdout``. The level of both the logger and of this first handler can be
+# changed with `~template.set_log_level`.
 # Additional file handlers can be added with `~template.add_file_handler`.
 # Each handler can be set to a different level than the logger (and than the
 # first `~logging.StreamHandler`).
@@ -69,14 +70,13 @@ for line in lines:
 
 #%%
 # A message level must be equal or above both the logger and the handler level
-# to be emitted on a specific handler.
+# to be emitted on a specific handler. More information on the
+# `Python logging documentation <pyLogging_>`_ and on the flowchart below:
 #
 # .. figure:: ../../_static/logging/flowchart-light.png
 #     :class: only-light
 #
 # .. figure:: ../../_static/logging/flowchart-dark.png
 #     :class: only-dark
-#
-# More information on the `Python logging documentation <pyLogging_>`_.
 #
 # .. _pyLogging: https://docs.python.org/3/library/logging.html
