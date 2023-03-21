@@ -1,46 +1,62 @@
 import logging
 import sys
 from pathlib import Path
-from typing import Callable, Optional, TextIO, Union
+from typing import Callable, Optional, IO, Union
 
 from ._checks import check_verbose
 from ._docs import fill_doc
 
-logger = logging.getLogger(__package__.split(".utils", maxsplit=1)[0])
-logger.propagate = False  # don't propagate (in case of multiple imports)
-
 
 @fill_doc
-def _init_logger(verbose: Optional[Union[bool, str, int]] = None) -> None:
+def _init_logger(
+    *, verbose: Optional[Union[bool, str, int]] = None
+) -> logging.Logger:
     """Initialize a logger.
 
-    Assign sys.stdout as a handler of the logger.
+    Assigns sys.stdout as the first handler of the logger.
 
     Parameters
     ----------
     %(verbose)s
+
+    Returns
+    -------
+    logger : Logger
+        The initialized logger.
     """
-    set_log_level(verbose)
-    add_stream_handler(sys.stdout, verbose)
+    # create logger
+    verbose = check_verbose(verbose)
+    logger = logging.getLogger(__package__.split(".utils", maxsplit=1)[0])
+    logger.propagate = False
+    logger.setLevel(verbose)
+
+    # add the main handler
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(_LoggerFormatter())
+    handler.setLevel(verbose)
+    logger.addHandler(handler)
+
+    return logger
 
 
 @fill_doc
 def add_stream_handler(
-    stream: TextIO, verbose: Optional[Union[bool, str, int]] = None
+    stream: IO, *, verbose: Optional[Union[bool, str, int]] = None
 ) -> None:
     """Add a stream handler to the logger.
 
     Parameters
     ----------
-    stream : TextIO
+    stream : file-like
         The output stream, e.g. ``sys.stdout``.
+        Must be an object which supports ``write()`` and ``flush()`` methods.
     %(verbose)s
     """
     verbose = check_verbose(verbose)
     handler = logging.StreamHandler(stream)
     handler.setFormatter(_LoggerFormatter())
+    handler.setLevel(verbose)
     logger.addHandler(handler)
-    set_handler_log_level(-1, verbose)
 
 
 @fill_doc
@@ -48,6 +64,7 @@ def add_file_handler(
     fname: Union[str, Path],
     mode: str = "a",
     encoding: Optional[str] = None,
+    *,
     verbose: Optional[Union[bool, str, int]] = None,
 ) -> None:
     """Add a file handler to the logger.
@@ -65,32 +82,13 @@ def add_file_handler(
     verbose = check_verbose(verbose)
     handler = logging.FileHandler(fname, mode, encoding)
     handler.setFormatter(_LoggerFormatter())
+    handler.setLevel(verbose)
     logger.addHandler(handler)
-    set_handler_log_level(-1, verbose)
-
-
-@fill_doc
-def set_handler_log_level(
-    handler_id: int, verbose: Union[bool, str, int, None]
-) -> None:
-    """Set the log level for a specific handler.
-
-    First handler (ID 0) is always ``sys.stdout``, followed by user-defined
-    handlers.
-
-    Parameters
-    ----------
-    handler_id : int
-        ID of the handler among ``logger.handlers``.
-    %(verbose)s
-    """
-    verbose = check_verbose(verbose)
-    logger.handlers[handler_id].setLevel = verbose
 
 
 @fill_doc
 def set_log_level(verbose: Union[bool, str, int, None]) -> None:
-    """Set the log level for the logger.
+    """Set the log level for the logger and the first handler ``sys.stdout``.
 
     Parameters
     ----------
@@ -98,6 +96,7 @@ def set_log_level(verbose: Union[bool, str, int, None]) -> None:
     """
     verbose = check_verbose(verbose)
     logger.setLevel(verbose)
+    logger.handlers[0].setLevel(verbose)
 
 
 class _LoggerFormatter(logging.Formatter):
@@ -156,10 +155,32 @@ def verbose(f: Callable) -> Callable:
 
     def wrapper(*args, **kwargs):
         if "verbose" in kwargs:
-            set_log_level(kwargs["verbose"])
-        return f(*args, **kwargs)
+            with _use_log_level(kwargs["verbose"]):
+                return f(*args, **kwargs)
+        else:
+            return f(*args, **kwargs)
 
     return wrapper
 
 
-_init_logger()
+@fill_doc
+class _use_log_level:
+    """Context manager to change the logging level temporary.
+
+    Parameters
+    ----------
+    %(verbose)s
+    """
+
+    def __init__(self, verbose: Union[bool, str, int, None] = None):
+        self._old_level = logger.level
+        self._level = verbose
+
+    def __enter__(self):
+        set_log_level(self._level)
+
+    def __exit__(self, *args):
+        set_log_level(self._old_level)
+
+
+logger = _init_logger(verbose="WARNING")  # equivalent to verbose=None

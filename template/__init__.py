@@ -4,6 +4,5 @@ from .utils.logs import (  # noqa: F401
     add_file_handler,
     add_stream_handler,
     logger,
-    set_handler_log_level,
     set_log_level,
 )

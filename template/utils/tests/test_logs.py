@@ -6,7 +6,6 @@ from typing import Optional, Union
 import pytest
 
 from ..logs import (
-    _init_logger,
     add_file_handler,
     logger,
     set_log_level,
@@ -18,8 +17,6 @@ logger.propagate = True
 
 def test_default_log_level(caplog):
     """Test the default log level."""
-    _init_logger()
-
     caplog.clear()
     logger.debug("101")
     assert "101" not in caplog.text
@@ -78,10 +75,10 @@ def test_verbose(caplog):
     def foo(verbose: Optional[Union[bool, str, int]] = None):
         logger.debug("101")
 
-    set_log_level("DEBUG")
+    set_log_level("INFO")
     caplog.clear()
     foo()
-    assert "101" in caplog.text
+    assert "101" not in caplog.text
 
     for level in (20, 25, 30, True, False, "WARNING", "ERROR"):
         caplog.clear()
@@ -91,17 +88,17 @@ def test_verbose(caplog):
     caplog.clear()
     foo(verbose="DEBUG")
     assert "101" in caplog.text
+    assert logger.level == logging.INFO
 
 
 def test_file_handler(tmp_path):
     """Test adding a file handler."""
     fname = tmp_path / "logs.txt"
-    add_file_handler(fname)
+    add_file_handler(fname)  # default level: WARNING.
 
-    set_log_level("WARNING")
     logger.warning("test1")
     logger.info("test2")
-    set_log_level("INFO")
+    logger.handlers[-1].setLevel(logging.INFO)
     logger.info("test3")
 
     logger.handlers[-1].close()
