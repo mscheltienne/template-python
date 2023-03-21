@@ -36,12 +36,12 @@ set_log_level("DEBUG")
 logger.debug("This is a debug log that will now be displayed.")
 
 #%%
-# By default, the logger has one stream handler which outputs in
+# By default, the logger has one `~logging.StreamHandler` which outputs in
 # ``sys.stdout``. The level of this handler always matches the level of the
 # logger when using  `~template.set_log_level`.
-# Additional handler can be added with `~template.add_stream_handler` and
-# `~template.add_file_handler`. Each handler can be set to a different level
-# than the logger (and than the first stream handler ``sys.stdout``).
+# Additional file handlers can be added with `~template.add_file_handler`.
+# Each handler can be set to a different level than the logger (and than the
+# first `~logging.StreamHandler`).
 #
 # .. note::
 #

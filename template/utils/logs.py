@@ -1,7 +1,7 @@
 import logging
 import sys
 from pathlib import Path
-from typing import IO, Callable, Optional, Union
+from typing import Callable, Optional, Union
 
 from ._checks import check_verbose
 from ._docs import fill_doc
@@ -37,26 +37,6 @@ def _init_logger(
     logger.addHandler(handler)
 
     return logger
-
-
-@fill_doc
-def add_stream_handler(
-    stream: IO, *, verbose: Optional[Union[bool, str, int]] = None
-) -> None:
-    """Add a stream handler to the logger.
-
-    Parameters
-    ----------
-    stream : file-like
-        The output stream, e.g. ``sys.stdout``.
-        Must be an object which supports ``write()`` and ``flush()`` methods.
-    %(verbose)s
-    """
-    verbose = check_verbose(verbose)
-    handler = logging.StreamHandler(stream)
-    handler.setFormatter(_LoggerFormatter())
-    handler.setLevel(verbose)
-    logger.addHandler(handler)
 
 
 @fill_doc
