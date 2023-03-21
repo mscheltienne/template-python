@@ -27,15 +27,15 @@ from template import add_file_handler, logger, set_log_level
 
 print (f"The level 'INFO' corresponds to the value {logging.INFO}.")
 print (f"The level 'ERROR' corresponds to the value {logging.ERROR}.")
-logger.debug("This is a debug log that will not be displayed.")
-logger.warning("This is a warning log that will be displayed.")
+logger.debug("Log that will not be displayed.")
+logger.warning("Log that will be displayed.")
 
 #%%
 # The function `~template.set_log_level` can be used to edit the level of the
 # logger.
 
 set_log_level("DEBUG")
-logger.debug("This is a debug log that will now be displayed.")
+logger.debug("Log that will now be displayed.")
 
 #%%
 # By default, the logger has one `~logging.StreamHandler` which outputs to
@@ -52,12 +52,8 @@ logger.debug("This is a debug log that will now be displayed.")
 directory = TemporaryDirectory()
 file = Path(directory.name) / "mylogs.log"
 add_file_handler(file, verbose="INFO")  # different level than the logger
-logger.debug(
-    "This is a debug log that will not be saved to file but will be displayed."
-)
-logger.info(
-    "This is an info log that will both be displayed and saved to file."
-)
+logger.debug("Log displayed but not saved to file.")
+logger.info("Log displayed and saved to file.")
 
 #%%
 # Since the file handler we added is set to the ``INFO`` level, it should
