@@ -1,10 +1,10 @@
 import logging
-import sys
 from pathlib import Path
 from typing import Callable, Optional, Union
 
 from ._checks import check_verbose
 from ._docs import fill_doc
+from ._fixes import _WrapStdOut
 
 
 @fill_doc
@@ -31,9 +31,8 @@ def _init_logger(
     logger.setLevel(verbose)
 
     # add the main handler
-    handler = logging.StreamHandler(sys.stdout)
+    handler = logging.StreamHandler(_WrapStdOut())
     handler.setFormatter(_LoggerFormatter())
-    handler.setLevel(verbose)
     logger.addHandler(handler)
 
     return logger
@@ -76,7 +75,6 @@ def set_log_level(verbose: Union[bool, str, int, None]) -> None:
     """
     verbose = check_verbose(verbose)
     logger.setLevel(verbose)
-    logger.handlers[0].setLevel(verbose)
 
 
 class _LoggerFormatter(logging.Formatter):

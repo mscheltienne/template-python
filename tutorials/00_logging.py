@@ -7,7 +7,8 @@ This package uses the logging module.
 """
 
 #%%
-# The logger and its utilities can be imported from the package namespace.
+# The logger and its utilities can be imported from the ``template`` package
+# namespace.
 
 import logging
 from pathlib import Path
@@ -37,12 +38,11 @@ set_log_level("DEBUG")
 logger.debug("This is a debug log that will now be displayed.")
 
 #%%
-# By default, the logger has one `~logging.StreamHandler` which outputs in
+# By default, the logger has one `~logging.StreamHandler` which outputs to
 # ``sys.stdout``. The level of both the logger and of this first handler can be
 # changed with `~template.set_log_level`.
 # Additional file handlers can be added with `~template.add_file_handler`.
-# Each handler can be set to a different level than the logger (and than the
-# first `~logging.StreamHandler`).
+# Each handler can be set to a different level than the logger.
 #
 # .. note::
 #
@@ -80,3 +80,11 @@ for line in lines:
 #     :class: only-dark
 #
 # .. _pyLogging: https://docs.python.org/3/library/logging.html
+
+#%%
+# Finally, the handlers are listed in ``logger.handlers``. When an handler is
+# not used anymore, it can be closed. This step is optional on Unix systems
+# while it might be mantadory depending on the situation on Windows.
+
+print (logger.handlers)
+logger.handlers[-1].close()
