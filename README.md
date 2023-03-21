@@ -46,6 +46,7 @@ On the `main` branch:
 - [ ] Edit the API pages
     - [ ] In `doc\api\index.rst`, edit the package name
     - [ ] In `doc\api\logging.rst`, edit the current module
+- [ ] Edit the logging tutorial to replace `from template import` with the correct package name
 
 On the `gh-pages` branch:
 - [ ] Edit the links in the landing page `index.html`
