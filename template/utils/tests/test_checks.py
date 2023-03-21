@@ -29,7 +29,7 @@ def test_ensure_int():
 
 
 def test_check_type():
-    """Test _check_type checker."""
+    """Test check_type checker."""
     # valids
     check_type(101, ("int",))
     check_type(101, ("int", str))
@@ -51,7 +51,7 @@ def test_check_type():
 
 
 def test_check_value():
-    """Test _check_value checker."""
+    """Test check_value checker."""
     # valids
     check_value(5, (5,))
     check_value(5, (5, 101))
@@ -68,7 +68,7 @@ def test_check_value():
 
 
 def test_check_verbose():
-    """Test _check_verbose checker."""
+    """Test check_verbose checker."""
     # valids
     assert check_verbose(12) == 12
     assert check_verbose("INFO") == logging.INFO
@@ -87,7 +87,7 @@ def test_check_verbose():
 
 
 def test_ensure_path():
-    """Test _ensure_path checker."""
+    """Test ensure_path checker."""
     # valids
     cwd = Path.cwd()
     path = ensure_path(cwd, must_exist=False)
