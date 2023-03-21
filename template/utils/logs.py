@@ -1,7 +1,7 @@
 import logging
 import sys
 from pathlib import Path
-from typing import Callable, Optional, IO, Union
+from typing import IO, Callable, Optional, Union
 
 from ._checks import check_verbose
 from ._docs import fill_doc
