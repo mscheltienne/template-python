@@ -69,8 +69,11 @@ def test_verbose(caplog):
     # function
     @verbose
     def foo(verbose: Optional[Union[bool, str, int]] = None):
+        """Foo function."""
         logger.debug("101")
 
+    assert foo.__doc__ == "Foo function."
+    assert foo.__name__ == "foo"
     set_log_level("INFO")
     caplog.clear()
     foo()

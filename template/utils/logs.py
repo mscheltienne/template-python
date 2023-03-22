@@ -1,4 +1,5 @@
 import logging
+from functools import wraps
 from pathlib import Path
 from typing import Callable, Optional, Union
 
@@ -131,6 +132,7 @@ def verbose(f: Callable) -> Callable:
         The function.
     """
 
+    @wraps(f)
     def wrapper(*args, **kwargs):
         if "verbose" in kwargs:
             with _use_log_level(kwargs["verbose"]):
