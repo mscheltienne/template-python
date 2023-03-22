@@ -66,6 +66,7 @@ def test_logger(level, caplog):
 def test_verbose(caplog):
     """Test verbose decorator."""
 
+    # function
     @verbose
     def foo(verbose: Optional[Union[bool, str, int]] = None):
         logger.debug("101")
@@ -84,6 +85,37 @@ def test_verbose(caplog):
     foo(verbose="DEBUG")
     assert "101" in caplog.text
     assert logger.level == logging.INFO
+
+    # method
+    class Foo:
+        def __init__(self):
+            pass
+
+        @verbose
+        def foo(self, verbose: Optional[Union[bool, str, int]] = None):
+            logger.debug("101")
+
+        @staticmethod
+        @verbose
+        def foo2(verbose: Optional[Union[bool, str, int]] = None):
+            logger.debug("101")
+
+    foo = Foo()
+    set_log_level("INFO")
+    caplog.clear()
+    foo.foo()
+    assert "101" not in caplog.text
+    caplog.clear()
+    foo.foo(verbose="DEBUG")
+    assert "101" in caplog.text
+
+    # static method
+    caplog.clear()
+    Foo.foo2()
+    assert "101" not in caplog.text
+    caplog.clear()
+    Foo.foo2(verbose="DEBUG")
+    assert "101" in caplog.text
 
 
 def test_file_handler(tmp_path):
