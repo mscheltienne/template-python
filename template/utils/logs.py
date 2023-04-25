@@ -67,7 +67,7 @@ def add_file_handler(
 
 
 @fill_doc
-def set_log_level(verbose: Union[bool, str, int, None]) -> None:
+def set_log_level(verbose: Optional[Union[bool, str, int]]) -> None:
     """Set the log level for the logger and the first handler ``sys.stdout``.
 
     Parameters
