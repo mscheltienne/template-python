@@ -1,3 +1,5 @@
+"""Test config.py"""
+
 from io import StringIO
 
 from ..config import sys_info
