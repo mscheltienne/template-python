@@ -10,6 +10,7 @@ import importlib
 INSTALL_MAPPING = {
     "codespell_lib": "codespell",
     "cv2": "opencv-python",
+    "parallel": "pyparallel",
     "pytest_cov": "pytest-cov",
     "serial": "pyserial",
     "sklearn": "scikit-learn",

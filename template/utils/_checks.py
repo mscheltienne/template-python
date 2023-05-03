@@ -11,7 +11,7 @@ import numpy as np
 from ._docs import fill_doc
 
 
-def _ensure_int(item: Any, item_name: Optional[str] = None) -> int:
+def ensure_int(item: Any, item_name: Optional[str] = None) -> int:
     """Ensure a variable is an integer.
 
     Parameters
@@ -45,7 +45,7 @@ class _IntLike:
     @classmethod
     def __instancecheck__(cls, other: Any) -> bool:
         try:
-            _ensure_int(other)
+            ensure_int(other)
         except TypeError:
             return False
         else:
@@ -204,7 +204,7 @@ def check_verbose(verbose: Any) -> int:
         else:
             verbose = logging.WARNING
     elif isinstance(verbose, int):
-        verbose = _ensure_int(verbose)
+        verbose = ensure_int(verbose)
         if verbose <= 0:
             raise ValueError(
                 "Argument 'verbose' can not be a negative integer, "

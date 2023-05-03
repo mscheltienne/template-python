@@ -5,21 +5,21 @@ from pathlib import Path
 
 import pytest
 
-from .._checks import _ensure_int, check_type, check_value, check_verbose, ensure_path
+from .._checks import check_type, check_value, check_verbose, ensure_int, ensure_path
 
 
 def test_ensure_int():
-    """Test _ensure_int checker."""
+    """Test ensure_int checker."""
     # valids
-    assert _ensure_int(101) == 101
+    assert ensure_int(101) == 101
 
     # invalids
     with pytest.raises(TypeError, match="Item must be an int"):
-        _ensure_int(101.0)
+        ensure_int(101.0)
     with pytest.raises(TypeError, match="Item must be an int"):
-        _ensure_int(True)
+        ensure_int(True)
     with pytest.raises(TypeError, match="Item must be an int"):
-        _ensure_int([101])
+        ensure_int([101])
 
 
 def test_check_type():
