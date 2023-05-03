@@ -5,13 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from .._checks import (
-    _ensure_int,
-    check_type,
-    check_value,
-    check_verbose,
-    ensure_path,
-)
+from .._checks import _ensure_int, check_type, check_value, check_verbose, ensure_path
 
 
 def test_ensure_int():
@@ -61,9 +55,7 @@ def test_check_value():
     # invalids
     with pytest.raises(ValueError, match="Invalid value for the parameter."):
         check_value(5, [1, 2, 3, 4])
-    with pytest.raises(
-        ValueError, match="Invalid value for the 'number' parameter."
-    ):
+    with pytest.raises(ValueError, match="Invalid value for the 'number' parameter."):
         check_value(5, [1, 2, 3, 4], "number")
 
 
