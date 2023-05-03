@@ -94,8 +94,8 @@ include = ['template*']
 exclude = ['template*tests']
 
 [tool.black]
-line-length = 79
-target-version = ['py38']
+line-length = 88
+target-version = ['py39']
 include = '\.pyi?$'
 extend-exclude = '''
 (
@@ -112,8 +112,8 @@ extend-exclude = '''
 [tool.isort]
 profile = 'black'
 multi_line_output = 3
-line_length = 79
-py_version = 38
+line_length = 88
+py_version = 39
 extend_skip_glob = [
     'setup.py',
     'doc/*',
@@ -129,7 +129,7 @@ match-dir = '^template.*'
 add_ignore = 'D100,D104,D107'
 
 [tool.ruff]
-line-length = 79
+line-length = 88
 extend-exclude = [
     "doc",
     "setup.py",
