@@ -25,8 +25,8 @@ def import_optional_dependency(
 ):
     """Import an optional dependency.
 
-    By default, if a dependency is missing an ImportError with a nice message
-    will be raised.
+    By default, if a dependency is missing an ImportError with a nice message will be
+    raised.
 
     Parameters
     ----------
@@ -43,8 +43,7 @@ def import_optional_dependency(
     -------
     module : Optional[ModuleType]
         The imported module when found.
-        None is returned when the package is not found and raise_error is
-        False.
+        None is returned when the package is not found and raise_error is False.
     """
     package_name = INSTALL_MAPPING.get(name)
     install_name = package_name if package_name is not None else name
@@ -54,8 +53,8 @@ def import_optional_dependency(
     except ImportError:
         if raise_error:
             raise ImportError(
-                f"Missing optional dependency '{install_name}'. {extra} "
-                f"Use pip or conda to install {install_name}."
+                f"Missing optional dependency '{install_name}'. {extra} Use pip or "
+                f"conda to install {install_name}."
             )
         else:
             return None

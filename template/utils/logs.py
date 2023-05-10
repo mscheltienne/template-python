@@ -99,8 +99,7 @@ class _LoggerFormatter(logging.Formatter):
         super().__init__(fmt="%(levelname): %(message)s")
 
     def format(self, record: logging.LogRecord):
-        """
-        Format the received log record.
+        """Format the received log record.
 
         Parameters
         ----------
