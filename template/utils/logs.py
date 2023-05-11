@@ -5,7 +5,7 @@ from typing import Callable, Optional, Union
 
 from ._checks import check_verbose
 from ._docs import fill_doc
-from ._fixes import _WrapStdOut
+from ._fixes import WrapStdOut
 
 
 @fill_doc
@@ -30,7 +30,7 @@ def _init_logger(*, verbose: Optional[Union[bool, str, int]] = None) -> logging.
     logger.setLevel(verbose)
 
     # add the main handler
-    handler = logging.StreamHandler(_WrapStdOut())
+    handler = logging.StreamHandler(WrapStdOut())
     handler.setFormatter(_LoggerFormatter())
     logger.addHandler(handler)
 

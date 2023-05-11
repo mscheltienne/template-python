@@ -4,7 +4,7 @@ import sys
 
 
 # https://github.com/sphinx-gallery/sphinx-gallery/issues/1112
-class _WrapStdOut(object):
+class WrapStdOut(object):
     """Dynamically wrap to sys.stdout.
 
     This makes packages that monkey-patch sys.stdout (e.g.doctest, sphinx-gallery) work
