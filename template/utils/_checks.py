@@ -3,6 +3,7 @@
 import logging
 import operator
 import os
+from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, Optional
 
@@ -61,8 +62,9 @@ class _Callable:
 _types = {
     "numeric": (np.floating, float, _IntLike()),
     "path-like": (str, Path, os.PathLike),
-    "int": (_IntLike(),),
+    "int-like": (_IntLike(),),
     "callable": (_Callable(),),
+    "array-like": (Sequence, np.ndarray),
 }
 
 
@@ -75,7 +77,8 @@ def check_type(item: Any, types: tuple, item_name: Optional[str] = None) -> None
         Item to check.
     types : tuple of types | tuple of str
         Types to be checked against.
-        If str, must be one of ('int', 'numeric', 'path-like', 'callable').
+        If str, must be one of ('int-like', 'numeric', 'path-like', 'callable',
+        'array-like').
     item_name : str | None
         Name of the item to show inside the error message.
 
@@ -187,7 +190,7 @@ def check_verbose(verbose: Any) -> int:
         CRITICAL=logging.CRITICAL,
     )
 
-    check_type(verbose, (bool, str, "int", None), item_name="verbose")
+    check_type(verbose, (bool, str, "int-like", None), item_name="verbose")
 
     if verbose is None:
         verbose = logging.WARNING
