@@ -20,16 +20,16 @@ keywords = [
     'template',
 ]
 classifiers = [
+    'License :: OSI Approved :: MIT License',
+    'Natural Language :: English',
+    'Operating System :: MacOS',
     'Operating System :: Microsoft :: Windows',
     'Operating System :: Unix',
-    'Operating System :: MacOS',
     'Programming Language :: Python :: 3 :: Only',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
-    'Natural Language :: English',
-    'License :: OSI Approved :: MIT License',
 ]
 dependencies = [
     'numpy>=1.21',
@@ -101,7 +101,6 @@ extend-exclude = '''
 (
       __pycache__
     | .github
-    | .ruff_cache
     | setup.py
     | doc/
     | examples/
