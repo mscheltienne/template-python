@@ -2,7 +2,6 @@
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![codecov](https://codecov.io/gh/mscheltienne/template-python/branch/main/graph/badge.svg?token=KRYRRUXDYY)](https://codecov.io/gh/mscheltienne/template-python)
 [![tests](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yml)
-[![build](https://github.com/mscheltienne/template-python/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/build.yml)
 [![doc](https://github.com/mscheltienne/template-python/actions/workflows/doc.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/doc.yml)
 
 # template-python
@@ -22,10 +21,11 @@ following steps are required:
     - [ ] Under `[tool.pydocstyle]`, edit the matching pattern `match-dir`
     - [ ] Under `[tool.coverage.run]`, edit the exclusion patterns `omit`
 - [ ] Edit the GitHub workflows
-    - [ ] In `build.yml`, edit the command for system information and uninstallation
+    - [ ] In `doc.yml`, edit the command for system information
     - [ ] In `publish.yml`, uncomment the trigger on release and edit the command for system information
-    - [ ] In `pytest.yml`, edit the command for system information and pytest
+    - [ ] In `pytest.yml`, edit the commands for system information and pytest
 - [ ] Edit `README.md`
+- [ ] Edit the keys to list in the system information
 
 The package can then be installed in a given environment with
 `pip install -e .` (assuming the current working directory is the root of the
