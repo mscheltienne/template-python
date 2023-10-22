@@ -1,8 +1,6 @@
 name: publish
-on:
+on:  # yamllint disable-line rule:truthy
   workflow_dispatch:
-  # release:
-  #   types: [published]
 
 jobs:
   pypi:

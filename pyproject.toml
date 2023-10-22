@@ -71,6 +71,7 @@ style = [
   'pydocstyle[toml]',
   'ruff',
   'toml-sort',
+  'yamllint',
 ]
 test = [
   'pytest',
