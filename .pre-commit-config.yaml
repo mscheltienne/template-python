@@ -18,5 +18,5 @@ repos:
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.23.1
     hooks:
-      - id: toml-sort
-        args: [pyproject.toml, --in-place]
+      - id: toml-sort-fix
+        args: [pyproject.toml]
