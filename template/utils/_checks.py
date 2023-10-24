@@ -1,5 +1,6 @@
 """Utility functions for checking types and values. Inspired from MNE."""
 
+import ctypes
 import logging
 import operator
 import os
