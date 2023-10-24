@@ -52,13 +52,13 @@ doc = [
   'furo',
   'matplotlib',
   'memory-profiler',
-  'sphinxcontrib-bibtex',
   'numpydoc',
   'sphinx',
   'sphinx-copybutton',
   'sphinx-design',
   'sphinx-gallery',
   'sphinx-issues',
+  'sphinxcontrib-bibtex',
 ]
 full = [
   'template[all]',
