@@ -2,10 +2,10 @@
 
 import logging
 import operator
+import os
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any, Optional
-import os
 
 import numpy as np
 
