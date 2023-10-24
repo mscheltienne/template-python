@@ -17,4 +17,7 @@ class WrapStdOut(object):
         if hasattr(sys.stdout, name):
             return getattr(sys.stdout, name)
         else:
-            raise AttributeError(f"'file' object has not attribute '{name}'")
+            raise AttributeError(
+                f"'file' object has not attribute '{name}'"
+                + "and maybe it can be longer"
+            )
