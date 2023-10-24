@@ -148,13 +148,13 @@ minversion = '6.0'
 
 [tool.ruff]
 extend-exclude = [
-  "doc",
-  "setup.py",
+  'doc',
+  'setup.py',
 ]
 line-length = 88
 
 [tool.ruff.per-file-ignores]
-"__init__.py" = ["F401"]
+'__init__.py' = ['F401']
 
 [tool.setuptools]
 include-package-data = false
