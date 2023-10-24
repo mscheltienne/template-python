@@ -34,6 +34,13 @@ repos:
             files: template
             additional_dependencies: [tomli]
 
+    - repo: https://github.com/mscheltienne/bibclean
+      rev: 0.7.1
+      hooks:
+          - id: bibclean-fix
+            files: doc/references.bib
+            args: [--exit-non-zero-on-fix]
+
     - repo: https://github.com/pappasam/toml-sort
       rev: v0.23.1
       hooks:
