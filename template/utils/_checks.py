@@ -69,7 +69,7 @@ _types = {
 
 
 def check_type(item: Any, types: tuple, item_name: Optional[str] = None) -> None:
-    """Checks that item is an instance of types.
+    """Check that item is an instance of types.
 
     Parameters
     ----------
