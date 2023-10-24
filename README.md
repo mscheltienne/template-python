@@ -1,8 +1,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 [![codecov](https://codecov.io/gh/mscheltienne/template-python/branch/main/graph/badge.svg?token=KRYRRUXDYY)](https://codecov.io/gh/mscheltienne/template-python)
-[![tests](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yml)
-[![doc](https://github.com/mscheltienne/template-python/actions/workflows/doc.yml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/doc.yml)
+[![tests](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yaml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/pytest.yaml)
+[![doc](https://github.com/mscheltienne/template-python/actions/workflows/doc.ayml/badge.svg?branch=main)](https://github.com/mscheltienne/template-python/actions/workflows/doc.yaml)
 
 # template-python
 
@@ -21,9 +21,12 @@ following steps are required:
     - [ ] Under `[tool.pydocstyle]`, edit the matching pattern `match-dir`
     - [ ] Under `[tool.coverage.run]`, edit the exclusion patterns `omit`
 - [ ] Edit the GitHub workflows
-    - [ ] In `doc.yml`, edit the command for system information
-    - [ ] In `publish.yml`, uncomment the trigger on release and edit the command for system information
-    - [ ] In `pytest.yml`, edit the commands for system information and pytest
+    - [ ] In `doc.yaml`, edit the command for system information
+    - [ ] In `publish.yaml`, uncomment the trigger on release and edit the command for system information
+    - [ ] In `pytest.yaml`, edit the commands for system information and pytest
+- [ ] Edit the pre-commit configuration
+    - [ ] Edit the paths in `.pre-commit-config.yaml`
+    - [ ] Enable `pre-commit.ci` on https://pre-commit.ci/
 - [ ] Edit `README.md`
 - [ ] Edit the keys to list in the system information
 
@@ -37,7 +40,7 @@ If the documentation build is preserved, the following steps are required:
 
 On the `main` branch:
 - [ ] Edit the GitHub workflows
-    - [ ] In `doc.yml`, edit the command for system information
+    - [ ] In `doc.yaml`, edit the command for system information
 - [ ] Edit the project links in `doc\links.inc`
 - [ ] Edit the landing page `index.rst`
 - [ ] Edit the sphinx configuration
