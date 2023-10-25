@@ -1,5 +1,8 @@
 extends: default
 
+ignore: |
+  conda-forge/recipes/template/meta.yaml
+
 rules:
   line-length: disable
   document-start: disable
