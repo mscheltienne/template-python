@@ -29,6 +29,7 @@ following steps are required:
     - [ ] Enable `pre-commit.ci` on https://pre-commit.ci/
 - [ ] Edit `README.md`
 - [ ] Edit the keys to list in the system information
+- [ ] Remove the conda-forge recipe from the ignored files in ``.yamllint.yaml``
 
 The package can then be installed in a given environment with
 `pip install -e .` (assuming the current working directory is the root of the
