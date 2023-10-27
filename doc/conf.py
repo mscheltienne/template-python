@@ -5,6 +5,7 @@
 
 
 import inspect
+import sys
 from datetime import date
 from importlib import import_module
 from typing import Dict, Optional
@@ -221,8 +222,18 @@ def linkcode_resolve(domain: str, info: Dict[str, str]) -> Optional[str]:
 
 
 # -- sphinx-gallery ----------------------------------------------------------
+if sys.platform.startswith("win"):
+    try:
+        subprocess.check_call(["optipng", "--version"])
+        compress_images = ("images", "thumbnails")
+    except Exception:
+        compress_images = ("images", "thumbnails")
+else:
+    compress_images = ("images", "thumbnails")
+
 sphinx_gallery_conf = {
     "backreferences_dir": "generated/backreferences",
+    "compress_images": compress_images,
     "doc_module": (f"{package}",),
     "examples_dirs": ["../tutorials"],
     "exclude_implicit_doc": {},  # set
