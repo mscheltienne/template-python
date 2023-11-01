@@ -11,7 +11,7 @@ class WrapStdOut(object):
     properly.
     """
 
-    def __getattr__(self, name):  # noqa: D105
+    def __getattr__(self, name: str):  # noqa: D105
         # Even more ridiculous than this class, this must be sys.stdout (not
         # just stdout) in order for this to work (tested on OSX and Linux).
         if hasattr(sys.stdout, name):

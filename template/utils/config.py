@@ -1,13 +1,18 @@
+from __future__ import annotations  # c.f. PEP 563, PEP 649
+
 import platform
 import sys
 from functools import partial
 from importlib.metadata import requires, version
-from typing import IO, Callable, List, Optional
+from typing import TYPE_CHECKING
 
 import psutil
 from packaging.requirements import Requirement
 
 from ._checks import check_type
+
+if TYPE_CHECKING:
+    from typing import IO, Callable, List, Optional
 
 
 def sys_info(fid: Optional[IO] = None, developer: bool = False):

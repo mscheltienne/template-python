@@ -1,11 +1,16 @@
+from __future__ import annotations  # c.f. PEP 563, PEP 649
+
 import logging
 from functools import wraps
 from pathlib import Path
-from typing import Callable, Optional, Union
+from typing import TYPE_CHECKING
 
 from ._checks import check_verbose
 from ._docs import fill_doc
 from ._fixes import WrapStdOut
+
+if TYPE_CHECKING:
+    from typing import Callable, Optional, Union
 
 
 @fill_doc

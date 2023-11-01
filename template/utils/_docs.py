@@ -4,8 +4,13 @@ Inspired from mne: https://mne.tools/stable/index.html
 Inspired from mne.utils.docs.py by Eric Larson <larson.eric.d@gmail.com>
 """
 
+from __future__ import annotations  # c.f. PEP 563, PEP 649
+
 import sys
-from typing import Callable, Dict, List
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Callable, Dict, List
 
 # ------------------------- Documentation dictionary -------------------------
 docdict: Dict[str, str] = dict()

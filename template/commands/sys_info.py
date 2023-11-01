@@ -3,7 +3,7 @@ import argparse
 from .. import sys_info
 
 
-def run():
+def run() -> None:
     """Run sys_info() command."""
     parser = argparse.ArgumentParser(
         prog=f"{__package__.split('.')[0]}-sys_info", description="sys_info"
