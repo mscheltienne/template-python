@@ -116,6 +116,7 @@ branch = true
 cover_pylib = false
 omit = [
   '**/__init__.py',
+  '**/conftest.py',
   '**/template/_version.py',
   '**/template/commands/*',
   '**/template/utils/_fixes.py',
