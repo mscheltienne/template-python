@@ -5,6 +5,7 @@
 
 
 import inspect
+import subprocess
 import sys
 from datetime import date
 from importlib import import_module
@@ -14,7 +15,7 @@ from sphinx_gallery.sorting import FileNameSortKey
 
 import template
 
-# -- project information -----------------------------------------------------
+# -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "template-python"
@@ -24,19 +25,18 @@ release = template.__version__
 package = template.__name__
 gh_url = "https://github.com/mscheltienne/template-python"
 
-# -- general configuration ---------------------------------------------------
+# -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 # If your documentation needs a minimal Sphinx version, state it here.
 needs_sphinx = "5.0"
 
-# The document name of the “root” document, that is, the document that contains
-# the root toctree directive.
+# The document name of the “root” document, that is, the document that contains the root
+# toctree directive.
 root_doc = "index"
 
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named "sphinx.ext.*") or your custom
-# ones.
+# Add any Sphinx extension module names here, as strings. They can be extensions coming
+# with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
@@ -62,12 +62,12 @@ nitpick_ignore = []
 # A list of ignored prefixes for module index sorting.
 modindex_common_prefix = [f"{package}."]
 
-# The name of a reST role (builtin or Sphinx extension) to use as the default
-# role, that is, for text marked up `like this`. This can be set to 'py:obj' to
-# make `filter` a cross-reference to the Python function “filter”.
+# The name of a reST role (builtin or Sphinx extension) to use as the default role, that
+# is, for text marked up `like this`. This can be set to 'py:obj' to make `filter` a
+# cross-reference to the Python function “filter”.
 default_role = "py:obj"
 
-# -- options for HTML output -------------------------------------------------
+# -- options for HTML output -----------------------------------------------------------
 html_theme = "furo"
 html_static_path = ["_static"]
 html_css_files = [
@@ -93,16 +93,16 @@ html_theme_options = {
     ],
 }
 
-# -- autosummary -------------------------------------------------------------
+# -- autosummary -----------------------------------------------------------------------
 autosummary_generate = True
 
-# -- autodoc -----------------------------------------------------------------
+# -- autodoc ---------------------------------------------------------------------------
 autodoc_typehints = "none"
 autodoc_member_order = "groupwise"
 autodoc_warningiserror = True
 autoclass_content = "class"
 
-# -- intersphinx -------------------------------------------------------------
+# -- intersphinx -----------------------------------------------------------------------
 intersphinx_mapping = {
     "matplotlib": ("https://matplotlib.org/stable", None),
     "mne": ("https://mne.tools/stable/", None),
@@ -114,13 +114,13 @@ intersphinx_mapping = {
 }
 intersphinx_timeout = 5
 
-# -- sphinx-issues -----------------------------------------------------------
+# -- sphinx-issues ---------------------------------------------------------------------
 issues_github_path = gh_url.split("https://github.com/")[-1]
 
-# -- autosectionlabels -------------------------------------------------------
+# -- autosectionlabels -----------------------------------------------------------------
 autosectionlabel_prefix_document = True
 
-# -- numpydoc ----------------------------------------------------------------
+# -- numpydoc --------------------------------------------------------------------------
 numpydoc_class_members_toctree = False
 numpydoc_attributes_as_param_list = False
 
@@ -154,7 +154,7 @@ error_ignores = {
     "EX01",  # section 'Examples' not found
     "ES01",  # no extended summary found
     "SA01",  # section 'See Also' not found
-    "RT02",  # The first line of the Returns section should contain only the type, unless multiple values are being returned  # noqa
+    "RT02",  # The first line of the Returns section should contain only the type, unless multiple values are being returned  # noqa: E501
 }
 numpydoc_validate = True
 numpydoc_validation_checks = {"all"} | set(error_ignores)
@@ -170,10 +170,10 @@ numpydoc_validation_exclude = {  # regex to ignore during docstring check
     r"\.__neg__",
 }
 
-# -- sphinxcontrib-bibtex ----------------------------------------------------
+# -- sphinxcontrib-bibtex --------------------------------------------------------------
 bibtex_bibfiles = ["./references.bib"]
 
-# -- sphinx.ext.linkcode -----------------------------------------------------
+# -- sphinx.ext.linkcode ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/extensions/linkcode.html
 
 
@@ -221,7 +221,7 @@ def linkcode_resolve(domain: str, info: Dict[str, str]) -> Optional[str]:
     return url
 
 
-# -- sphinx-gallery ----------------------------------------------------------
+# -- sphinx-gallery --------------------------------------------------------------------
 if sys.platform.startswith("win"):
     try:
         subprocess.check_call(["optipng", "--version"])
@@ -233,16 +233,21 @@ else:
 
 sphinx_gallery_conf = {
     "backreferences_dir": "generated/backreferences",
-    "compress_images": compress_images,
     "doc_module": (f"{package}",),
     "examples_dirs": ["../tutorials"],
     "exclude_implicit_doc": {},  # set
     "filename_pattern": r"\d{2}_",
     "gallery_dirs": ["generated/tutorials"],
     "line_numbers": False,
-    "plot_gallery": True,
+    "plot_gallery": "True",  # str, to enable overwrite from CLI without warning
     "reference_url": {f"{package}": None},
     "remove_config_comments": True,
     "show_memory": True,
     "within_subsection_order": FileNameSortKey,
 }
+
+# -- linkcheck -------------------------------------------------------------------------
+linkcheck_anchors = False  # saves a bit of time
+linkcheck_timeout = 15  # some can be quite slow
+linkcheck_retries = 3
+linkcheck_ignore = []  # will be compiled to regex

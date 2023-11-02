@@ -36,7 +36,7 @@ jobs:
       - name: Display system information
         run: template-sys_info --developer
       - name: Build doc
-        run: sphinx-build ./main/doc ./doc-build/dev -W --keep-going
+        run: sphinx-build ./main/doc ./doc-build/dev -b html -nWT --keep-going
       - name: Prune sphinx environment
         run: sudo rm -R ./doc-build/dev/.doctrees
       - name: Upload documentation
