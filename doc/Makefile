@@ -5,7 +5,6 @@
 # from the environment for the first two.
 SPHINXOPTS    ?= -nWT --keep-going
 SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = .
 
 .PHONY: help Makefile clean html html-noplot linkcheck linkcheck-grep view
 
