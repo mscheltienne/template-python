@@ -144,7 +144,6 @@ match-dir = '^template.*'
 
 [tool.pytest.ini_options]
 addopts = '--durations 20 --junit-xml=junit-results.xml --verbose'
-filterwarnings = []
 minversion = '6.0'
 
 [tool.ruff]
