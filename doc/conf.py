@@ -227,7 +227,7 @@ if sys.platform.startswith("win"):
         subprocess.check_call(["optipng", "--version"])
         compress_images = ("images", "thumbnails")
     except Exception:
-        compress_images = ("images", "thumbnails")
+        compress_images = ()
 else:
     compress_images = ("images", "thumbnails")
 
