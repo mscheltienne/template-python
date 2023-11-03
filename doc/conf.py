@@ -233,6 +233,7 @@ else:
 
 sphinx_gallery_conf = {
     "backreferences_dir": "generated/backreferences",
+    "compress_images": compress_images,
     "doc_module": (f"{package}",),
     "examples_dirs": ["../tutorials"],
     "exclude_implicit_doc": {},  # set
