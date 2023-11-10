@@ -10,10 +10,10 @@ import sys
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Callable, Dict, List
+    from typing import Callable
 
 # ------------------------- Documentation dictionary -------------------------
-docdict: Dict[str, str] = dict()
+docdict: dict[str, str] = dict()
 
 # ---------------------------------- verbose ---------------------------------
 docdict[
@@ -26,7 +26,7 @@ verbose : int | str | bool | None
     ``"WARNING"`` for False and to ``"INFO"`` for True."""
 
 # ------------------------- Documentation functions --------------------------
-docdict_indented: Dict[int, Dict[str, str]] = dict()
+docdict_indented: dict[int, dict[str, str]] = dict()
 
 
 def fill_doc(f: Callable) -> Callable:
@@ -72,7 +72,7 @@ def fill_doc(f: Callable) -> Callable:
     return f
 
 
-def _indentcount_lines(lines: List[str]) -> int:
+def _indentcount_lines(lines: list[str]) -> int:
     """Minimum indent for all lines in line list.
 
     >>> lines = [' one', '  two', '   three']

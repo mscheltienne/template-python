@@ -12,7 +12,7 @@ from packaging.requirements import Requirement
 from ._checks import check_type
 
 if TYPE_CHECKING:
-    from typing import IO, Callable, List, Optional
+    from typing import IO, Callable, Optional
 
 
 def sys_info(fid: Optional[IO] = None, developer: bool = False):
@@ -76,14 +76,14 @@ def sys_info(fid: Optional[IO] = None, developer: bool = False):
 
 
 def _list_dependencies_info(
-    out: Callable, ljust: int, package: str, dependencies: List[Requirement]
+    out: Callable, ljust: int, package: str, dependencies: list[Requirement]
 ):
     """List dependencies names and versions."""
     unicode = sys.stdout.encoding.lower().startswith("utf")
     if unicode:
         ljust += 1
 
-    not_found: List[Requirement] = list()
+    not_found: list[Requirement] = list()
     for dep in dependencies:
         if dep.name == package:
             continue
