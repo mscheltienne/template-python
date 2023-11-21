@@ -28,6 +28,7 @@ following steps are required:
     - [ ] Edit the paths in `.pre-commit-config.yaml`
     - [ ] Enable `pre-commit.ci` on https://pre-commit.ci/
 - [ ] Edit `README.md`
+- [ ] Edit `MANIFEST.in`
 - [ ] Edit the keys to list in the system information
 - [ ] Remove the conda-forge recipe from the ignored files in ``.yamllint.yaml``
 

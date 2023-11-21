@@ -1,0 +1,2 @@
+exclude template/conftest.py
+exclude template/utils/_tests.py
