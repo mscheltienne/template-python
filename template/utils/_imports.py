@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 # A mapping from import name to package name (on PyPI) when the package name
 # is different.
-INSTALL_MAPPING = {
+INSTALL_MAPPING: dict[str, str] = {
     "codespell_lib": "codespell",
     "cv2": "opencv-python",
     "parallel": "pyparallel",
