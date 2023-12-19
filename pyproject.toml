@@ -68,6 +68,7 @@ style = [
   'codespell',
   'isort',
   'mypy',
+  'pydocstyle[toml]',
   'ruff',
   'toml-sort',
   'yamllint',
