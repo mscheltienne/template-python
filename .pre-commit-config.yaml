@@ -13,11 +13,10 @@ repos:
       hooks:
           - id: ruff
             name: ruff linter
-            args: [--fix, --config=pyproject.toml]
+            args: [--fix]
             files: template
           - id: ruff-format
             name: ruff formatter
-            args: [--config=pyproject.toml]
             files: template
 
     - repo: https://github.com/codespell-project/codespell
