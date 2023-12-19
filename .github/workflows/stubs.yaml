@@ -36,8 +36,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          if ! git diff --exit-code
-          then
+          if [ -n "$(git status --porcelain)" ]; then
             git add .
             git commit -m "deploy stub files [ci skip]"
             git push
