@@ -1,7 +1,10 @@
 import ast
+import subprocess
+import sys
 from importlib import import_module
 from pathlib import Path
 
+import isort
 from mypy import stubgen
 
 import template
@@ -26,6 +29,8 @@ stubgen.main(
     ]
 )
 stubs = list(directory.rglob("*.pyi"))
+config = str((directory.parent / "pyproject.toml"))
+config_isort = isort.settings.Config(config)
 
 # expand docstrings and inject into stub files
 for stub in stubs:
@@ -51,3 +56,9 @@ for stub in stubs:
                 method.body[0].value.value = docstring
     unparsed = ast.unparse(module_ast)
     stub.write_text(unparsed, encoding="utf-8")
+    # sort imports
+    isort.file(stub, config=config_isort)
+
+# run ruff to improve stub style
+exec = subprocess.run(["ruff", "format", str(directory), "--config", config])
+sys.exit(exec.returncode)
