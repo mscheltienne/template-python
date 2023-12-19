@@ -65,7 +65,7 @@ full = [
 ]
 style = [
   'bibclean',
-  'codespell',
+  'codespell[toml]>=2.2.4',
   'isort',
   'mypy',
   'pydocstyle[toml]',
@@ -87,6 +87,12 @@ documentation = 'https://github.com/mscheltienne/template-python'
 homepage = 'https://github.com/mscheltienne/template-python'
 source = 'https://github.com/mscheltienne/template-python'
 tracker = 'https://github.com/mscheltienne/template-python/issues'
+
+[tool.codespell]
+check-hidden = true
+check-filenames = true
+ignore-words = '.codespellignore'
+skip = 'build,.git,.mypy_cache,.pytest_cache'
 
 [tool.coverage.report]
 exclude_lines = [
