@@ -29,7 +29,6 @@ stubgen.main(
     ]
 )
 stubs = list(directory.rglob("*.pyi"))
-print(directory)
 config = str((directory.parent / "pyproject.toml"))
 config_isort = isort.settings.Config(config)
 
