@@ -63,10 +63,14 @@ doc = [
 full = [
   'template[all]',
 ]
+stubs = [
+  'isort',
+  'mypy',
+  'ruff',
+]
 style = [
   'bibclean',
-  'black',
-  'codespell',
+  'codespell[toml]>=2.2.4',
   'isort',
   'pydocstyle[toml]',
   'ruff',
@@ -88,20 +92,11 @@ homepage = 'https://github.com/mscheltienne/template-python'
 source = 'https://github.com/mscheltienne/template-python'
 tracker = 'https://github.com/mscheltienne/template-python/issues'
 
-[tool.black]
-extend-exclude = '''
-(
-      __pycache__
-    | .github
-    | setup.py
-    | doc/
-    | examples/
-    | tutorials/
-)
-'''
-include = '\.pyi?$'
-line-length = 88
-target-version = ['py39']
+[tool.codespell]
+check-filenames = true
+check-hidden = true
+ignore-words = '.codespellignore'
+skip = 'build,.git,.mypy_cache,.pytest_cache'
 
 [tool.coverage.report]
 exclude_lines = [
@@ -152,6 +147,11 @@ extend-exclude = [
   'setup.py',
 ]
 line-length = 88
+select = ["E", "F", "W"]
+target-version = 'py39'
+
+[tool.ruff.format]
+docstring-code-format = true
 
 [tool.ruff.per-file-ignores]
 '__init__.py' = ['F401']
