@@ -156,6 +156,7 @@ docstring-code-format = true
 
 [tool.ruff.per-file-ignores]
 '__init__.py' = ['F401']
+'*.pyi' = ['E501']
 
 [tool.setuptools]
 include-package-data = false
