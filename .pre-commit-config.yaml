@@ -1,5 +1,5 @@
 ci:
-    skip: [codespell, pydocstyle, yamllint]
+    skip: [codespell, yamllint]
 
 repos:
     - repo: https://github.com/pycqa/isort
@@ -8,18 +8,16 @@ repos:
           - id: isort
             files: template
 
-    - repo: https://github.com/psf/black-pre-commit-mirror
-      rev: 23.12.0
-      hooks:
-          - id: black
-            args: [--quiet]
-            files: template
-
     - repo: https://github.com/astral-sh/ruff-pre-commit
       rev: v0.1.8
       hooks:
           - id: ruff
-            args: [--fix, --exit-non-zero-on-fix]
+            name: ruff linter
+            args: [--fix, --config=pyproject.toml]
+            files: template
+          - id: ruff-format
+            name: ruff formatter
+            args: [--config=pyproject.toml]
             files: template
 
     - repo: https://github.com/codespell-project/codespell
@@ -27,13 +25,6 @@ repos:
       hooks:
           - id: codespell
             args: [--check-filenames, --ignore-words=.codespellignore]
-
-    - repo: https://github.com/pycqa/pydocstyle
-      rev: 6.3.0
-      hooks:
-          - id: pydocstyle
-            files: template
-            additional_dependencies: [tomli]
 
     - repo: https://github.com/mscheltienne/bibclean
       rev: 0.8.0

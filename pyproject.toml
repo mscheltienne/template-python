@@ -136,6 +136,7 @@ extend-exclude = [
   'setup.py',
 ]
 line-length = 88
+select = ["E", "F", "W"]
 target-version = 'py39'
 
 [tool.ruff.per-file-ignores]
