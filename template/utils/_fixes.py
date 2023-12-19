@@ -1,6 +1,12 @@
 """Temporary bug-fixes awaiting an upstream fix."""
 
+from __future__ import annotations  # c.f. PEP 563, PEP 649
+
 import sys
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Any
 
 
 # https://github.com/sphinx-gallery/sphinx-gallery/issues/1112
@@ -11,7 +17,7 @@ class WrapStdOut(object):
     properly.
     """
 
-    def __getattr__(self, name: str):  # noqa: D105
+    def __getattr__(self, name: str) -> Any:  # noqa: D105
         # Even more ridiculous than this class, this must be sys.stdout (not
         # just stdout) in order for this to work (tested on OSX and Linux).
         if hasattr(sys.stdout, name):

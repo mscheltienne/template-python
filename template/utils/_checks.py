@@ -13,7 +13,7 @@ import numpy as np
 from ._docs import fill_doc
 
 if TYPE_CHECKING:
-    from typing import Any, Optional
+    from typing import Any, Optional, Union
 
 
 def ensure_int(item: Any, item_name: Optional[str] = None) -> int:
@@ -127,7 +127,7 @@ def check_type(item: Any, types: tuple, item_name: Optional[str] = None) -> None
 
 def check_value(
     item: Any,
-    allowed_values: tuple,
+    allowed_values: Union[tuple, dict[Any, Any]],
     item_name: Optional[str] = None,
     extra: Optional[str] = None,
 ) -> None:
@@ -137,8 +137,8 @@ def check_value(
     ----------
     item : object
         Item to check.
-    allowed_values : tuple of objects
-        Allowed values to be checked against.
+    allowed_values : tuple of objects | dict of objects
+        Allowed values to be checked against. If a dictionary, checks against the keys.
     item_name : str | None
         Name of the item to show inside the error message.
     extra : str | None

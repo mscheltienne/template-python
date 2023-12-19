@@ -10,7 +10,7 @@ import sys
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Callable
+    from typing import Any, Callable
 
 # ------------------------- Documentation dictionary -------------------------
 docdict: dict[str, str] = dict()
@@ -29,7 +29,7 @@ verbose : int | str | bool | None
 docdict_indented: dict[int, dict[str, str]] = dict()
 
 
-def fill_doc(f: Callable) -> Callable:
+def fill_doc(f: Callable[..., Any]) -> Callable[..., Any]:
     """Fill a docstring with docdict entries.
 
     Parameters
@@ -97,7 +97,7 @@ def _indentcount_lines(lines: list[str]) -> int:
     return indent
 
 
-def copy_doc(source: Callable) -> Callable:
+def copy_doc(source: Callable[..., Any]) -> Callable[..., Any]:
     """Copy the docstring from another function (decorator).
 
     The docstring of the source function is prepepended to the docstring of the function
@@ -131,7 +131,7 @@ def copy_doc(source: Callable) -> Callable:
     Docstring for m1 this gets appended
     """
 
-    def wrapper(func):
+    def wrapper(func: Callable[..., Any]) -> Callable[..., Any]:
         if source.__doc__ is None or len(source.__doc__) == 0:
             raise RuntimeError(
                 f"The docstring from {source.__name__} could not be copied because it "
