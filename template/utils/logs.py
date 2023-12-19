@@ -82,7 +82,7 @@ def set_log_level(verbose: Optional[Union[bool, str, int]]) -> None:
 
 
 class _LoggerFormatter(logging.Formatter):
-    """Format string snytax."""
+    """Format string syntax."""
 
     # Format string syntax for the different Log levels
     _formatters = dict()

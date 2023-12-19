@@ -89,8 +89,8 @@ source = 'https://github.com/mscheltienne/template-python'
 tracker = 'https://github.com/mscheltienne/template-python/issues'
 
 [tool.codespell]
-check-hidden = true
 check-filenames = true
+check-hidden = true
 ignore-words = '.codespellignore'
 skip = 'build,.git,.mypy_cache,.pytest_cache'
 
