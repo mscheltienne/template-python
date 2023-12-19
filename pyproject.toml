@@ -63,6 +63,11 @@ doc = [
 full = [
   'template[all]',
 ]
+stubs = [
+  'isort',
+  'mypy',
+  'ruff',
+]
 style = [
   'bibclean',
   'codespell[toml]>=2.2.4',
@@ -71,11 +76,6 @@ style = [
   'ruff',
   'toml-sort',
   'yamllint',
-]
-stubs = [
-  'isort',
-  'mypy',
-  'ruff',
 ]
 test = [
   'pytest',
