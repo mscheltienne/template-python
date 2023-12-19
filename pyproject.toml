@@ -65,10 +65,9 @@ full = [
 ]
 style = [
   'bibclean',
-  'black',
   'codespell',
   'isort',
-  'pydocstyle[toml]',
+  'mypy',
   'ruff',
   'toml-sort',
   'yamllint',
@@ -87,21 +86,6 @@ documentation = 'https://github.com/mscheltienne/template-python'
 homepage = 'https://github.com/mscheltienne/template-python'
 source = 'https://github.com/mscheltienne/template-python'
 tracker = 'https://github.com/mscheltienne/template-python/issues'
-
-[tool.black]
-extend-exclude = '''
-(
-      __pycache__
-    | .github
-    | setup.py
-    | doc/
-    | examples/
-    | tutorials/
-)
-'''
-include = '\.pyi?$'
-line-length = 88
-target-version = ['py39']
 
 [tool.coverage.report]
 exclude_lines = [
@@ -152,9 +136,13 @@ extend-exclude = [
   'setup.py',
 ]
 line-length = 88
+target-version = 'py39'
 
 [tool.ruff.per-file-ignores]
 '__init__.py' = ['F401']
+
+[tool.ruff.format]
+docstring-code-format = true
 
 [tool.setuptools]
 include-package-data = false
