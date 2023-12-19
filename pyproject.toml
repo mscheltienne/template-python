@@ -41,6 +41,7 @@ version = '0.1.0'
 all = [
   'template[build]',
   'template[doc]',
+  'template[stubs]',
   'template[style]',
   'template[test]',
 ]
