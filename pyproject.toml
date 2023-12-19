@@ -155,8 +155,8 @@ target-version = 'py39'
 docstring-code-format = true
 
 [tool.ruff.per-file-ignores]
-'__init__.py' = ['F401']
 '*.pyi' = ['E501']
+'__init__.py' = ['F401']
 
 [tool.setuptools]
 include-package-data = false
