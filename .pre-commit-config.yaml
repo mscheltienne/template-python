@@ -1,5 +1,5 @@
 ci:
-    skip: [codespell, yamllint]
+    skip: [codespell, pydocstyle, yamllint]
 
 repos:
     - repo: https://github.com/pycqa/isort
@@ -25,6 +25,13 @@ repos:
       hooks:
           - id: codespell
             args: [--check-filenames, --ignore-words=.codespellignore]
+
+    - repo: https://github.com/pycqa/pydocstyle
+      rev: 6.3.0
+      hooks:
+          - id: pydocstyle
+            files: template
+            additional_dependencies: [tomli]
 
     - repo: https://github.com/mscheltienne/bibclean
       rev: 0.8.0
