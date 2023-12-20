@@ -1,7 +1,7 @@
 from types import ModuleType as ModuleType
 from typing import Optional
 
-INSTALL_MAPPING: dict[str, str]
+_INSTALL_MAPPING: dict[str, str]
 
 def import_optional_dependency(
     name: str, extra: str = ..., raise_error: bool = ...
