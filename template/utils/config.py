@@ -78,7 +78,7 @@ def sys_info(fid: Optional[IO] = None, developer: bool = False):
 
 def _list_dependencies_info(
     out: Callable, ljust: int, package: str, dependencies: list[Requirement]
-):
+) -> None:
     """List dependencies names and versions."""
     unicode = sys.stdout.encoding.lower().startswith("utf")
     if unicode:
