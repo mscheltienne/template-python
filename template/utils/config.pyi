@@ -18,5 +18,5 @@ def sys_info(fid: Optional[IO] = ..., developer: bool = ...):
 
 def _list_dependencies_info(
     out: Callable, ljust: int, package: str, dependencies: list[Requirement]
-):
+) -> None:
     """List dependencies names and versions."""
