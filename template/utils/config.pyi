@@ -4,7 +4,7 @@ from packaging.requirements import Requirement
 
 from ._checks import check_type as check_type
 
-def sys_info(fid: Optional[IO] = ..., developer: bool = ...):
+def sys_info(fid: Optional[IO] = None, developer: bool = False):
     """Print the system information for debugging.
 
     Parameters
