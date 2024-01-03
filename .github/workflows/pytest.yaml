@@ -51,9 +51,9 @@ jobs:
     timeout-minutes: 30
     strategy:
       fail-fast: false
-      matrix:
-        python-version: ["3.11"]
-    name: pip pre-release - py${{ matrix.python-version }}
+    env:
+      PY_VERSION: "3.11"
+    name: pip pre-release - py$PY_VERSION
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -61,10 +61,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Python ${{ matrix.python-version }}
+      - name: Setup Python $PY_VERSION
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: $PY_VERSION
           architecture: 'x64'
       - name: Install dependencies
         run: |
