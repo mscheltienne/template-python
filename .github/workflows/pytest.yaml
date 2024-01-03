@@ -53,7 +53,7 @@ jobs:
       fail-fast: false
     env:
       PY_VERSION: "3.11"
-    name: pip pre-release - py$PY_VERSION
+    name: pip pre-release - py${{ env.PY_VERSION }}
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -61,10 +61,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Python $PY_VERSION
+      - name: Setup Python ${{ env.PY_VERSION }}
         uses: actions/setup-python@v5
         with:
-          python-version: $PY_VERSION
+          python-version: ${{ env.PY_VERSION }}
           architecture: 'x64'
       - name: Install dependencies
         run: |
