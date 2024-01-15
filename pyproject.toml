@@ -147,12 +147,12 @@ extend-exclude = [
   'doc',
   'setup.py',
 ]
-line-length = 88
-select = ["E", "F", "W", "UP"]
-target-version = 'py39'
 ignore = [
-  "UP007",  # 'Use `X | Y` for type annotations', requires python 3.10
+  "UP007", # 'Use `X | Y` for type annotations', requires python 3.10
 ]
+line-length = 88
+select = ["E", "F", "UP", "W"]
+target-version = 'py39'
 
 [tool.ruff.format]
 docstring-code-format = true
