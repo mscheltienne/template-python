@@ -8,7 +8,7 @@ from ._checks import check_verbose as check_verbose
 from ._docs import fill_doc as fill_doc
 from ._fixes import WrapStdOut as WrapStdOut
 
-def _init_logger(*, verbose: Optional[Union[bool, str, int]]=None) -> logging.Logger:
+def _init_logger(*, verbose: Optional[Union[bool, str, int]] = None) -> logging.Logger:
     """Initialize a logger.
 
     Assigns sys.stdout as the first handler of the logger.
@@ -27,7 +27,13 @@ def _init_logger(*, verbose: Optional[Union[bool, str, int]]=None) -> logging.Lo
         The initialized logger.
     """
 
-def add_file_handler(fname: Union[str, Path], mode: str='a', encoding: Optional[str]=None, *, verbose: Optional[Union[bool, str, int]]=None) -> None:
+def add_file_handler(
+    fname: Union[str, Path],
+    mode: str = "a",
+    encoding: Optional[str] = None,
+    *,
+    verbose: Optional[Union[bool, str, int]] = None,
+) -> None:
     """Add a file handler to the logger.
 
     Parameters
@@ -59,11 +65,10 @@ def set_log_level(verbose: Optional[Union[bool, str, int]]) -> None:
 
 class _LoggerFormatter(logging.Formatter):
     """Format string syntax."""
+
     _formatters: Incomplete
 
-    def __init__(self) -> None:
-        ...
-
+    def __init__(self) -> None: ...
     def format(self, record: logging.LogRecord):
         """Format the received log record.
 
@@ -97,15 +102,12 @@ class _use_log_level:
         verbosity is set to ``"WARNING"``. If a bool is provided, the verbosity is set to
         ``"WARNING"`` for False and to ``"INFO"`` for True.
     """
+
     _old_level: Incomplete
     _level: Incomplete
 
-    def __init__(self, verbose: Optional[Union[bool, str, int]]=None) -> None:
-        ...
+    def __init__(self, verbose: Optional[Union[bool, str, int]] = None) -> None: ...
+    def __enter__(self) -> None: ...
+    def __exit__(self, *args) -> None: ...
 
-    def __enter__(self) -> None:
-        ...
-
-    def __exit__(self, *args) -> None:
-        ...
 logger: Incomplete
