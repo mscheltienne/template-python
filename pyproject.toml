@@ -79,9 +79,9 @@ style = [
   'yamllint',
 ]
 test = [
-  'pytest>=8.0',
   'pytest-cov',
   'pytest-timeout',
+  'pytest>=8.0',
 ]
 
 [project.scripts]
