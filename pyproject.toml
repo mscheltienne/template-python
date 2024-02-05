@@ -79,7 +79,7 @@ style = [
   'yamllint',
 ]
 test = [
-  'pytest',
+  'pytest>=8.0',
   'pytest-cov',
   'pytest-timeout',
 ]
@@ -140,7 +140,7 @@ match-dir = '^template.*'
 
 [tool.pytest.ini_options]
 addopts = '--durations 20 --junit-xml=junit-results.xml --verbose'
-minversion = '6.0'
+minversion = '8.0'
 
 [tool.ruff]
 extend-exclude = [
