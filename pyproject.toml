@@ -123,19 +123,18 @@ omit = [
 extend_skip_glob = [
   'doc/*',
   'examples/*',
-  'setup.py',
   'tutorials/*',
 ]
 line_length = 88
 multi_line_output = 3
 profile = 'black'
-py_version = 39
+py_version = 310
 
 [tool.pydocstyle]
 add_ignore = 'D100,D104,D107'
 convention = 'numpy'
 ignore-decorators = '(copy_doc|property|.*setter|.*getter|pyqtSlot|Slot)'
-match = '^(?!setup|__init__|test_).*\.py'
+match = '^(?!__init__|test_).*\.py'
 match-dir = '^template.*'
 
 [tool.pytest.ini_options]
@@ -145,7 +144,6 @@ minversion = '8.0'
 [tool.ruff]
 extend-exclude = [
   'doc',
-  'setup.py',
 ]
 line-length = 88
 target-version = 'py39'
