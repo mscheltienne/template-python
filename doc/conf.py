@@ -3,17 +3,21 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from __future__ import annotations  # c.f. PEP 563, PEP 649
 
 import inspect
 import subprocess
 import sys
 from datetime import date
 from importlib import import_module
-from typing import Optional
+from typing import TYPE_CHECKING
 
 from sphinx_gallery.sorting import FileNameSortKey
 
 import template
+
+if TYPE_CHECKING:
+    from typing import Optional
 
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
