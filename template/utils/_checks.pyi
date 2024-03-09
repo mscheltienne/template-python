@@ -1,11 +1,11 @@
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any
 
 from _typeshed import Incomplete
 
 from ._docs import fill_doc as fill_doc
 
-def ensure_int(item: Any, item_name: Optional[str] = None) -> int:
+def ensure_int(item: Any, item_name: str | None = None) -> int:
     """Ensure a variable is an integer.
 
     Parameters
@@ -31,7 +31,7 @@ class _Callable:
 
 _types: Incomplete
 
-def check_type(item: Any, types: tuple, item_name: Optional[str] = None) -> None:
+def check_type(item: Any, types: tuple, item_name: str | None = None) -> None:
     """Check that item is an instance of types.
 
     Parameters
@@ -53,9 +53,9 @@ def check_type(item: Any, types: tuple, item_name: Optional[str] = None) -> None
 
 def check_value(
     item: Any,
-    allowed_values: Union[tuple, dict[Any, Any]],
-    item_name: Optional[str] = None,
-    extra: Optional[str] = None,
+    allowed_values: tuple | dict[Any, Any],
+    item_name: str | None = None,
+    extra: str | None = None,
 ) -> None:
     """Check the value of a parameter against a list of valid options.
 
