@@ -124,18 +124,15 @@ def test_verbose(caplog):
 def test_file_handler(tmp_path):
     """Test adding a file handler."""
     fname = tmp_path / "logs.txt"
-    add_file_handler(fname)  # default level: WARNING.
-
+    add_file_handler(fname)
+    set_log_level("WARNING")
     logger.warning("test1")
     logger.info("test2")
-    logger.handlers[-1].setLevel(logging.INFO)
+    set_log_level("INFO")
     logger.info("test3")
-
     logger.handlers[-1].close()
-
     with open(fname) as file:
         lines = file.readlines()
-
     assert len(lines) == 2
     assert "test1" in lines[0]
     assert "test2" not in lines[0]
