@@ -217,9 +217,8 @@ def warn(
         fname = Path(frame.f_code.co_filename)
         if fname.parent.name == "tests":
             break  # treat tests as outside of the namespace
-        fname = str(fname)  # convert back to str
         lineno = frame.f_lineno
-        if not (any(fname.startswith(str(rd)) for rd in root_dirs)):
+        if not (any(str(fname).startswith(str(rd)) for rd in root_dirs)):
             break
         frame = frame.f_back
     del frame
@@ -229,7 +228,7 @@ def warn(
     warn_explicit(
         message,
         category,
-        fname,
+        str(fname),
         lineno,
         module,
         globals().get("__warningregistry__", {}),
