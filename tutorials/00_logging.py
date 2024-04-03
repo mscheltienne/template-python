@@ -13,7 +13,8 @@ import logging
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from template import add_file_handler, logger, set_log_level
+from template import add_file_handler, set_log_level
+from template.utils.logs import logger
 
 # sphinx_gallery_thumbnail_path = '_static/logging/flowchart-light.png'
 
