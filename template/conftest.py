@@ -2,6 +2,8 @@ from __future__ import annotations  # c.f. PEP 563, PEP 649
 
 from typing import TYPE_CHECKING
 
+from .utils.logs import logger
+
 if TYPE_CHECKING:
     from pytest import Config
 
@@ -15,3 +17,5 @@ def pytest_configure(config: Config) -> None:
         warning_line = warning_line.strip()
         if warning_line and not warning_line.startswith("#"):
             config.addinivalue_line("filterwarnings", warning_line)
+    # setup logging
+    logger.propagate = True
