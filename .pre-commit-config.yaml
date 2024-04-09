@@ -17,7 +17,7 @@ repos:
             files: template
 
     - repo: https://github.com/codespell-project/codespell
-      rev: v2.2.5
+      rev: v2.2.4
       hooks:
           - id: codespell
             args: [--write-changes]
