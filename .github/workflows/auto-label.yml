@@ -3,29 +3,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
   cancel-in-progress: true
 on:  # yamllint disable-line rule:truthy
-  pull_request:
-    types: opened
+  pull_request_target
 
 jobs:
   pr:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Check PR title
-        id: check_title
-        run: |
-          title=$(echo "${{ github.event.pull_request.title }}" | tr '[:upper:]' '[:lower:]')
-          if [[ $title == *"[pre-commit.ci]"* ]]; then
-            echo "::set-output name=label::bug"
-          fi
-      - name: Add label to PR
-        if: steps.check_title.outputs.label != ''
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            await github.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: [`${{ steps.check_title.outputs.label }}`]
-            });
+    - uses: actions/labeler@v5
