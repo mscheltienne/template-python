@@ -97,7 +97,7 @@ tracker = 'https://github.com/mscheltienne/template-python/issues'
 check-filenames = true
 check-hidden = true
 ignore-words = '.codespellignore'
-skip = 'build,.git,.mypy_cache,.pytest_cache'
+skip = 'build,.git,.mypy_cache,.pytest_cache,.venv'
 
 [tool.coverage.report]
 exclude_lines = [
