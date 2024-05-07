@@ -159,7 +159,7 @@ def verbose(f: Callable) -> Callable:
 
 
 @fill_doc
-class _use_log_level:
+class _use_log_level:  # noqa: N801
     """Context manager to change the logging level temporary.
 
     Parameters

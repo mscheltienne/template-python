@@ -5,10 +5,10 @@ from typing import TYPE_CHECKING
 from .utils.logs import logger
 
 if TYPE_CHECKING:
-    from pytest import Config
+    import pytest
 
 
-def pytest_configure(config: Config) -> None:
+def pytest_configure(config: pytest.Config) -> None:
     """Configure pytest options."""
     warnings_lines = r"""
     error::
