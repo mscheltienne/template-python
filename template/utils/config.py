@@ -112,6 +112,18 @@ def _list_dependencies_info(
                 backend = "Not found"
 
             output += f" (backend: {backend})"
+        if dep.name == "pyvista":
+            try:
+                from pyvista import GPUInfo
+
+                gi = GPUInfo()
+                version_, renderer = gi.version, gi.renderer
+            except Exception:
+                version_, renderer = None, None
+            if version_ is None:
+                output += " (OpenGL unavailable)"
+            else:
+                output += f" (OpenGL {version_} via {renderer})"
         out(output + "\n")
 
     if len(not_found) != 0:
