@@ -113,7 +113,7 @@ autoclass_content = "class"
 
 # -- intersphinx -----------------------------------------------------------------------
 intersphinx_mapping = get_intersphinx_mapping(
-    only={"matplotlib", "mne", "numpy", "pandas", "python", "scipy", "sklearn"}
+    packages={"matplotlib", "mne", "numpy", "pandas", "python", "scipy", "sklearn"}
 )
 intersphinx_timeout = 5
 
