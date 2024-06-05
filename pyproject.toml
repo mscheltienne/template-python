@@ -139,7 +139,8 @@ match = '^(?!__init__|test_).*\.py'
 match-dir = '^template.*'
 
 [tool.pytest.ini_options]
-addopts = '--durations 20 --junit-xml=junit-results.xml --verbose'
+addopts = ['--color=yes', '--cov-report=', '--durations=20', '--junit-xml=junit-results.xml', '--strict-config', '--tb=short', '-ra', '-v']
+junit_family = 'xunit2'
 minversion = '8.0'
 
 [tool.ruff]
@@ -147,7 +148,6 @@ extend-exclude = [
   'doc',
 ]
 line-length = 88
-target-version = 'py39'
 
 [tool.ruff.format]
 docstring-code-format = true
