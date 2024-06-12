@@ -31,7 +31,7 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools
           python -m pip install --progress-bar off .[doc]
       - name: Display system information
-        run: template-sys_info --developer
+        run: template sys-info --developer
       - name: Build doc
         run: make -C doc html
       - name: Prune sphinx environment

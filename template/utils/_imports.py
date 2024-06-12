@@ -3,7 +3,7 @@
 Inspired from pandas: https://pandas.pydata.org/
 """
 
-from __future__ import annotations  # c.f. PEP 563, PEP 649
+# c.f. PEP 563, PEP 649
 
 import importlib
 from typing import TYPE_CHECKING

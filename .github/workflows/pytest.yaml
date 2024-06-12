@@ -35,7 +35,7 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools
           python -m pip install --progress-bar off .[test]
       - name: Display system information
-        run: template-sys_info --developer
+        run: template sys-info --developer
       - name: Run pytest
         run: pytest template --cov=template --cov-report=xml --cov-config=pyproject.toml
       - name: Upload to codecov
@@ -71,7 +71,7 @@ jobs:
           python -m pip install --progress-bar off .[test]
           python -m pip install --progress-bar off --upgrade --pre --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple --timeout=180 numpy
       - name: Display system information
-        run: template-sys_info --developer
+        run: template sys-info --developer
       - name: Run pytest
         run: pytest template --cov=template --cov-report=xml --cov-config=pyproject.toml
       - name: Upload to codecov
