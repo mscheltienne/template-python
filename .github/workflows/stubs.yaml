@@ -27,7 +27,7 @@ jobs:
           python -m pip install --progress-bar off --upgrade pip setuptools
           python -m pip install --progress-bar off -e .[stubs]
       - name: Display system information
-        run: template sys-info--developer
+        run: template sys-info --developer
       - name: Generate stub files
         run: python tools/stubgen.py
       - name: Push stub files
