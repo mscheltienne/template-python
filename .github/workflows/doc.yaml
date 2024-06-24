@@ -26,10 +26,10 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y optipng
-      - name: Install package
+      - name: Install uv and package
         run: |
-          python -m pip install --progress-bar off --upgrade pip setuptools
-          python -m pip install --progress-bar off .[doc]
+          python -m pip install --quiet uv
+          uv pip install --quiet --system .[doc]
       - name: Display system information
         run: template sys-info --developer
       - name: Build doc
