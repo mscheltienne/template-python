@@ -30,10 +30,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install package
+      - name: Install uv and package
         run: |
-          python -m pip install --progress-bar off --upgrade pip setuptools
-          python -m pip install --progress-bar off .[test]
+          python -m pip install --quiet uv
+          uv pip install --quiet .[test]
       - name: Display system information
         run: template sys-info --developer
       - name: Run pytest
@@ -67,9 +67,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          python -m pip install --progress-bar off --upgrade pip setuptools
-          python -m pip install --progress-bar off .[test]
-          python -m pip install --progress-bar off --upgrade --pre --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple --timeout=180 numpy
+          python -m pip install --quiet uv
+          uv pip install --quiet .[test]
+          uv pip install --quiet --upgrade --prerelease allow --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple --timeout=180 numpy
       - name: Display system information
         run: template sys-info --developer
       - name: Run pytest
