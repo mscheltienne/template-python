@@ -80,6 +80,7 @@ style = [
   'yamllint',
 ]
 test = [
+  'pre-commit',
   'pytest-cov',
   'pytest-timeout',
   'pytest>=8.0',
