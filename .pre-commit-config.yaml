@@ -1,10 +1,4 @@
 repos:
-    - repo: https://github.com/pycqa/isort
-      rev: 5.13.2
-      hooks:
-          - id: isort
-            files: template
-
     - repo: https://github.com/astral-sh/ruff-pre-commit
       rev: v0.5.7
       hooks:
@@ -14,7 +8,6 @@ repos:
             files: template
           - id: ruff-format
             name: ruff formatter
-            files: template
 
     - repo: https://github.com/codespell-project/codespell
       rev: v2.3.0

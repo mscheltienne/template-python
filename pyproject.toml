@@ -67,20 +67,18 @@ full = [
   'template[all]',
 ]
 stubs = [
-  'isort',
   'mypy',
-  'ruff>=0.1.8',
+  'ruff>=0.6.0',
 ]
 style = [
   'bibclean',
   'codespell[toml]>=2.2.4',
-  'isort',
-  'ruff>=0.1.8',
+  'pre-commit',
+  'ruff>=0.6.0',
   'toml-sort',
   'yamllint',
 ]
 test = [
-  'pre-commit',
   'pytest-cov',
   'pytest-timeout',
   'pytest>=8.0',
@@ -120,17 +118,6 @@ omit = [
   '**/tests/**',
 ]
 
-[tool.isort]
-extend_skip_glob = [
-  'doc/*',
-  'examples/*',
-  'tutorials/*',
-]
-line_length = 88
-multi_line_output = 3
-profile = 'black'
-py_version = 39
-
 [tool.pytest.ini_options]
 addopts = ['--color=yes', '--cov-report=', '--durations=20', '--junit-xml=junit-results.xml', '--strict-config', '--tb=short', '-ra', '-v']
 junit_family = 'xunit2'
@@ -148,14 +135,14 @@ line-ending = "lf"
 
 [tool.ruff.lint]
 ignore = []
-select = ['A', 'B', 'D', 'E', 'F', 'G', 'LOG', 'NPY', 'PIE', 'PT', 'T20', 'UP', 'W']
+select = ['A', 'B', 'D', 'E', 'F', 'G', 'I', 'LOG', 'NPY', 'PIE', 'PT', 'T20', 'UP', 'W']
 
 [tool.ruff.lint.per-file-ignores]
 '*' = [
   'B904', # 'Within an except clause, raise exceptions with raise ... from ...'
-  'D100', # undocumented public module
-  'D104', # undocumented public package
-  'D107', # undocumented public init
+  'D100', # 'Missing docstring in public module'
+  'D104', # 'Missing docstring in public package'
+  'D107', # 'Missing docstring in __init__'
   'UP007', # 'Use `X | Y` for type annotations', requires python 3.10
 ]
 '*.pyi' = ['E501']
@@ -163,7 +150,7 @@ select = ['A', 'B', 'D', 'E', 'F', 'G', 'LOG', 'NPY', 'PIE', 'PT', 'T20', 'UP', 
 
 [tool.ruff.lint.pydocstyle]
 convention = 'numpy'
-ignore-decorators = ["click.group", '(copy_doc|property|.*setter|.*getter|pyqtSlot|Slot)']
+ignore-decorators = ["template.utils._docs.copy_doc"]
 
 [tool.setuptools]
 include-package-data = false
