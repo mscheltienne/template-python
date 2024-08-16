@@ -3,7 +3,7 @@ from __future__ import annotations
 import platform
 import sys
 from functools import lru_cache, partial
-from importlib.metadata import requires, version
+from importlib.metadata import metadata, requires, version
 from typing import TYPE_CHECKING
 
 import psutil
@@ -57,12 +57,12 @@ def sys_info(fid: Optional[IO] = None, developer: bool = False):
 
     # extras
     if developer:
-        keys = (
-            "build",
-            "doc",
-            "test",
-            "stubs",
-            "style",
+        keys = sorted(
+            [
+                elt
+                for elt in metadata(package).get_all("Provides-Extra")
+                if elt not in ("all", "full")
+            ]
         )
         for key in keys:
             extra_dependencies = [

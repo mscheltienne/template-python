@@ -18,7 +18,6 @@ following steps are required:
 - [ ] Enable `pre-commit.ci` on https://pre-commit.ci/
 - [ ] Edit `README.md`
 - [ ] Edit `MANIFEST.in`
-- [ ] Edit the keys to list in the system information in `template/utils/config.py`
 - [ ] Edit the package import in `tools/stubgen.py`
 - [ ] Remove the conda-forge recipe from the ignored files in ``.yamllint.yaml``
 
