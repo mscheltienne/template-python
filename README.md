@@ -13,24 +13,13 @@ Template python repository. To bootstrap a project from this template, the
 following steps are required:
 
 - [ ] Rename the folder `template` to the package name
-- [ ] Edit `pyproject.toml`
-    - [ ] Under `[project]`, edit `name`, `description` and `keywords`
-    - [ ] Under `[project.optional-dependencies]`, edit the extra-keys `all` and `full`
-    - [ ] Under `[project.urls]`, edit all the URLs
-    - [ ] Under `[project.scripts]`, edit the command for system information
-    - [ ] Under `[tool.setuptools.packages.find]`, edit the file inclusion/exclusion patterns
-    - [ ] Under `[tool.pydocstyle]`, edit the matching pattern `match-dir`
-    - [ ] Under `[tool.coverage.run]`, edit the exclusion patterns `omit`
-- [ ] Edit the GitHub workflows
-    - [ ] In `doc.yaml`, edit the command for system information
-    - [ ] In `publish.yaml`, uncomment the trigger on release and edit the command for system information
-    - [ ] In `pytest.yaml`, edit the commands for system information and pytest
-- [ ] Edit the pre-commit configuration
-    - [ ] Edit the paths in `.pre-commit-config.yaml`
-    - [ ] Enable `pre-commit.ci` on https://pre-commit.ci/
+- [ ] Edit `pyproject.toml` and all the `template` entries
+- [ ] Edit the GitHub workflows in `.github`
+- [ ] Enable `pre-commit.ci` on https://pre-commit.ci/
 - [ ] Edit `README.md`
 - [ ] Edit `MANIFEST.in`
-- [ ] Edit the keys to list in the system information
+- [ ] Edit the keys to list in the system information in `template/utils/config.py`
+- [ ] Edit the package import in `tools/stubgen.py`
 - [ ] Remove the conda-forge recipe from the ignored files in ``.yamllint.yaml``
 
 The package can then be installed in a given environment with
@@ -42,13 +31,9 @@ repository).
 If the documentation build is preserved, the following steps are required:
 
 On the `main` branch:
-- [ ] Edit the GitHub workflows
-    - [ ] In `doc.yaml`, edit the command for system information
 - [ ] Edit the project links in `doc\links.inc`
 - [ ] Edit the landing page `index.rst`
-- [ ] Edit the sphinx configuration
-    - [ ] Replace `import template` with the correct package name
-    - [ ] Edit the fields `project`, `author`, `release`, `package` and `gh_url`
+- [ ] Edit the sphinx configuration `doc/conf.py`
 - [ ] Edit the API pages
     - [ ] In `doc\api\index.rst`, edit the package name
     - [ ] In `doc\api\logging.rst`, edit the current module
