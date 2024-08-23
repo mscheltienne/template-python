@@ -32,7 +32,7 @@ test:
     - template
   commands:
     - pip check
-    - template-sys_info
+    - template
   requires:
     - pip
 
