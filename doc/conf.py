@@ -10,15 +10,11 @@ import subprocess
 import sys
 from datetime import date
 from importlib import import_module
-from typing import TYPE_CHECKING
 
 from intersphinx_registry import get_intersphinx_mapping
 from sphinx_gallery.sorting import FileNameSortKey
 
 import template
-
-if TYPE_CHECKING:
-    pass
 
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
