@@ -13,14 +13,14 @@ from ._docs import fill_doc
 from ._fixes import WrapStdOut
 
 if TYPE_CHECKING:
-    from typing import Callable, Optional, Union
+    from collections.abc import Callable
 
 
 _PACKAGE: str = __package__.split(".")[0]
 
 
 @fill_doc
-def _init_logger(*, verbose: Optional[Union[bool, str, int]] = None) -> logging.Logger:
+def _init_logger(*, verbose: bool | str | int | None = None) -> logging.Logger:
     """Initialize a logger.
 
     Assigns sys.stdout as the first handler of the logger.
@@ -47,11 +47,11 @@ def _init_logger(*, verbose: Optional[Union[bool, str, int]] = None) -> logging.
 
 
 def add_file_handler(
-    fname: Union[str, Path],
+    fname: str | Path,
     mode: str = "a",
-    encoding: Optional[str] = None,
+    encoding: str | None = None,
     *,
-    verbose: Optional[Union[bool, str, int]] = None,
+    verbose: bool | str | int | None = None,
 ) -> None:
     """Add a file handler to the logger.
 
@@ -83,7 +83,7 @@ def add_file_handler(
 
 
 @fill_doc
-def set_log_level(verbose: Optional[Union[bool, str, int]]) -> None:
+def set_log_level(verbose: bool | str | int | None) -> None:
     """Set the log level for the logger.
 
     Parameters
@@ -167,7 +167,7 @@ class _use_log_level:  # noqa: N801
     %(verbose)s
     """
 
-    def __init__(self, verbose: Optional[Union[bool, str, int]] = None):
+    def __init__(self, verbose: bool | str | int | None = None):
         self._old_level = logger.level
         self._level = verbose
 
@@ -182,7 +182,7 @@ def warn(
     message: str,
     category: Warning = RuntimeWarning,
     module: str = _PACKAGE,
-    ignore_namespaces: Union[tuple[str, ...] | list[str]] = (_PACKAGE,),
+    ignore_namespaces: tuple[str, ...] | list[str] = (_PACKAGE,),
 ) -> None:
     """Emit a warning with trace outside the requested namespace.
 
