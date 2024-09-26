@@ -15,8 +15,10 @@ jobs:
           sudo docker image prune --all --force
           sudo swapoff -a
           sudo rm -f /mnt/swapfile
-          sudo apt purge r-base x11-common php* nginx
-          sudo apt autoremove --purge
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo rm -rf /var/log
+          sudo apt purge -y r-base x11-common php* nginx emacs
+          sudo apt autoremove -y --purge
       - run: ls -l /mnt
       - run: ls -l /usr/local/share
       - run: sudo du -sh /usr/local/share
@@ -27,5 +29,4 @@ jobs:
       - run: sudo du -sh /opt/pipx
       - run: sudo du -sh /opt/pipx_bin
       - run: sudo du -sh /opt/google
-      - run: sudo du -sh /var
-      - run: sudo du -sh /var/log
+      - run: ls -l /var
