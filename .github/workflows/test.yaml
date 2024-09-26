@@ -13,6 +13,10 @@ jobs:
     steps:
       - run: |
           sudo docker image prune --all --force
+          sudo swapoff -a
+          sudo rm -f /mnt/swapfile
+          sudo apt purge r-base x11-common php* nginx
+          sudo apt autoremove --purge
       - run: ls -l /mnt
       - run: ls -l /usr/local/share
       - run: sudo du -sh /usr/local/share
@@ -23,3 +27,5 @@ jobs:
       - run: sudo du -sh /opt/pipx
       - run: sudo du -sh /opt/pipx_bin
       - run: sudo du -sh /opt/google
+      - run: sudo du -sh /var
+      - run: sudo du -sh /var/log
