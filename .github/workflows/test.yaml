@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - run: ls -l /
+      - run: |
+          sudo docker image prune --all --force
+      - run: ls -l /mnt
       - run: ls -l /usr/local/share
       - run: sudo du -sh /usr/local/share
       - run: ls -l /usr/share
