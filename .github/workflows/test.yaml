@@ -12,8 +12,8 @@ jobs:
     permissions: write-all
     steps:
       - run: ls -l /
-      - run: du -sh /
+      - run: sudo du -sh /
       - run: ls -l /usr/local/share
-      - run: du -sh /usr/local/share
+      - run: sudo du -sh /usr/local/share
       - run: ls -l /opt
-      - run: du -sh /opt
+      - run: sudo du -sh /opt
