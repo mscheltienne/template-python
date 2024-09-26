@@ -1,0 +1,15 @@
+name: pytest
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
+on:  # yamllint disable-line rule:truthy
+  push:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    name: debug
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: valeriangalliat/action-sshd-cloudflared@v1
