@@ -54,7 +54,9 @@ def import_optional_dependency(
     """
     package_name = _INSTALL_MAPPING.get(name)
     install_name = package_name if package_name is not None else name
-    if importlib.util.find_spec(name) is None:
+    try:
+        return importlib.import_module(name)
+    except ImportError:
         if raise_error:
             raise ImportError(
                 f"Missing optional dependency '{install_name}'. {extra} Use pip or "
@@ -62,4 +64,3 @@ def import_optional_dependency(
             )
         else:
             return None
-    return importlib.import_module(name)
