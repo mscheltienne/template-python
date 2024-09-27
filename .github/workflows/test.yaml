@@ -1,9 +1,11 @@
+
 name: pytest
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
   cancel-in-progress: true
 on:  # yamllint disable-line rule:truthy
-  pull_request:
+  push:
+  workflow_dispatch:
 
 jobs:
   debug:
@@ -11,22 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
-      - run: |
-          sudo docker image prune --all --force
-          sudo swapoff -a
-          sudo rm -f /mnt/swapfile
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo rm -rf /var/log
-          sudo apt purge -y r-base x11-common php* nginx emacs
-          sudo apt autoremove -y --purge
-      - run: ls -l /mnt
-      - run: ls -l /usr/local/share
-      - run: sudo du -sh /usr/local/share
-      - run: ls -l /usr/share
-      - run: sudo du -sh /usr/share
-      - run: ls -l /opt
-      - run: sudo du -sh /opt
-      - run: sudo du -sh /opt/pipx
-      - run: sudo du -sh /opt/pipx_bin
-      - run: sudo du -sh /opt/google
-      - run: ls -l /var
+      - uses: valeriangalliat/action-sshd-cloudflared@v1
