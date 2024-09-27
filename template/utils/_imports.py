@@ -6,6 +6,7 @@ Inspired from pandas: https://pandas.pydata.org/
 from __future__ import annotations
 
 import importlib
+import importlib.util
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
