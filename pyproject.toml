@@ -162,4 +162,5 @@ include = ['template*']
 [tool.tomlsort]
 all = true
 ignore_case = true
+spaces_before_inline_comment = 2
 trailing_comma_inline_array = true
