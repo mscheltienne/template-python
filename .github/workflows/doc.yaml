@@ -86,12 +86,12 @@ jobs:
       - name: Download documentation
         uses: actions/download-artifact@v4
         with:
-          name: doc-build
-          path: ./doc-build
+          name: doc-dev
+          path: ./doc-dev
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./doc-build
+          folder: ./doc-dev
           target-folder: ./staging/
           git-config-name: 'github-actions[bot]'
           git-config-email: 'github-actions[bot]@users.noreply.github.com'
