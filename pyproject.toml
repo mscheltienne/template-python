@@ -137,10 +137,10 @@ select = ['A', 'B', 'D', 'E', 'F', 'G', 'I', 'LOG', 'NPY', 'PIE', 'PT', 'T20', '
 
 [tool.ruff.lint.per-file-ignores]
 '*' = [
-  'B904', # 'Within an except clause, raise exceptions with raise ... from ...'
-  'D100', # 'Missing docstring in public module'
-  'D104', # 'Missing docstring in public package'
-  'D107', # 'Missing docstring in __init__'
+  'B904',  # 'Within an except clause, raise exceptions with raise ... from ...'
+  'D100',  # 'Missing docstring in public module'
+  'D104',  # 'Missing docstring in public package'
+  'D107',  # 'Missing docstring in __init__'
 ]
 '*.pyi' = ['E501']
 '__init__.py' = ['F401']
