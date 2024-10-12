@@ -16,11 +16,11 @@ classifiers = [
   'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
   'Programming Language :: Python :: 3.12',
-  'Programming Language :: Python :: 3.9',
+  'Programming Language :: Python :: 3.13',
 ]
 dependencies = [
   'click',
-  'numpy>=1.21,<3',
+  'numpy>=1.23,<3',
   'packaging',
   'psutil',
 ]
@@ -35,7 +35,7 @@ maintainers = [
 ]
 name = 'template'
 readme = 'README.md'
-requires-python = '>=3.9'
+requires-python = '>=3.10'
 version = '0.1.0'
 
 [project.optional-dependencies]
@@ -141,8 +141,6 @@ select = ['A', 'B', 'D', 'E', 'F', 'G', 'I', 'LOG', 'NPY', 'PIE', 'PT', 'T20', '
   'D100',  # 'Missing docstring in public module'
   'D104',  # 'Missing docstring in public package'
   'D107',  # 'Missing docstring in __init__'
-  'UP007',  # 'Use `X | Y` for type annotations', requires python 3.10
-  'UP038',  # 'Use X | Y in {} call instead of (X, Y)', requires python 3.10
 ]
 '*.pyi' = ['E501']
 '__init__.py' = ['F401']

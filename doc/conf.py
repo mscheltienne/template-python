@@ -10,15 +10,11 @@ import subprocess
 import sys
 from datetime import date
 from importlib import import_module
-from typing import TYPE_CHECKING
 
 from intersphinx_registry import get_intersphinx_mapping
 from sphinx_gallery.sorting import FileNameSortKey
 
 import template
-
-if TYPE_CHECKING:
-    from typing import Optional
 
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -180,7 +176,7 @@ bibtex_bibfiles = ["./references.bib"]
 # https://www.sphinx-doc.org/en/master/usage/extensions/linkcode.html
 
 
-def linkcode_resolve(domain: str, info: dict[str, str]) -> Optional[str]:
+def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
     """Determine the URL corresponding to a Python object.
 
     Parameters
