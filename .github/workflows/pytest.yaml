@@ -32,7 +32,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install uv
         uses: astral-sh/setup-uv@v3
-      - name: Install uv and package
+      - name: Install package
         run: uv pip install --quiet --system .[test]
       - name: Display system information
         run: template sys-info --developer
@@ -67,7 +67,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install uv
         uses: astral-sh/setup-uv@v3
-      - name: Install dependencies
+      - name: Install package
         run: |
           uv pip install --quiet --system .[test]
           uv pip install --quiet --system --upgrade --prerelease allow --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple numpy

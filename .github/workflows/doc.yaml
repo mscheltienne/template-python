@@ -28,7 +28,7 @@ jobs:
           sudo apt install -y optipng
       - name: Install uv
         uses: astral-sh/setup-uv@v3
-      - name: Install uv and package
+      - name: Install package
         run: uv pip install --quiet --system .[doc]
       - name: Display system information
         run: template sys-info --developer
