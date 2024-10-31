@@ -180,7 +180,7 @@ class _use_log_level:  # noqa: N801
 
 def warn(
     message: str,
-    category: Warning = RuntimeWarning,
+    category: type[Warning] = RuntimeWarning,
     module: str = _PACKAGE,
     ignore_namespaces: tuple[str, ...] | list[str] = (_PACKAGE,),
 ) -> None:
@@ -199,7 +199,7 @@ def warn(
     ----------
     message : str
         Warning message.
-    category : instance of Warning
+    category : type of Warning
         The warning class. Defaults to ``RuntimeWarning``.
     module : str
         The name of the module emitting the warning.
