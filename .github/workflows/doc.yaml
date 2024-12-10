@@ -12,32 +12,19 @@ jobs:
   build:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: 3.11
-      - name: Install linux dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y optipng
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-      - name: Install package
-        run: uv pip install --quiet --system .[doc]
-      - name: Display system information
-        run: template sys-info --developer
-      - name: Build doc
-        run: make -C doc html
+      - run: sudo apt update && sudo apt install -y optipng
+      - uses: astral-sh/setup-uv@v4
+      - run: uv pip install --quiet --system .[doc]
+      - run: template sys-info --developer
+      - run: make -C doc html
       - name: Prune sphinx environment
         run: rm -R ./doc/_build/html/.doctrees
-      - name: Upload documentation
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: doc-dev
           path: ./doc/_build/html
@@ -49,19 +36,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    defaults:
-      run:
-        shell: bash
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Download documentation
-        uses: actions/download-artifact@v4
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
           name: doc-dev
           path: ./doc-dev
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./doc-dev
           target-folder: ./dev
