@@ -13,7 +13,6 @@ classifiers = [
   'Operating System :: Microsoft :: Windows',
   'Operating System :: Unix',
   'Programming Language :: Python :: 3 :: Only',
-  'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
   'Programming Language :: Python :: 3.12',
   'Programming Language :: Python :: 3.13',
@@ -35,7 +34,7 @@ maintainers = [
 ]
 name = 'template'
 readme = 'README.md'
-requires-python = '>=3.10'
+requires-python = '>=3.11'
 version = '0.1.0'
 
 [project.optional-dependencies]
