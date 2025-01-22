@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from .._checks import check_type, check_value, check_verbose, ensure_int, ensure_path
+from .._checks import check_type, check_value, ensure_int, ensure_path, ensure_verbose
 
 
 def test_ensure_int():
@@ -63,23 +63,23 @@ def test_check_value():
         check_value(5, [1, 2, 3, 4], "number")
 
 
-def test_check_verbose():
-    """Test check_verbose checker."""
+def test_ensure_verbose():
+    """Test ensure_verbose checker."""
     # valids
-    assert check_verbose(12) == 12
-    assert check_verbose("INFO") == logging.INFO
-    assert check_verbose("DEBUG") == logging.DEBUG
-    assert check_verbose(True) == logging.INFO
-    assert check_verbose(False) == logging.WARNING
-    assert check_verbose(None) == logging.WARNING
+    assert ensure_verbose(12) == 12
+    assert ensure_verbose("INFO") == logging.INFO
+    assert ensure_verbose("DEBUG") == logging.DEBUG
+    assert ensure_verbose(True) == logging.INFO
+    assert ensure_verbose(False) == logging.WARNING
+    assert ensure_verbose(None) == logging.WARNING
 
     # invalids
     with pytest.raises(TypeError, match="must be an instance of"):
-        check_verbose(("INFO",))
+        ensure_verbose(("INFO",))
     with pytest.raises(ValueError, match="Invalid value"):
-        check_verbose("101")
+        ensure_verbose("101")
     with pytest.raises(ValueError, match="negative integer, -101 is invalid."):
-        check_verbose(-101)
+        ensure_verbose(-101)
 
 
 def test_ensure_path():

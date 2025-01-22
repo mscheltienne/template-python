@@ -174,8 +174,8 @@ def check_value(
 
 
 @fill_doc
-def check_verbose(verbose: Any) -> int:
-    """Check that the value of verbose is valid.
+def ensure_verbose(verbose: Any) -> int:
+    """Ensure that the value of verbose is valid.
 
     Parameters
     ----------

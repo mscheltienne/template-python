@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from warnings import warn_explicit
 
-from ._checks import check_verbose
+from ._checks import ensure_verbose
 from ._docs import fill_doc
 from ._fixes import WrapStdOut
 
@@ -35,7 +35,7 @@ def _init_logger(*, verbose: bool | str | int | None = None) -> logging.Logger:
         The initialized logger.
     """
     # create logger
-    verbose = check_verbose(verbose)
+    verbose = ensure_verbose(verbose)
     logger = logging.getLogger(__package__.split(".utils", maxsplit=1)[0])
     logger.propagate = False
     logger.setLevel(verbose)
@@ -77,7 +77,7 @@ def add_file_handler(
     handler = logging.FileHandler(fname, mode, encoding)
     handler.setFormatter(_LoggerFormatter())
     if verbose is not None:
-        verbose = check_verbose(verbose)
+        verbose = ensure_verbose(verbose)
         handler.setLevel(verbose)
     logger.addHandler(handler)
 
@@ -90,7 +90,7 @@ def set_log_level(verbose: bool | str | int | None) -> None:
     ----------
     %(verbose)s
     """
-    verbose = check_verbose(verbose)
+    verbose = ensure_verbose(verbose)
     logger.setLevel(verbose)
 
 
