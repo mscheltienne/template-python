@@ -26,6 +26,11 @@ def ensure_int(item: Any, item_name: str | None = None) -> int:
     item_name : str | None
         Name of the item to show inside the error message.
 
+    Returns
+    -------
+    item : int
+        Item validated and converted to a Python integer.
+
     Raises
     ------
     TypeError
