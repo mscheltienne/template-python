@@ -7,7 +7,6 @@ authors = [
   {email = 'mathieu.scheltienne@gmail.com', name = 'Mathieu Scheltienne'},
 ]
 classifiers = [
-  'License :: OSI Approved :: MIT License',
   'Natural Language :: English',
   'Operating System :: MacOS',
   'Operating System :: Microsoft :: Windows',
