@@ -30,7 +30,8 @@ keywords = [
   'python',
   'template',
 ]
-license = {file = 'LICENSE'}
+license = 'MIT'
+license-files = ['LICENSE']
 maintainers = [
   {email = 'mathieu.scheltienne@gmail.com', name = 'Mathieu Scheltienne'},
 ]
