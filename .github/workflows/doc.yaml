@@ -32,7 +32,7 @@ jobs:
           path: ./doc/_build/html
 
   deploy:
-    if: github.event_name == 'push'
+    if: ${{ github.event_name == 'push' }}
     needs: build
     timeout-minutes: 10
     runs-on: ubuntu-latest
