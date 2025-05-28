@@ -10,10 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: write
-    environment:
-      name: pypi
-      url: https://pypi.org/p/template-python
+    environment: pypi
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,4 +26,4 @@ jobs:
         with:
           files: dist/*
           tag_name: ${{ github.event.release.tag_name }}
-      - uses: pypa/gh-action-pypi-publish@release/v1
+      - run: uv publish --trusted-publishing always --publish-url https://test.pypi.org/legacy/
