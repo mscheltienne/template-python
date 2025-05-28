@@ -4,7 +4,7 @@ from pathlib import Path
 
 from _typeshed import Incomplete
 
-from ._checks import check_verbose as check_verbose
+from ._checks import ensure_verbose as ensure_verbose
 from ._docs import fill_doc as fill_doc
 from ._fixes import WrapStdOut as WrapStdOut
 

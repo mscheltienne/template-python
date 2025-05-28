@@ -15,6 +15,11 @@ def ensure_int(item: Any, item_name: str | None = None) -> int:
     item_name : str | None
         Name of the item to show inside the error message.
 
+    Returns
+    -------
+    item : int
+        Item validated and converted to a Python integer.
+
     Raises
     ------
     TypeError
@@ -76,8 +81,8 @@ def check_value(
         When the value of the item is not one of the valid options.
     """
 
-def check_verbose(verbose: Any) -> int:
-    """Check that the value of verbose is valid.
+def ensure_verbose(verbose: Any) -> int:
+    """Ensure that the value of verbose is valid.
 
     Parameters
     ----------

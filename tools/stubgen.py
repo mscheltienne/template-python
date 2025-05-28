@@ -16,7 +16,7 @@ for file in directory.rglob("*.pyi"):
 files = [
     str(file.as_posix())
     for file in directory.rglob("*.py")
-    if file.parent.name not in ("commands", "tests")
+    if file.parent.name not in ("_commands", "tests")
     and file.name not in ("conftest.py", "_version.py")
 ]
 stubgen.main(

@@ -2,6 +2,44 @@
 build-backend = 'setuptools.build_meta'
 requires = ['setuptools >= 64.0.0', 'setuptools_scm>=8']
 
+[dependency-groups]
+doc = [
+  'autodoc_pydantic',
+  'furo',
+  'intersphinx_registry',
+  'matplotlib',
+  'memory-profiler',
+  'numpydoc',
+  'sphinx',
+  'sphinx-copybutton',
+  'sphinx-design',
+  'sphinx-gallery',
+  'sphinx-issues',
+  'sphinxcontrib-bibtex',
+]
+ide = [
+  'ipykernel',
+  'ipython',
+]
+stubs = [
+  'mypy',
+  'ruff>=0.6.0',
+]
+style = [
+  'bibclean',
+  'codespell[toml]>=2.2.4',
+  'pre-commit',
+  'ruff>=0.6.0',
+  'toml-sort',
+  'yamllint',
+]
+test = [
+  'pytest-cov',
+  'pytest-randomly',
+  'pytest-timeout',
+  'pytest>=8.0',
+]
+
 [project]
 authors = [
   {email = 'mathieu.scheltienne@gmail.com', name = 'Mathieu Scheltienne'},
@@ -12,7 +50,6 @@ classifiers = [
   'Operating System :: Microsoft :: Windows',
   'Operating System :: Unix',
   'Programming Language :: Python :: 3 :: Only',
-  'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: 3.11',
   'Programming Language :: Python :: 3.12',
   'Programming Language :: Python :: 3.13',
@@ -36,56 +73,10 @@ maintainers = [
 ]
 name = 'template'
 readme = 'README.md'
-requires-python = '>=3.10'
-
-[project.optional-dependencies]
-all = [
-  'template[build]',
-  'template[doc]',
-  'template[stubs]',
-  'template[style]',
-  'template[test]',
-]
-build = [
-  'build',
-  'twine',
-]
-doc = [
-  'furo',
-  'intersphinx_registry',
-  'matplotlib',
-  'memory-profiler',
-  'numpydoc',
-  'sphinx',
-  'sphinx-copybutton',
-  'sphinx-design',
-  'sphinx-gallery',
-  'sphinx-issues',
-  'sphinxcontrib-bibtex',
-]
-full = [
-  'template[all]',
-]
-stubs = [
-  'mypy',
-  'ruff>=0.6.0',
-]
-style = [
-  'bibclean',
-  'codespell[toml]>=2.2.4',
-  'pre-commit',
-  'ruff>=0.6.0',
-  'toml-sort',
-  'yamllint',
-]
-test = [
-  'pytest-cov',
-  'pytest-timeout',
-  'pytest>=8.0',
-]
+requires-python = '>=3.11'
 
 [project.scripts]
-template = 'template.commands.main:run'
+template = 'template._commands.main:run'
 
 [project.urls]
 documentation = 'https://github.com/mscheltienne/template-python'
@@ -166,3 +157,6 @@ all = true
 ignore_case = true
 spaces_before_inline_comment = 2
 trailing_comma_inline_array = true
+
+[tool.uv]
+default-groups = "all"
