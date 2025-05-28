@@ -20,6 +20,8 @@ following steps are required:
 - [ ] Edit `MANIFEST.in`
 - [ ] Edit the package import in `tools/stubgen.py`
 - [ ] Remove the conda-forge recipe from the ignored files in ``.yamllint.yaml``
+- [ ] Edit the triggers in the release workflow, setup PyPI trusted publishing, and
+      remove the publishing URL to test PyPI
 
 The package can then be installed in a given environment with
 `pip install -e .` (assuming the current working directory is the root of the
