@@ -44,9 +44,10 @@ def ensure_int(item: Any, item_name: str | None = None) -> int:
         if isinstance(item, bool):
             raise TypeError
         item = int(operator.index(item))
-    except TypeError:
+    except TypeError as exc:
         item_name = "Item" if item_name is None else f"'{item_name}'"
-        raise TypeError(f"{item_name} must be an integer, got {type(item)} instead.")
+        exc.add_note(f"{item_name} must be an integer, got {type(item)} instead.")
+        raise
 
     return item
 
@@ -240,15 +241,16 @@ def ensure_path(item: Any, must_exist: bool) -> Path:
     """
     try:
         item = Path(item)
-    except TypeError:
+    except TypeError as exc:
         try:
             str_ = f"'{str(item)}' "
         except Exception:
             str_ = ""
-        raise TypeError(
+        exc.add_note(
             f"The provided path {str_}is invalid and can not be converted. Please "
             f"provide a str, an os.PathLike or a pathlib.Path object, not {type(item)}."
         )
+        raise
     if must_exist and not item.exists():
         raise FileNotFoundError(f"The provided path '{str(item)}' does not exist.")
     return item

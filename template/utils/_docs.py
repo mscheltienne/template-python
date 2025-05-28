@@ -89,10 +89,11 @@ def fill_doc(f: Callable[..., Any]) -> Callable[..., Any]:
 
     try:
         f.__doc__ = docstring % indented
-    except (TypeError, ValueError, KeyError) as exp:
+    except (TypeError, ValueError, KeyError) as exc:
         funcname = f.__name__
         funcname = docstring.split("\n")[0] if funcname is None else funcname
-        raise RuntimeError(f"Error documenting {funcname}:\n{str(exp)}")
+        exc.add_note(f"Error documenting {funcname}.")
+        raise
 
     return f
 

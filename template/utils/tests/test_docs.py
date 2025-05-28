@@ -30,7 +30,7 @@ def test_fill_doc_function():
     assert foo.__doc__ is None
 
     # test filling docstring with invalid key
-    with pytest.raises(RuntimeError, match="Error documenting"):
+    with pytest.raises(KeyError, match="Error documenting"):
 
         @fill_doc
         def foo(verbose):
