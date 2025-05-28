@@ -13,15 +13,14 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
+      - run: sudo apt update && sudo apt install -y optipng
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-      - run: sudo apt update && sudo apt install -y optipng
       - uses: astral-sh/setup-uv@v6
-      - run: uv pip install --quiet --system .[doc]
+        with:
+          activate-environment: true
+      - run: uv sync -q --locked --no-default-groups --group doc
       - run: template sys-info --developer
       - run: make -C doc html
       - name: Prune sphinx environment

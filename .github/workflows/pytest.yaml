@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu, macos, windows]
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12", "3.13"]
     name: ${{ matrix.os }} - py${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}-latest
     defaults:
@@ -27,47 +27,39 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v6
-      - run: uv pip install --quiet --system .[test]
+        with:
+          activate-environment: true
+          python-version: ${{ matrix.python-version }}
+      - run: uv sync -q --locked --no-default-groups --group test
       - run: template sys-info --developer
       - run: pytest template --cov=template --cov-report=xml --cov-config=pyproject.toml
       - uses: codecov/codecov-action@v5
         with:
-          files: ./coverage.xml
-          flags: unittests  # optional
-          name: codecov-umbrella  # optional
           token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true  # optional (default = false)
 
   pytest-pip-pre:
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.13"]
     name: pip pre-release - py${{ matrix.python-version }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v6
+        with:
+          activate-environment: true
+          python-version: ${{ matrix.python-version }}
       - name: Install package
         run: |
-          uv pip install --quiet --system .[test]
-          uv pip install --quiet --system --upgrade --prerelease allow --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple numpy
+          uv sync -q --locked --no-default-groups --group test
+          uv pip install -q --upgrade --prerelease allow --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple numpy
       - run: template sys-info --developer
       - run: pytest template --cov=template --cov-report=xml --cov-config=pyproject.toml
       - uses: codecov/codecov-action@v5
         with:
-          files: ./coverage.xml
-          flags: unittests  # optional
-          name: codecov-umbrella  # optional
           token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true  # optional (default = false)

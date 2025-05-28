@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import platform
 import sys
+import tomllib
 from functools import lru_cache, partial
 from importlib.metadata import metadata, requires, version
+from importlib.util import find_spec
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import psutil
@@ -16,7 +19,13 @@ if TYPE_CHECKING:
     from typing import IO
 
 
-def sys_info(fid: IO | None = None, developer: bool = False):
+def sys_info(
+    fid: IO | None = None,
+    *,
+    extra: bool = False,
+    developer: bool = False,
+    package: str | None = None,
+) -> None:
     """Print the system information for debugging.
 
     Parameters
@@ -24,14 +33,21 @@ def sys_info(fid: IO | None = None, developer: bool = False):
     fid : file-like | None
         The file to write to, passed to :func:`print`. Can be None to use
         :data:`sys.stdout`.
-    developer : bool
+    extra : bool
         If True, display information about optional dependencies.
+    developer : bool
+        If True, display information about optional dependencies. Only available for
+        the package installed in editable mode.
+    package : str | None
+        The package to display information about. If None, display information about the
+        current package.
     """
     check_type(developer, (bool,), "developer")
+    check_type(package, (str, None), "package")
 
     ljust = 26
     out = partial(print, end="", file=fid)
-    package = __package__.split(".")[0]
+    package = __package__.split(".")[0] if package is None else package
 
     # OS information - requires python 3.8 or above
     out("Platform:".ljust(ljust) + platform.platform() + "\n")
@@ -52,29 +68,51 @@ def sys_info(fid: IO | None = None, developer: bool = False):
 
     # dependencies
     out("\nCore dependencies\n")
-    dependencies = [Requirement(elt) for elt in requires(package)]
+    requirements = requires(package)
+    if requirements is None:
+        raise RuntimeError(
+            f"The set of requirements for {package} could not be retrieved."
+        )
+    dependencies = [Requirement(elt) for elt in requirements]
     core_dependencies = [dep for dep in dependencies if "extra" not in str(dep.marker)]
     _list_dependencies_info(out, ljust, package, core_dependencies)
 
-    # extras
+    if extra:
+        extras = metadata(package).get_all("Provides-Extra")
+        if extras is not None:
+            for key in sorted([elt for elt in extras if elt not in ("all", "full")]):
+                extra_dependencies = [
+                    dep
+                    for dep in dependencies
+                    if all(elt in str(dep.marker) for elt in ("extra", key))
+                ]
+                if len(extra_dependencies) == 0:
+                    continue
+                out(f"\nOptional '{key}' dependencies\n")
+                _list_dependencies_info(out, ljust, package, extra_dependencies)
+
     if developer:
-        keys = sorted(
-            [
-                elt
-                for elt in metadata(package).get_all("Provides-Extra")
-                if elt not in ("all", "full")
-            ]
-        )
-        for key in keys:
-            extra_dependencies = [
-                dep
-                for dep in dependencies
-                if all(elt in str(dep.marker) for elt in ("extra", key))
-            ]
-            if len(extra_dependencies) == 0:
-                continue
-            out(f"\nOptional '{key}' dependencies\n")
-            _list_dependencies_info(out, ljust, package, extra_dependencies)
+        # following PEP 735, dependency-groups are intentionally omitted from metadata,
+        # thus we need to parse the pyproject.toml file directly.
+        origin = Path(find_spec(package).origin)
+        for folder in origin.parents[1:3]:  # support 'src' or 'flat' layout structure
+            if (folder / "pyproject.toml").exists():
+                pyproject = folder / "pyproject.toml"
+                break
+        else:
+            raise RuntimeError(
+                f"The pyproject.toml file for the package {package} could not be "
+                "found. To retrieve developer dependencies, please install the package "
+                "from source in an editable install, e.g. using 'uv sync'."
+            )
+
+        with open(pyproject, "rb") as fid:
+            pyproject_data = tomllib.load(fid)
+        dependency_groups = pyproject_data.get("dependency-groups", {})
+        for key in sorted(dependency_groups):
+            dependencies = [Requirement(dep) for dep in dependency_groups[key]]
+            out(f"\nDeveloper '{key}' dependencies\n")
+            _list_dependencies_info(out, ljust, package, dependencies)
 
 
 def _list_dependencies_info(

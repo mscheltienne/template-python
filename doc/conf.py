@@ -98,10 +98,10 @@ html_theme_options = {
     ],
 }
 
-# -- autosummary -----------------------------------------------------------------------
+# -- autosummary / autodoc--------------------------------------------------------------
 autosummary_generate = True
-
-# -- autodoc ---------------------------------------------------------------------------
+autodoc_pydantic_model_show_config_summary = False
+autodoc_pydantic_model_show_json = False
 autodoc_typehints = "none"
 autodoc_member_order = "groupwise"
 autodoc_warningiserror = True
