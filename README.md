@@ -23,9 +23,8 @@ following steps are required:
 - [ ] Edit the triggers in the release workflow, setup PyPI trusted publishing, and
       remove the publishing URL to test PyPI
 
-The package can then be installed in a given environment with
-`pip install -e .` (assuming the current working directory is the root of the
-repository).
+The environment can then be setup with `uv sync` (assuming the current working directory
+is the root of the repository).
 
 ## Documentation build
 
