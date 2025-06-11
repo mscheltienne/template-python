@@ -10,7 +10,25 @@ permissions:
   pull-requests: write
 
 jobs:
+  uv-lock:
+    runs-on: ubuntu-latest
+    if: github.repository == 'mscheltienne/template-python'  # prevent running on forks
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: astral-sh/setup-uv@v6
+      - run: uv lock --upgrade
+      - name: Commit changes
+        run: |
+          git config --local user.name 'github-actions[bot]'
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+          git add uv.lock
+          git diff --staged --quiet || git commit -m "Update uv.lock"
+          git push
+
   auto-merge:
+    needs: uv-lock
     runs-on: ubuntu-latest
     if: (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]') && github.repository == 'mscheltienne/template-python'
     steps:
