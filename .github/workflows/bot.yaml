@@ -3,7 +3,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
   cancel-in-progress: true
 on:  # yamllint disable-line rule:truthy
-  pull_request
+  pull_request:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,25 +15,27 @@ permissions:
 jobs:
   uv-lock:
     runs-on: ubuntu-latest
-    if: github.repository == 'mscheltienne/template-python'  # prevent running on forks
+    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: astral-sh/setup-uv@v6
       - run: uv lock --upgrade
-      - name: Commit changes
+      - uses: autofix-ci/action@v1.3.2
+        if: ${{ github.event_name == 'pull_request' }}
+      - name: Push lock file changes
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: |
-          git config --local user.name 'github-actions[bot]'
-          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
-          git add uv.lock
-          git diff --staged --quiet || git commit -m "Update uv.lock"
-          git push
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          if [ -n "$(git status --porcelain)" ]; then
+            git add uv.lock
+            git commit -m "Upgrade uv.lock"
+            git push origin main
+          fi
 
   auto-merge:
-    needs: uv-lock
     runs-on: ubuntu-latest
-    if: (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]') && github.repository == 'mscheltienne/template-python'
+    if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]') && github.repository == 'mscheltienne/template-python' }}
     steps:
       - name: Enable auto-merge for bot PRs
         run: gh pr merge --auto --squash "$PR_URL"
