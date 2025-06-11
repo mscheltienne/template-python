@@ -10,8 +10,6 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
-from ._docs import fill_doc
-
 if TYPE_CHECKING:
     from typing import Any
 
@@ -179,13 +177,17 @@ def check_value(
         )
 
 
-@fill_doc
 def ensure_verbose(verbose: Any) -> int:
     """Ensure that the value of verbose is valid.
 
     Parameters
     ----------
-    %(verbose)s
+    verbose : int | str | bool | None
+        Sets the verbosity level. The verbosity increases gradually between
+        ``"CRITICAL"``, ``"ERROR"``, ``"WARNING"``, ``"INFO"`` and ``"DEBUG"``. If
+        ``None`` is provided, the verbosity is set to ``"WARNING"``. If a bool is
+        provided, the verbosity is set to ``"WARNING"`` for ``False`` and to ``"INFO"``
+        for ``True``.
 
     Returns
     -------

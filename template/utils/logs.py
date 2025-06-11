@@ -9,7 +9,6 @@ from typing import TYPE_CHECKING
 from warnings import warn_explicit
 
 from ._checks import ensure_verbose
-from ._docs import fill_doc
 from ._fixes import WrapStdOut
 
 if TYPE_CHECKING:
@@ -19,7 +18,6 @@ if TYPE_CHECKING:
 _PACKAGE: str = __package__.split(".")[0]
 
 
-@fill_doc
 def _init_logger(*, verbose: bool | str | int | None = None) -> logging.Logger:
     """Initialize a logger.
 
@@ -27,7 +25,12 @@ def _init_logger(*, verbose: bool | str | int | None = None) -> logging.Logger:
 
     Parameters
     ----------
-    %(verbose)s
+    verbose : int | str | bool | None
+        Sets the verbosity level. The verbosity increases gradually between
+        ``"CRITICAL"``, ``"ERROR"``, ``"WARNING"``, ``"INFO"`` and ``"DEBUG"``. If
+        ``None`` is provided, the verbosity is set to ``"WARNING"``. If a bool is
+        provided, the verbosity is set to ``"WARNING"`` for ``False`` and to ``"INFO"``
+        for ``True``.
 
     Returns
     -------
@@ -82,13 +85,17 @@ def add_file_handler(
     logger.addHandler(handler)
 
 
-@fill_doc
 def set_log_level(verbose: bool | str | int | None) -> None:
     """Set the log level for the logger.
 
     Parameters
     ----------
-    %(verbose)s
+    verbose : int | str | bool | None
+        Sets the verbosity level. The verbosity increases gradually between
+        ``"CRITICAL"``, ``"ERROR"``, ``"WARNING"``, ``"INFO"`` and ``"DEBUG"``. If
+        ``None`` is provided, the verbosity is set to ``"WARNING"``. If a bool is
+        provided, the verbosity is set to ``"WARNING"`` for ``False`` and to ``"INFO"``
+        for ``True``.
     """
     verbose = ensure_verbose(verbose)
     logger.setLevel(verbose)
@@ -158,13 +165,17 @@ def verbose(f: Callable) -> Callable:
     return wrapper
 
 
-@fill_doc
 class _use_log_level:  # noqa: N801
     """Context manager to change the logging level temporary.
 
     Parameters
     ----------
-    %(verbose)s
+    verbose : int | str | bool | None
+        Sets the verbosity level. The verbosity increases gradually between
+        ``"CRITICAL"``, ``"ERROR"``, ``"WARNING"``, ``"INFO"`` and ``"DEBUG"``. If
+        ``None`` is provided, the verbosity is set to ``"WARNING"``. If a bool is
+        provided, the verbosity is set to ``"WARNING"`` for ``False`` and to ``"INFO"``
+        for ``True``.
     """
 
     def __init__(self, verbose: bool | str | int | None = None):

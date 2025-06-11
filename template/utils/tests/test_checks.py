@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 
@@ -7,7 +9,7 @@ import pytest
 from .._checks import check_type, check_value, ensure_int, ensure_path, ensure_verbose
 
 
-def test_ensure_int():
+def test_ensure_int() -> None:
     """Test ensure_int checker."""
     # valids
     assert ensure_int(101) == 101
@@ -21,14 +23,14 @@ def test_ensure_int():
         ensure_int([101])
 
 
-def test_check_type():
+def test_check_type() -> None:
     """Test check_type checker."""
     # valids
     check_type(101, ("int-like",))
     check_type(101, ("int-like", str))
     check_type("101.fif", ("path-like",))
 
-    def foo():
+    def foo() -> None:
         pass
 
     check_type(foo, ("callable",))
@@ -48,7 +50,7 @@ def test_check_type():
         check_type(101, (float,), "number")
 
 
-def test_check_value():
+def test_check_value() -> None:
     """Test check_value checker."""
     # valids
     check_value(5, (5,))
@@ -63,7 +65,7 @@ def test_check_value():
         check_value(5, [1, 2, 3, 4], "number")
 
 
-def test_ensure_verbose():
+def test_ensure_verbose() -> None:
     """Test ensure_verbose checker."""
     # valids
     assert ensure_verbose(12) == 12
@@ -82,7 +84,7 @@ def test_ensure_verbose():
         ensure_verbose(-101)
 
 
-def test_ensure_path():
+def test_ensure_path() -> None:
     """Test ensure_path checker."""
     # valids
     cwd = Path.cwd()
@@ -105,7 +107,7 @@ def test_ensure_path():
         ensure_path(101, must_exist=False)
 
     class Foo:
-        def __str__(self):
+        def __str__(self) -> None:
             pass
 
     with pytest.raises(TypeError, match="path is invalid"):
