@@ -8,10 +8,6 @@ on:  # yamllint disable-line rule:truthy
     - cron: '0 3 * * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   uv-lock:
     runs-on: ubuntu-latest
@@ -34,6 +30,10 @@ jobs:
           fi
 
   auto-merge:
+    needs: uv-lock
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]') && github.repository == 'mscheltienne/template-python' }}
     steps:
