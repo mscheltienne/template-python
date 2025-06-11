@@ -10,6 +10,8 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   uv-lock:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
