@@ -38,7 +38,7 @@ jobs:
           delete-branch: true
 
   auto-merge:
-    if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]' || github.event.pull_request.user.login == 'uv-lock-upgrader') }}
+    if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]' || github.event.pull_request.user.login == 'uv-lock-upgrader[bot]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Enable auto-merge for bot PRs
