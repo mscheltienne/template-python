@@ -29,6 +29,8 @@ jobs:
       - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app-token.outputs.token }}
+          author: "uv-lock-upgrader[bot] <uv-lock-upgrader[bot]@users.noreply.github.com>"
+          committer: "uv-lock-upgrader[bot] <uv-lock-upgrader[bot]@users.noreply.github.com>"
           commit-message: "chore: upgrade uv.lock"
           title: "chore: upgrade uv.lock"
           body: This PR updates the uv.lock file with the latest dependency versions.
@@ -36,7 +38,7 @@ jobs:
           delete-branch: true
 
   auto-merge:
-    if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]' || github.event.pull_request.user.login == 'github-actions[bot]') }}
+    if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]' || github.event.pull_request.user.login == 'app/uv-lock-upgrader') }}
     runs-on: ubuntu-latest
     steps:
       - name: Enable auto-merge for bot PRs

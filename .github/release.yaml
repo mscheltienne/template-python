@@ -5,3 +5,4 @@ changelog:
       - dependabot
       - github-actions
       - pre-commit-ci
+      - uv-lock-upgrader[bot]
