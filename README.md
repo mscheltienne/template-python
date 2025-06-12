@@ -25,6 +25,13 @@ following steps are required:
 The environment can then be setup with `uv sync` (assuming the current working directory
 is the root of the repository).
 
+To retain the auto-upgrade of the `uv.lock` file, the 2 following secrets must be added:
+
+- [ ] `UV_LOCK_UPGRADER_APP_ID`
+- [ ] `UV_LOCK_UPGRADER_APP_PRIVATE_KEY`
+
+And the associated app must be installed in the repository (or namespace).
+
 ## Documentation build
 
 If the documentation build is preserved, the following steps are required:
