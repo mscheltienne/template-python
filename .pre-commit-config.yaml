@@ -1,6 +1,3 @@
-ci:
-    skip: [uv-lock]
-
 repos:
     - repo: https://github.com/astral-sh/uv-pre-commit
       rev: 0.7.12
