@@ -16,7 +16,7 @@ jobs:
   uv-lock:
     if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
-    name: uv.lock --upgrade
+    name: uv lock --upgrade
     steps:
       - uses: actions/create-github-app-token@v2
         id: app-token
