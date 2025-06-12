@@ -1,8 +1,8 @@
 changelog:
   exclude:
     authors:
-      - autofix-ci
-      - dependabot
-      - github-actions
-      - pre-commit-ci
+      - autofix-ci[bot]
+      - dependabot[bot]
+      - github-actions[bot]
+      - pre-commit-ci[bot]
       - uv-lock-upgrader[bot]
