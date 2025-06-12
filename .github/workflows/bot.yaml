@@ -1,18 +1,42 @@
 name: bot
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number }}
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
   cancel-in-progress: true
 on:  # yamllint disable-line rule:truthy
   pull_request:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  auto-merge:
+  uv-lock:
+    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ secrets.UV_LOCK_UPGRADER_APP_ID }}
+          private-key: ${{ secrets.UV_LOCK_UPGRADER_APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv lock --upgrade
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          commit-message: "chore: upgrade uv.lock"
+          title: "chore: upgrade uv.lock"
+          body: This PR updates the uv.lock file with the latest dependency versions.
+          branch: update-uv-lock
+          delete-branch: true
+
+  auto-merge:
     if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]' || github.event.pull_request.user.login == 'github-actions[bot]') }}
+    runs-on: ubuntu-latest
     steps:
       - name: Enable auto-merge for bot PRs
         run: gh pr merge --auto --squash "$PR_URL"
