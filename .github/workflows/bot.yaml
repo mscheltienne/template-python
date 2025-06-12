@@ -8,10 +8,12 @@ on:  # yamllint disable-line rule:truthy
     - cron: '0 3 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   uv-lock:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,22 +21,23 @@ jobs:
       - run: uv lock --upgrade
       - uses: autofix-ci/action@v1.3.2
         if: ${{ github.event_name == 'pull_request' }}
-      - name: Push lock file changes
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore: upgrade uv.lock"
+          title: "chore: upgrade uv.lock"
+          body: This PR updates the uv.lock file with the latest dependency versions.
+          branch: update-uv-lock
+          delete-branch: true
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-          if [ -n "$(git status --porcelain)" ]; then
-            git add uv.lock
-            git commit -m "Upgrade uv.lock"
-            git push origin main
-          fi
+        id: pr
+      - name: Enable auto-merge for the PR
+        if: ${{ steps.pr.outputs.pull-request-number }}
+        run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   auto-merge:
     needs: uv-lock
-    permissions:
-      contents: write
-      pull-requests: write
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' && (github.event.pull_request.user.login == 'dependabot[bot]' || github.event.pull_request.user.login == 'pre-commit-ci[bot]') }}
     steps:
