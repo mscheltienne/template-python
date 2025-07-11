@@ -105,7 +105,7 @@ class _LoggerFormatter(logging.Formatter):
     """Format string syntax."""
 
     # Format string syntax for the different Log levels
-    _formatters = dict()
+    _formatters = {}
     _formatters[logging.DEBUG] = logging.Formatter(
         fmt="[%(module)s:%(funcName)s:%(lineno)d] %(levelname)s: %(message)s "
         "(%(asctime)s)"

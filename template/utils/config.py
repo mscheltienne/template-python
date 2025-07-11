@@ -123,7 +123,7 @@ def _list_dependencies_info(
     if unicode:
         ljust += 1
 
-    not_found: list[Requirement] = list()
+    not_found: list[Requirement] = []
     for dep in dependencies:
         if dep.name == package:
             continue

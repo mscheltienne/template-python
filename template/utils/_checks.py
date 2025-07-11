@@ -194,13 +194,13 @@ def ensure_verbose(verbose: Any) -> int:
     verbose : int
         The verbosity level as an integer.
     """
-    logging_types = dict(
-        DEBUG=logging.DEBUG,
-        INFO=logging.INFO,
-        WARNING=logging.WARNING,
-        ERROR=logging.ERROR,
-        CRITICAL=logging.CRITICAL,
-    )
+    logging_types = {
+        "DEBUG": logging.DEBUG,
+        "INFO": logging.INFO,
+        "WARNING": logging.WARNING,
+        "ERROR": logging.ERROR,
+        "CRITICAL": logging.CRITICAL,
+    }
 
     check_type(verbose, (bool, str, "int-like", None), item_name="verbose")
 
