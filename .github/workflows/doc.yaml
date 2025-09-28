@@ -8,6 +8,9 @@ on:  # yamllint disable-line rule:truthy
     branches: [main]
   workflow_dispatch:
 
+env:
+  UV_LOCKED: true
+
 jobs:
   build:
     timeout-minutes: 10
@@ -20,7 +23,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           activate-environment: true
-      - run: uv sync -q --locked --no-default-groups --group doc
+      - run: uv sync -q --no-default-groups --group doc
       - run: template sys-info --developer
       - run: make -C doc html
       - name: Prune sphinx environment

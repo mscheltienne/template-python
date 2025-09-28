@@ -4,6 +4,9 @@ on:  # yamllint disable-line rule:truthy
   # release:
   #   types: [published]
 
+env:
+  UV_LOCKED: true
+
 jobs:
   pypi:
     timeout-minutes: 10
@@ -19,9 +22,8 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           activate-environment: true
-      - run: uv sync -q --locked --no-default-groups --group stubs
+      - run: uv sync -q --no-default-groups
       - run: template sys-info --developer
-      - run: python tools/stubgen.py
       - run: uv build
       - uses: softprops/action-gh-release@v2
         with:
