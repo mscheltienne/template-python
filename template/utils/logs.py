@@ -104,20 +104,30 @@ def set_log_level(verbose: bool | str | int | None) -> None:
 class _LoggerFormatter(logging.Formatter):
     """Format string syntax."""
 
+    magenta = "\x1b[35;20m"
+    yellow = "\x1b[33;20m"
+    red = "\x1b[31;20m"
+    reset = "\x1b[0m"
+    fmt = "%(levelname)s [%(asctime)s] [%(module)s.%(funcName)s:%(lineno)d] %(message)s"
+    datefmt = "%Y/%m/%d %H:%M:%S"
+
     # Format string syntax for the different Log levels
     _formatters = {}
     _formatters[logging.DEBUG] = logging.Formatter(
-        fmt="[%(module)s:%(funcName)s:%(lineno)d] %(levelname)s: %(message)s "
-        "(%(asctime)s)"
+        fmt=magenta + fmt + reset,
+        datefmt=datefmt,
     )
     _formatters[logging.INFO] = logging.Formatter(
-        fmt="[%(module)s.%(funcName)s] %(levelname)s: %(message)s"
+        fmt=fmt,
+        datefmt=datefmt,
     )
     _formatters[logging.WARNING] = logging.Formatter(
-        fmt="[%(module)s.%(funcName)s] %(levelname)s: %(message)s"
+        fmt=yellow + fmt + reset,
+        datefmt=datefmt,
     )
     _formatters[logging.ERROR] = logging.Formatter(
-        fmt="[%(module)s:%(funcName)s:%(lineno)d] %(levelname)s: %(message)s"
+        fmt=red + fmt + reset,
+        datefmt=datefmt,
     )
 
     def __init__(self):
@@ -252,3 +262,21 @@ def warn(
 
 
 logger = _init_logger()
+# overwrite the logger docstring
+logger.__doc__ = """Main logger.
+
+This logger is used across the entire package. It's verbosity can be controlled by the
+function :func:`template.set_log_level` or by the ``verbose`` argument of callables
+decorated with the :func:`template.utils.logs.verbose` decorator.
+
+Examples
+--------
+.. code-block:: python
+
+    from template.utils.logs import logger, set_log_level
+
+    set_log_level("DEBUG")
+    logger.debug("This debug message will be displayed.")
+    set_log_level("WARNING")
+    logger.debug("This debug message will not be displayed.")
+"""
