@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from click.testing import CliRunner
 
-from ..main import run
+from template._commands.main import run
 
 
 def test_main() -> None:

@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 import psutil
 from packaging.requirements import Requirement
 
-from ._checks import check_type
+from template.utils._checks import check_type
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -110,7 +110,14 @@ def sys_info(
             pyproject_data = tomllib.load(fid)
         dependency_groups = pyproject_data.get("dependency-groups", {})
         for key in sorted(dependency_groups):
-            dependencies = [Requirement(dep) for dep in dependency_groups[key]]
+            # Skip include-group references (dicts), only parse string dependencies
+            dependencies = [
+                Requirement(dep)
+                for dep in dependency_groups[key]
+                if isinstance(dep, str)
+            ]
+            if len(dependencies) == 0:
+                continue
             out(f"\nDeveloper '{key}' dependencies\n")
             _list_dependencies_info(out, ljust, package, dependencies)
 

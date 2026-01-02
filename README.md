@@ -12,7 +12,7 @@
 Template python repository. To bootstrap a project from this template, the
 following steps are required:
 
-- [ ] Rename the folder `template` to the package name
+- [ ] Rename the folder `src/template` to the package name and update imports
 - [ ] Edit `pyproject.toml` and all the `template` entries
 - [ ] Edit the GitHub workflows in `.github`
 - [ ] Enable `pre-commit.ci` on https://pre-commit.ci/

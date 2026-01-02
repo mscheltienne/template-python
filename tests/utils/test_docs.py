@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from .._docs import copy_doc
-from ..logs import verbose
+from template.utils._docs import copy_doc
+from template.utils.logs import verbose
 
 
 def test_copy_doc_function() -> None:
