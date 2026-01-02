@@ -6,7 +6,13 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from .._checks import check_type, check_value, ensure_int, ensure_path, ensure_verbose
+from template.utils._checks import (
+    check_type,
+    check_value,
+    ensure_int,
+    ensure_path,
+    ensure_verbose,
+)
 
 
 def test_ensure_int() -> None:

@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from warnings import warn_explicit
 
-from ._checks import ensure_verbose
-from ._fixes import WrapStdOut
+from template.utils._checks import ensure_verbose
+from template.utils._fixes import WrapStdOut
 
 if TYPE_CHECKING:
     from collections.abc import Callable
