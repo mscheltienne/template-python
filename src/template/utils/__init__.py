@@ -1,3 +1,3 @@
 """Utilities module."""
 
-from . import config, logs
+from template.utils import config, logs
