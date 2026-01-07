@@ -200,6 +200,7 @@ def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
         pyobject = module
         for elt in info["fullname"].split("."):
             pyobject = getattr(pyobject, elt)
+        pyobject = inspect.unwrap(pyobject)
         fname = inspect.getsourcefile(pyobject).replace("\\", "/")
     except Exception:
         # Either the object could not be loaded or the file was not found.
@@ -216,7 +217,7 @@ def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
     else:
         return None  # alternatively, link to a maint/version branch
     fname = fname.rsplit(f"/{package}/")[1]
-    url = f"{gh_url}/blob/{branch}/{package}/{fname}#{lines}"
+    url = f"{gh_url}/blob/{branch}/src/{package}/{fname}#{lines}"
     return url
 
 
