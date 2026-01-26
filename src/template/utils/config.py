@@ -4,7 +4,7 @@ import platform
 import sys
 import tomllib
 from functools import lru_cache, partial
-from importlib.metadata import metadata, requires, version
+from importlib.metadata import PackageNotFoundError, metadata, requires, version
 from importlib.util import find_spec
 from pathlib import Path
 from typing import TYPE_CHECKING
@@ -47,7 +47,10 @@ def sys_info(
 
     ljust = 26
     out = partial(print, end="", file=fid)
-    package = __package__.split(".")[0] if package is None else package
+    if package is None:
+        package = _find_distribution_name(__package__)
+    if "-" in package:
+        package = package.replace("-", "_")
 
     # OS information - requires python 3.8 or above
     out("Platform:".ljust(ljust) + platform.platform() + "\n")
@@ -177,6 +180,25 @@ def _list_dependencies_info(
             out(f"✘ Not installed: {', '.join(not_found)}\n")
         else:
             out(f"Not installed: {', '.join(not_found)}\n")
+
+
+def _find_distribution_name(module_package: str) -> str:
+    """Find the distribution name from a module's ``__package__``.
+
+    Tries progressively shorter prefixes until finding one with valid metadata.
+    Handles both regular packages (e.g., ``template.utils`` -> ``template``) and
+    namespace packages (e.g., ``sphinxcontrib.pydantic.utils`` ->
+    ``sphinxcontrib.pydantic``).
+    """
+    parts = module_package.split(".")
+    for i in range(len(parts), 0, -1):
+        candidate = ".".join(parts[:i])
+        try:
+            version(candidate)
+            return candidate
+        except PackageNotFoundError:
+            continue
+    return module_package
 
 
 @lru_cache(maxsize=1)
