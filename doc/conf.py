@@ -12,9 +12,12 @@ from datetime import date
 from importlib import import_module
 
 from intersphinx_registry import get_intersphinx_mapping
+from sphinx.util import logging as sphinx_logging
 from sphinx_gallery.sorting import FileNameSortKey
 
 import template
+
+_logger = sphinx_logging.getLogger(__name__)
 
 # -- project information ---------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -47,6 +50,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "numpydoc",
     "sphinxcontrib.bibtex",
+    "sphinxcontrib.pydantic",
     "sphinx_copybutton",
     "sphinx_design",
     "sphinx_gallery.gen_gallery",
@@ -100,8 +104,6 @@ html_theme_options = {
 
 # -- autosummary / autodoc--------------------------------------------------------------
 autosummary_generate = True
-autodoc_pydantic_model_show_config_summary = False
-autodoc_pydantic_model_show_json = False
 autodoc_typehints = "none"
 autodoc_member_order = "groupwise"
 autodoc_warningiserror = True
@@ -194,6 +196,9 @@ def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
     if domain != "py":
         return None  # only document python objects
 
+    fullpath = f"{info['module']}.{info['fullname']}"
+    _logger.debug("[linkcode] Processing: %s", fullpath)
+
     # retrieve pyobject and file
     try:
         module = import_module(info["module"])
@@ -202,21 +207,24 @@ def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
             pyobject = getattr(pyobject, elt)
         pyobject = inspect.unwrap(pyobject)
         fname = inspect.getsourcefile(pyobject).replace("\\", "/")
-    except Exception:
+
+        # retrieve start/stop lines
+        source, start_line = inspect.getsourcelines(pyobject)
+        lines = f"L{start_line}-L{start_line + len(source) - 1}"
+    except Exception as exc:
         # Either the object could not be loaded or the file was not found.
         # For instance, properties will raise.
+        _logger.debug("[linkcode] Skipping %s: %s", fullpath, exc)
         return None
-
-    # retrieve start/stop lines
-    source, start_line = inspect.getsourcelines(pyobject)
-    lines = f"L{start_line}-L{start_line + len(source) - 1}"
 
     # create URL
     if "dev" in release:
         branch = "main"
     else:
-        return None  # alternatively, link to a maint/version branch
-    fname = fname.rsplit(f"/{package}/")[1]
+        version = release.split(".")
+        branch = f"maint/{version[0]}.{version[1]}"
+
+    fname = fname.rsplit(f"/{package}/")[-1]
     url = f"{gh_url}/blob/{branch}/src/{package}/{fname}#{lines}"
     return url
 

@@ -4,18 +4,18 @@ requires = ['setuptools >= 64.0.0', 'setuptools_scm>=8']
 
 [dependency-groups]
 doc = [
-  'autodoc_pydantic',
   'furo',
   'intersphinx_registry',
   'matplotlib',
   'memory-profiler',
   'numpydoc',
-  'sphinx',
   'sphinx-copybutton',
   'sphinx-design',
   'sphinx-gallery',
   'sphinx-issues',
+  'sphinx>=9.0',
   'sphinxcontrib-bibtex',
+  'sphinxcontrib-pydantic>=0.2.0',
 ]
 ide = [
   'ipykernel',
