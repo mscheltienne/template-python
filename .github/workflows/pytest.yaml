@@ -37,7 +37,7 @@ jobs:
       - run: uv sync -q --no-default-groups --group test
       - run: template sys-info --developer
       - run: pytest tests --cov=template --cov-report=xml --cov-config=pyproject.toml
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         if: ${{ github.repository == 'mscheltienne/template-python' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
           uv pip install -q --upgrade --prerelease allow --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple numpy
       - run: template sys-info --developer
       - run: pytest tests --cov=template --cov-report=xml --cov-config=pyproject.toml
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         if: ${{ github.repository == 'mscheltienne/template-python' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
