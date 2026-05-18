@@ -2033,7 +2033,7 @@ wheels = [
 
 [[package]]
 name = "sphinxcontrib-pydantic"
-version = "0.2.0"
+version = "0.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "docutils" },
@@ -2043,9 +2043,9 @@ dependencies = [
     { name = "sphinx", version = "9.0.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "sphinx", version = "9.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f3/02/6a818e06c79e83b5adbf2a0ebdf7fde06f1ce063553355660d49d175cb38/sphinxcontrib_pydantic-0.2.0.tar.gz", hash = "sha256:91f64ae031fb038d7953106dd2048e4d0ff87b80326bf391c55f7b4581ffaa80", size = 199138, upload-time = "2026-01-28T14:48:38.588Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f2/b0/9b82524553b93b22cfcea0fc60fe013a6d4e72fbc8f151149898761fa7f4/sphinxcontrib_pydantic-0.3.0.tar.gz", hash = "sha256:9f55d7dfd48b5b58f7a78f22eae5a4ad557f9ee588fa3a2dd0f906f3677f276f", size = 199440, upload-time = "2026-04-22T17:15:04.023Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/08/ca/5ad0b161d74531bf258811ed0aba4a15e76bf1cce418abfd037a00bed5a2/sphinxcontrib_pydantic-0.2.0-py3-none-any.whl", hash = "sha256:51a0d69ad6211cabf69f1cab4acc6160607fe3899e93da96d14080c8c53e583c", size = 32170, upload-time = "2026-01-28T14:48:39.757Z" },
+    { url = "https://files.pythonhosted.org/packages/76/85/2ca2c74b79e72a798ebb3e857ba3bf66f20f0d4e1093df0a8f30f065572f/sphinxcontrib_pydantic-0.3.0-py3-none-any.whl", hash = "sha256:68831ed9f2013a2270a4445b743b5fbcf042abfa1e7b45539d74cd96de4a2ba8", size = 32396, upload-time = "2026-04-22T17:15:02.855Z" },
 ]
 
 [[package]]
@@ -2147,7 +2147,7 @@ doc = [
     { name = "sphinx-gallery" },
     { name = "sphinx-issues" },
     { name = "sphinxcontrib-bibtex" },
-    { name = "sphinxcontrib-pydantic", specifier = ">=0.2.0" },
+    { name = "sphinxcontrib-pydantic", specifier = ">=0.3.0" },
 ]
 ide = [
     { name = "ipykernel" },
