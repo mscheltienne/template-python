@@ -15,7 +15,7 @@ doc = [
   'sphinx-issues',
   'sphinx>=9.0',
   'sphinxcontrib-bibtex',
-  'sphinxcontrib-pydantic>=0.2.0',
+  'sphinxcontrib-pydantic>=0.3.0',
 ]
 ide = [
   'ipykernel',
