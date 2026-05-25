@@ -1,5 +1,5 @@
 [build-system]
-build-backend = 'setuptools.build_meta'
+build-backend = 'setuptools>=82.0.1'
 requires = ['setuptools >= 64.0.0', 'setuptools_scm>=10.0.5']
 
 [dependency-groups]
