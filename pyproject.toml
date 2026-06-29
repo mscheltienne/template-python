@@ -1,6 +1,6 @@
 [build-system]
 build-backend = 'setuptools.build_meta'
-requires = ['setuptools >= 76.0.0', 'setuptools_scm>=10.0.5']
+requires = ['setuptools >= 76.0.0', 'setuptools_scm>=10.2.0']
 
 [dependency-groups]
 doc = [
