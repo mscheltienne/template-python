@@ -24,7 +24,7 @@ ide = [
 ]
 style = [
   'bibclean',
-  'codespell[toml]>=2.4.2',
+  'codespell[toml]>=2.4.3',
   'pre-commit',
   'ruff>=0.15.22',
   'toml-sort',
