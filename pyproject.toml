@@ -23,7 +23,7 @@ ide = [
   'ipython',
 ]
 style = [
-  'bibclean',
+  'bibclean>=1.0',
   'codespell[toml]>=2.4.3',
   'pre-commit',
   'ruff>=0.16.10',
